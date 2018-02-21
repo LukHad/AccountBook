@@ -9,4 +9,4 @@ class Transaction:
         self.date = date
         self.categorie = categorie
         self.description = description
-        self.bool_income = bool_income
+        self.bool_income = bool_income #will be used to calculate percentage of savings / income

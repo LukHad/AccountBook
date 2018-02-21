@@ -16,16 +16,31 @@ class Account:
         self.interest_pa = interest_pa
         self.interest_date = interest_date
         self.interest_interval_months = interest_interval_months
-        self.savings = savings_acc
+        self.savings = savings_acc #will be used to calculate percentage of savings / income
 
-    def deposit(self, amount, src_acc_id = 0, categorie = "", description = "",
-        date = dt.date.today(), bool_income = True
+    def deposit(self, amount, src_acc_id = 0, date = dt.date.today(),
+        categorie = "", description = "", bool_income = True
         ):
         self.balance += amount
         #create transaction
         nt_id = self.last_transaction_id + 1
-        tgt_id = self.id
-        new_transaction = Transaction(nt_id, src_acc_id, tgt_id, amount, date, categorie, description, bool_income)
+        self.last_transaction_id += 1
+        target_acc_id = self.id #transaction to this account
+        new_transaction = Transaction(nt_id, src_acc_id, target_acc_id, amount,
+                                      date, categorie, description, bool_income)
+        #add transaction to transaction list
+        self.transactions.append(new_transaction)
+
+    def withdraw(self, amount, target_acc_id = 0, date = dt.date.today(),
+        categorie = "", description = "", bool_income = False
+        ):
+        self.balance -= amount
+        #create transaction
+        nt_id = self.last_transaction_id + 1
+        self.last_transaction_id += 1
+        src_acc_id = self.id #transaction from this account
+        new_transaction = Transaction(nt_id, src_acc_id, target_acc_id, -amount,
+                                      date, categorie, description, bool_income)
         #add transaction to transaction list
         self.transactions.append(new_transaction)
 
@@ -47,7 +62,7 @@ class Account:
             str(ta.amount) + "\t" +
             str(ta.src_acc_id) + "\t" +
             str(ta.target_acc_id) + "\t" +
-            str(ta.bool_income) + "\t" +
+            str(ta.bool_income) + "\t\t" +
             str(ta.categorie) + "\t" +
             str(ta.description) + "\t"
             )
