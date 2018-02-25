@@ -15,7 +15,7 @@ import datetime as dt
 #
 from Account import Account
 
-acc = Account(1, "MyAccName", 927)
+acc = Account("MyAccName", 927)
 
 acc.deposit(100, 2, dt.date(2017,12,1))
 acc.withdraw(27.5, 2, dt.date(2017,12,13))

@@ -16,7 +16,7 @@ import datetime as dt
 #
 from Account import Account
 
-acc = Account(1, "MyAccName", 500)
+acc = Account("MyAccName", 500)
 acc.interest_pa = 0.12
 
 acc.interest_date = dt.date(2017,12,1)

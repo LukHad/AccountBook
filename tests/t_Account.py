@@ -10,14 +10,17 @@ import datetime as dt
 #
 from Account import Account
 
-acc = Account(1, "MyAccName", 900)
+acc = Account("MyAccName", 900)
+acc2 = Account("MyAccName2", 0)
+
 acc.interest_pa = 0.12
 acc.interest_date = dt.date(2018,2,10)
 
 acc.deposit(100, 2, dt.date(2017,12,1), "My Income", "")
 acc.deposit(100, 2, dt.date(2018,1,1), "My Income", "")
+acc2.deposit(100, 2, dt.date(2018,2,1), "My Income in acc2", "")
 acc.deposit(100, 2, dt.date(2018,2,1), "My Income", "")
-
+acc.withdraw(100, 2, dt.date(2018,2,1), "My Income", "")
 
 acc.update_interest()
 
