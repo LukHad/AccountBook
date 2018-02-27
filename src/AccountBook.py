@@ -27,3 +27,14 @@ class AccountBook:
             if acc.id == acc_id:
                 return i
         return -1 #not found
+
+    def update_standing_orders(self):
+        for sto in self.standing_orders:
+            while dt.date.today() >= sto.date:
+                if sto.src_acc_id != 0:
+                    pos = get_acc_array_pos(sto.src_acc_id)
+                    self.accounts[pos].withdraw(sto.amount, sto.date, sto.categorie, sto.description, sto.bool_income)
+                if sto.target_acc_id != 0:
+                    pos = get_acc_array_pos(sto.target_acc_id)
+                    self.accounts[pos].deposit(sto.amount, sto.date, sto.categorie, sto.description, sto.bool_income)
+                sto.date = add_months(sto.date, sto.interval_months)

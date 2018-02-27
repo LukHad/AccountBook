@@ -17,11 +17,11 @@ from Account import Account
 
 acc = Account("MyAccName", 927)
 
-acc.deposit(100, 2, dt.date(2017,12,1))
-acc.withdraw(27.5, 2, dt.date(2017,12,13))
-acc.deposit(100, 2, dt.date(2018,1,1))
-acc.withdraw(27.5, 2, dt.date(2018,1,7))
-acc.deposit(100, 2, dt.date(2018,2,1))
+acc.deposit(100, dt.date(2017,12,1))
+acc.withdraw(27.5, dt.date(2017,12,13))
+acc.deposit(100, dt.date(2018,1,1))
+acc.withdraw(27.5, dt.date(2018,1,7))
+acc.deposit(100, dt.date(2018,2,1))
 
 if acc.balance_at_date(dt.date(2018,1,6))== 1099.5:
     print("passed - Account.balance_at_date")

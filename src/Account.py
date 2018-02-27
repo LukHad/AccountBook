@@ -22,26 +22,18 @@ class Account:
         self.interest_categorie = interest_categorie
         self.savings = savings_acc #will be used to calculate percentage of savings / income
 
-    def deposit(self, amount, src_acc_id = 0, date = dt.date.today(),
+    def deposit(self, amount, date = dt.date.today(),
         categorie = "", description = "", bool_income = False
         ):
         self.balance += amount
-        #create transaction
-        target_acc_id = self.id #transaction to this account
-        new_transaction = Transaction(src_acc_id, target_acc_id, amount,
-                                      date, categorie, description, bool_income)
-        #add transaction to transaction list
+        new_transaction = Transaction(amount, date, categorie, description, bool_income)
         self.transactions.append(new_transaction)
 
-    def withdraw(self, amount, target_acc_id = 0, date = dt.date.today(),
+    def withdraw(self, amount, date = dt.date.today(),
         categorie = "", description = "", bool_income = False
         ):
         self.balance -= amount
-        #create transaction
-        src_acc_id = self.id #transaction from this account
-        new_transaction = Transaction(src_acc_id, target_acc_id, -amount,
-                                      date, categorie, description, bool_income)
-        #add transaction to transaction list
+        new_transaction = Transaction(-amount, date, categorie, description, bool_income)
         self.transactions.append(new_transaction)
 
     def update_interest(self):
@@ -67,9 +59,9 @@ class Account:
             #deposit or withdraw amount
             description = "Interest payment" #ToDo_2
             if self.interest_pa >= 0:
-                self.deposit(amount,0,self.interest_date,self.interest_categorie,description,True)
+                self.deposit(amount,self.interest_date,self.interest_categorie,description,True)
             else:
-                self.withdraw(abs(amount),0,self.interest_date,self.interest_categorie,description,False)
+                self.withdraw(abs(amount),self.interest_date,self.interest_categorie,description,False)
             #set new date for next interest payment
             self.interest_date = add_months(self.interest_date, self.interest_interval_months)
 
@@ -90,8 +82,6 @@ class Account:
         "ID \t"
         "Date       \t"
         "Amount \t"
-        "Src \t"
-        "Target \t"
         "B_Income \t"
         "Categorie \t"
         "Description \t"
@@ -101,8 +91,6 @@ class Account:
             str(ta.id) + "\t" +
             str(ta.date) + "\t" +
             str(ta.amount) + "\t" +
-            str(ta.src_acc_id) + "\t" +
-            str(ta.target_acc_id) + "\t" +
             str(ta.bool_income) + "\t\t" +
             str(ta.categorie) + "\t" +
             str(ta.description) + "\t"

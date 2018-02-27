@@ -6,7 +6,9 @@ class StandingOrder:
         StandingOrder.next_id += 1
         self.src_acc_id = src_acc_id
         self.target_acc_id = target_acc_id
-        self.amount = amount
+        if amount < 0: #tmp
+            print("Warning: amount in StandinOrders should always be greater than 0") #tmp
+        self.amount = amount #is always > 0 !
         self.date = date
         self.interval_months = interval_months
         self.categorie = categorie

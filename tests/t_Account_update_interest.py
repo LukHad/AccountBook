@@ -21,10 +21,10 @@ acc.interest_pa = 0.12
 
 acc.interest_date = dt.date(2017,12,1)
 
-acc.deposit(1000, 2, dt.date(2017,12,3), "My Income", "")
-acc.deposit(1000, 2, dt.date(2017,12,20), "My Income", "")
-acc.deposit(10000, 2, dt.date(2018,1,25), "My Income", "")
-acc.deposit(1500, 2, dt.date(2018,2,14), "My Income", "")
+acc.deposit(1000, dt.date(2017,12,3), "My Income", "")
+acc.deposit(1000, dt.date(2017,12,20), "My Income", "")
+acc.deposit(10000, dt.date(2018,1,25), "My Income", "")
+acc.deposit(1500, dt.date(2018,2,14), "My Income", "")
 
 before_interest = acc.balance
 acc.update_interest()
