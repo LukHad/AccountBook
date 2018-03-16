@@ -19,7 +19,7 @@ tab.save()
 
 new_AccBook = AccountBook()
 
-new_AccBook.load()
+new_AccBook.load("saved_data/" + tab.name)
 
 new_AccBook.accounts[0].withdraw(100)
 print(new_AccBook.accounts[0].print_transactions())

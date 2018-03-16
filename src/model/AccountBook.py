@@ -18,7 +18,7 @@ class AccountBook:
         self.standing_orders = []
         if not os.path.isdir(default_save_dir):
             os.mkdir(default_save_dir)
-        self.file_path = os.path.join(default_save_dir, name + ".obj")
+        self.file_path = os.path.join(default_save_dir, name)
 
     def update(self):
         self.update_standing_orders()
@@ -70,15 +70,11 @@ class AccountBook:
         self.file_path = file_path
         self.save()
 
-    def load(self):
-        filehandler = open(self.file_path, 'rb')
+    def load(self, file_path):
+        filehandler = open(file_path, 'rb')
         loaded = pickle.load(filehandler)
         self.name = loaded.name
         self.accounts = loaded.accounts
         self.categories = loaded.categories
         self.standing_orders = loaded.standing_orders
         self.file_path = loaded.file_path
-
-    def load_from(self, file_path):
-        self.file_path = file_path
-        self.load()
