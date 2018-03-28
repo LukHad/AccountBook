@@ -1,1 +1,1 @@
-pyobjc==4.1
+pyobjc==4.1 # if gui_config_for_mac
