@@ -3,3 +3,4 @@ __pycache__/
 *$py.class
 
 saved_data/
+secret_key.py

@@ -4,3 +4,5 @@
 
 * **ToDo_4**: Calculate balance at date backwards (from .balance instead of from .init_balance).
 More efficient with an increasing number of transactions
+
+* **ToDo_5**: Use correct rounding methods for Cent digits.

@@ -13,7 +13,7 @@ class Sidebar(tk.Frame):
                             borderwidth=0,
                             selectborderwidth=0,
                             highlightthickness=0,
-                            font=("Arial", 18))
+                            font=("Arial", 16))
 
     def pack(self, *args, **kwargs):
         tk.Frame.pack(self, *args, **kwargs)

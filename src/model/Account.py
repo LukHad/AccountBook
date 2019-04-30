@@ -1,7 +1,7 @@
 import datetime as dt
 
-from Transaction import Transaction
-from util.add_months import add_months
+from .Transaction import Transaction
+from .util.add_months import add_months
 
 
 class Account:
@@ -33,34 +33,30 @@ class Account:
         self.savings = savings_acc
         self.currency = currency
 
-    def deposit(
-        self, amount, date=dt.date.today(),
-        categorie="", description="", bool_income=False
-    ):
+    def deposit(self, amount, date=dt.date.today(),
+                category="", description="", bool_income=False):
         self.balance += amount
-        new_transaction = Transaction(amount, date, categorie,
+        new_transaction = Transaction(amount, date, category,
                                       description, bool_income)
         self.transactions.append(new_transaction)
 
-    def withdraw(
-        self, amount, date=dt.date.today(),
-        categorie="", description="", bool_income=False
-    ):
+    def withdraw(self, amount, date=dt.date.today(),
+                 category="", description="", bool_income=False):
         self.balance -= amount
-        new_transaction = Transaction(-amount, date, categorie,
+        new_transaction = Transaction(-amount, date, category,
                                       description, bool_income)
         self.transactions.append(new_transaction)
 
-    def update_interest(self):
-        '''
-        Calculate if an interest payment happend. Calculate the amount and
-        create a transaction for each payment.
-        '''
+    def update_interest(self, actual_date=dt.date.today()):
+        """
+        Calculate if an interest payment happend since the last interest calculation.
+        Calculate the amount and create a transaction for each payment.
+        """
         # check if calculation is necessary
         if self.interest_pa == 0:
             return
         # start calculation
-        while dt.date.today() > self.interest_date:
+        while actual_date > self.interest_date:
             # calculate daily percentage
             daily_fac = self.interest_pa / self.interest_days_in_year
             # calculate first relevant day
@@ -85,10 +81,10 @@ class Account:
                                             self.interest_interval_months)
 
     def balance_at_date(self, date):
-        '''
+        """
         Calculates the account balance at a certain date. The day of the date
         passed is included.
-        '''
+        """
         # ToDo_4
         balance_at_date = self.init_balance
         rel_transactions = (tr for tr in self.transactions if tr.date <= date)

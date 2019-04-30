@@ -2,10 +2,10 @@ import datetime as dt
 import pickle as pickle  # save class to file
 import os
 
-from util.add_months import add_months
-from Account import Account
-from Categorie import Categorie
-from StandingOrder import StandingOrder
+from .util.add_months import add_months
+from .Account import Account
+from .Categorie import Categorie
+from .StandingOrder import StandingOrder
 
 default_save_dir = "saved_data"
 
@@ -33,13 +33,12 @@ class AccountBook:
 
     def new_standing_order(
         self, src_acc_id, target_acc_id, amount, date=dt.date.today(),
-        interval_months=1, categorie="", description="", bool_income=False
+        interval_months=1, categorie="", description=""
     ):
         self.standing_orders.append(StandingOrder(src_acc_id, target_acc_id,
                                                   amount, date,
                                                   interval_months,
-                                                  categorie, description,
-                                                  bool_income))
+                                                  categorie, description))
 
     def get_acc_array_pos(self, acc_id):
         for i, acc in enumerate(self.accounts):
@@ -47,19 +46,17 @@ class AccountBook:
                 return i
         return -1  # not found
 
-    def update_standing_orders(self):
+    def update_standing_orders(self, actual_date=dt.date.today()):
         for sto in self.standing_orders:
-            while dt.date.today() >= sto.date:
+            while actual_date >= sto.date:
                 if sto.src_acc_id != 0:
                     pos = self.get_acc_array_pos(sto.src_acc_id)
                     self.accounts[pos].withdraw(sto.amount, sto.date,
-                                                sto.categorie, sto.description,
-                                                sto.bool_income)
+                                                sto.category, sto.description)
                 if sto.target_acc_id != 0:
                     pos = self.get_acc_array_pos(sto.target_acc_id)
                     self.accounts[pos].deposit(sto.amount, sto.date,
-                                               sto.categorie, sto.description,
-                                               sto.bool_income)
+                                               sto.category, sto.description)
                 sto.date = add_months(sto.date, sto.interval_months)
 
     def save(self):
