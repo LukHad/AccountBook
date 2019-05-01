@@ -1,6 +1,3 @@
-# t_add_months
-#
-# add src directory to path
 import nose
 import nose.tools
 import datetime as dt

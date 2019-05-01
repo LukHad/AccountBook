@@ -3,23 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="725e8b36-b93e-4b14-8867-4f0abe93dbf0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToDo.md" beforeDir="false" afterPath="$PROJECT_DIR$/ToDo.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/AppFrame.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/Page.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/Sidebar.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/gui_config_for_mac.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Account.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Account.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/AccountBook.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/AccountBook.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/StandingOrder.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/StandingOrder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/start_up.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/start_up.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/t_Account.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/t_AccountBook_update_standing_orders.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/t_Account_balance_at_date.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/t_Account_update_interest.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/t_add_months.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/t_AccountBook_save.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_Account.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_Account.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_AccountBook.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_AccountBook.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -39,22 +27,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="t_AccountBook_save.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/t_AccountBook_save.py">
+      <file leaf-file-name="run_unit_tests.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/run_unit_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="45">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_AccountBook.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/__init__.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="test_AccountBook.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/test_AccountBook.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="29" column="115" selection-start-line="29" selection-start-column="115" selection-end-line="29" selection-end-column="115" />
+            <state relative-caret-position="285">
+              <caret line="19" column="89" selection-start-line="19" selection-start-column="89" selection-end-line="19" selection-end-column="89" />
               <folding>
                 <element signature="e#1#22#0" expanded="true" />
               </folding>
@@ -65,11 +56,20 @@
       <file leaf-file-name="AccountBook.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/AccountBook.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
+            <state relative-caret-position="791">
               <caret line="58" column="76" selection-start-line="58" selection-start-column="76" selection-end-line="58" selection-end-column="76" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
         </entry>
@@ -86,7 +86,7 @@
       <file leaf-file-name="Account.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/Account.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="717">
+            <state relative-caret-position="640">
               <caret line="52" column="33" selection-start-line="52" selection-start-column="33" selection-end-line="52" selection-end-column="33" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
@@ -95,32 +95,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="start_up.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/start_up.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="16" selection-start-column="16" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="test_Account.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/test_Account.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="20" column="19" lean-forward="true" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="19" />
+            <state>
               <folding>
-                <element signature="e#97#118#0" expanded="true" />
+                <element signature="e#0#21#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LICENSE" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LICENSE">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -128,8 +109,7 @@
       <file leaf-file-name="test_utils.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/test_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="35" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
+            <state>
               <folding>
                 <element signature="e#45#56#0" expanded="true" />
               </folding>
@@ -153,7 +133,6 @@
         <option value="$PROJECT_DIR$/src/gui/accounts_page.py" />
         <option value="$PROJECT_DIR$/src/gui_django/web_gui_acc_book/web_gui_acc_book/secret_key.py" />
         <option value="$PROJECT_DIR$/src/start_up.py" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/gui_django/web_gui_acc_book/web_gui_acc_book/settings.py" />
         <option value="$PROJECT_DIR$/src/run_unit_tests.py" />
         <option value="$PROJECT_DIR$/src/model/__init__.py" />
@@ -161,20 +140,22 @@
         <option value="$PROJECT_DIR$/tests/t_Account_balance_at_date.py" />
         <option value="$PROJECT_DIR$/src/model/Account.py" />
         <option value="$PROJECT_DIR$/tests/run_unit_tests.py" />
-        <option value="$PROJECT_DIR$/tests/test_Account.py" />
         <option value="$PROJECT_DIR$/ToDo.md" />
-        <option value="$PROJECT_DIR$/tests/test_utils.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/src/model/AccountBook.py" />
         <option value="$PROJECT_DIR$/src/model/StandingOrder.py" />
+        <option value="$PROJECT_DIR$/tests/test_utils.py" />
+        <option value="$PROJECT_DIR$/tests/test_Account.py" />
         <option value="$PROJECT_DIR$/tests/test_AccountBook.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-1920" />
     <option name="y" value="23" />
-    <option name="width" value="1280" />
-    <option name="height" value="733" />
+    <option name="width" value="1920" />
+    <option name="height" value="1057" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -241,7 +222,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.test_AccountBook">
+  <component name="RunManager" selected="Python.run_unit_tests">
     <configuration name="Unnamed" type="PythonConfigurationType" factoryName="Python">
       <module name="FinanceManager" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -360,8 +341,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.test_AccountBook" />
         <item itemvalue="Python.run_unit_tests" />
+        <item itemvalue="Python.test_AccountBook" />
         <item itemvalue="Python.start_up" />
         <item itemvalue="Python.test_Account" />
         <item itemvalue="Python.t_Account_update_interest" />
@@ -382,13 +363,13 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="733" extended-state="6" />
+    <frame x="-1920" y="23" width="1920" height="1057" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.27734375" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14375" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3080425" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.20651068" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -519,13 +500,6 @@
     <entry file="file://$PROJECT_DIR$/src/gui/accounts_page.py" />
     <entry file="file://$PROJECT_DIR$/src/gui/AppFrame.py" />
     <entry file="file://$PROJECT_DIR$/src/gui/accounts_page.py" />
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gui_django/web_gui_acc_book/web_gui_acc_book/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -584,9 +558,6 @@
     <entry file="file://$PROJECT_DIR$/src/model/Transaction.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -613,13 +584,6 @@
           <folding>
             <element signature="e#99#120#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/run_unit_tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
@@ -653,16 +617,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="35" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
-          <folding>
-            <element signature="e#45#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/t_AccountBook_update_standing_orders.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-6">
@@ -688,16 +642,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
+    <entry file="file://$PROJECT_DIR$/src/model/StandingOrder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="3" selection-start-column="3" selection-end-column="3" />
+        <state relative-caret-position="225">
+          <caret line="15" column="47" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/Account.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="717">
+        <state relative-caret-position="640">
           <caret line="52" column="33" selection-start-line="52" selection-start-column="33" selection-end-line="52" selection-end-column="33" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
@@ -714,19 +668,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="3" selection-start-column="3" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#45#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_Account.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="20" column="19" lean-forward="true" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="19" />
+        <state>
           <folding>
-            <element signature="e#97#118#0" expanded="true" />
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/run_unit_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_AccountBook.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="89" selection-start-line="19" selection-start-column="89" selection-end-line="19" selection-end-column="89" />
+          <folding>
+            <element signature="e#1#22#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/AccountBook.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
+        <state relative-caret-position="791">
           <caret line="58" column="76" selection-start-line="58" selection-start-column="76" selection-end-line="58" selection-end-column="76" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
@@ -734,20 +723,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/StandingOrder.py">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="47" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_AccountBook.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="29" column="115" selection-start-line="29" selection-start-column="115" selection-end-line="29" selection-end-column="115" />
-          <folding>
-            <element signature="e#1#22#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="60">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>

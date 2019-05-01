@@ -1,8 +1,3 @@
-# t_Account.balance_at_date
-#   > Account.__init__
-#   > Account.deposit
-#   > Account.withdraw
-
 import datetime as dt
 import nose
 import nose.tools
