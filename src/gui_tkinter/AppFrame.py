@@ -1,7 +1,7 @@
 import tkinter as tk
-from .Sidebar import Sidebar
+from src.gui_tkinter.Sidebar import Sidebar
 # from .Page import Page
-from .accounts_page import accounts_page
+from src.gui_tkinter.accounts_page import accounts_page
 
 
 class AppFrame(tk.Frame):
@@ -85,3 +85,8 @@ class AppFrame(tk.Frame):
     def cb_dummy(self, event=None):
         # filemenu.entryconfigure(pos, label="Clicked!")
         print("Pressed", event)
+
+
+if __name__ == '__main__':
+    app = AppFrame()
+    app.mainloop()

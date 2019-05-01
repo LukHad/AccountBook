@@ -6,7 +6,6 @@ from src.model.Account import Account
 
 def test_account_balance_at_date():
     acc = Account("MyAccName", 927)
-
     acc.deposit(100, dt.date(2017, 12, 1))
     acc.withdraw(27.5, dt.date(2017, 12, 13))
     acc.deposit(100, dt.date(2018, 1, 1))
@@ -30,4 +29,7 @@ def test_update_interest():
     acc.update_interest(dt.date(2018, 11, 14))
     after_interest = acc.balance
     interest_amount = after_interest - before_interest
+
     nose.tools.ok_(interest_amount == 1543.3262847212645, msg="Wrong interest update")
+
+

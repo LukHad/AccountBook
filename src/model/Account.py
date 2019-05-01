@@ -1,5 +1,4 @@
 import datetime as dt
-
 from .Transaction import Transaction
 from .util.add_months import add_months
 
@@ -10,7 +9,7 @@ class Account:
     def __init__(
         self, name="Account " + str(id), init_balance=0,
         interest_pa=0, savings_acc=False, interest_date=dt.date.today(),
-        interest_interval_months=1, interest_categorie="", currency="Eur"
+        interest_interval_months=1, interest_category="", currency="Eur"
     ):
         # every new object of Account gets the next id starting at 1
         self.id = Account.next_id
@@ -28,7 +27,7 @@ class Account:
         self.interest_date = interest_date  # the next date of interest payment
         # interest_interval_months interval of interest payments in months
         self.interest_interval_months = interest_interval_months
-        self.interest_categorie = interest_categorie
+        self.interest_category = interest_category
         # savings will be used to calculate percentage of savings / income
         self.savings = savings_acc
         self.currency = currency
@@ -72,10 +71,10 @@ class Account:
             description = "Interest payment"  # ToDo_2
             if self.interest_pa >= 0:
                 self.deposit(amount, self.interest_date,
-                             self.interest_categorie, description, True)
+                             self.interest_category, description, True)
             else:
                 self.withdraw(abs(amount), self.interest_date,
-                              self.interest_categorie, description, False)
+                              self.interest_category, description, False)
             # set new date for next interest payment
             self.interest_date = add_months(self.interest_date,
                                             self.interest_interval_months)
@@ -98,7 +97,7 @@ class Account:
             "Date       \t"
             "Amount \t"
             "B_Income \t"
-            "Categorie \t"
+            "Category \t"
             "Description \t"
         )
         for ta in self.transactions:
@@ -107,6 +106,6 @@ class Account:
                 str(ta.date) + "\t" +
                 str(ta.amount) + "\t" +
                 str(ta.bool_income) + "\t\t" +
-                str(ta.categorie) + "\t" +
+                str(ta.category) + "\t" +
                 str(ta.description) + "\t"
             )

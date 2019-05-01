@@ -28,23 +28,23 @@ class AccountBook:
     def new_account(self, *args):
         self.accounts.append(Account(*args))
 
-    def new_categorie(self, *args):
+    def new_category(self, *args):
         self.categories.append(Categorie(*args))
 
     def new_standing_order(
         self, src_acc_id, target_acc_id, amount, date=dt.date.today(),
-        interval_months=1, categorie="", description=""
+        interval_months=1, category="", description=""
     ):
         self.standing_orders.append(StandingOrder(src_acc_id, target_acc_id,
                                                   amount, date,
                                                   interval_months,
-                                                  categorie, description))
+                                                  category, description))
 
     def get_acc_array_pos(self, acc_id):
         for i, acc in enumerate(self.accounts):
             if acc.id == acc_id:
                 return i
-        return -1  # not found
+        return None  # not found
 
     def update_standing_orders(self, actual_date=dt.date.today()):
         for sto in self.standing_orders:

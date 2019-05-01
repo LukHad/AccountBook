@@ -1,2 +1,4 @@
-pyobjc==4.1 # if gui_config_for_mac
-nose==1.3.7
+pyobjc==4.1 # tkinter gui
+nose==1.3.7 #unit tests
+Cython==0.26.1 #kivy gui
+kivy
