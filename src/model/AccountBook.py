@@ -4,7 +4,7 @@ import os
 
 from .util.add_months import add_months
 from .Account import Account
-from .Categorie import Categorie
+from .Category import Category
 from .StandingOrder import StandingOrder
 
 default_save_dir = "saved_data"
@@ -29,7 +29,7 @@ class AccountBook:
         self.accounts.append(Account(*args))
 
     def new_category(self, *args):
-        self.categories.append(Categorie(*args))
+        self.categories.append(Category(*args))
 
     def new_standing_order(
         self, src_acc_id, target_acc_id, amount, date=dt.date.today(),

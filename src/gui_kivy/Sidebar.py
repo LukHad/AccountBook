@@ -6,7 +6,6 @@ class Sidebar(BoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.orientation = 'vertical'
-        self.width = 100
         self.btn_list = []
 
     def update(self, button_list):

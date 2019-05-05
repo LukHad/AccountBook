@@ -1,10 +1,10 @@
 from kivy.app import App
-from src.gui_kivy.Display import Display
+from src.gui_kivy.DisplayController import DisplayController
 
 
 class AppMain(App):
     def build(self):
-        return Display()
+        return DisplayController()
 
 
 if __name__ == '__main__':

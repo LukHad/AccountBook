@@ -8,3 +8,10 @@ class Adapter:
         :return: list of account names
         """
         return ["My first account", "Savings account", "Second account for special savings", "Stock portfolio"]
+
+    def req_cat_list(self):
+        """
+        Get list of categories
+        :return: list of categories names
+        """
+        return ["Income", "Rent", "Holidays", "Presents", "Sports and Health", "Food and Drinks", "Cinema"]
