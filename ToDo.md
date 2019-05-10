@@ -9,3 +9,7 @@ More efficient with an increasing number of transactions
 **ToDo_5**: Use correct rounding methods for Cent digits.
 
 **ToDo_6**: Put interest details in dedicated class
+
+**ToDo_7**: Make sidebar scrollable
+
+**ToDo8**: Replace hardcoded strings like "Accounts" etc.

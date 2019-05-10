@@ -4,7 +4,7 @@ from src.Adapter import Adapter
 from src.gui_kivy.Topbar import Topbar
 from src.gui_kivy.Sidebar import Sidebar
 from src.gui_kivy.Details import Details
-from src.gui_kivy.AccountDetails import AccountDetails
+from src.gui_kivy.AccountView import AccountDetails, AccountNew
 
 # Dimensions
 SIDEBAR_WIDTH = 0.1
@@ -21,24 +21,31 @@ class DisplayController(FloatLayout):
     def __init__(self, **kwargs):
         # Init parent
         super().__init__(**kwargs)
+        self.page = ["Main", "New"]
         self.states = ["Accounts", "Evaluation", "Categories", "Standing orders"]
         # Create widgets
         self.topbar = Topbar(pos_hint={'y': 1-TOPBAR_WIDTH}, size_hint=(1, TOPBAR_WIDTH), ctrl=self)
         self.sidebar = Sidebar(pos=(0, 0), size_hint=(SIDEBAR_WIDTH, 1-TOPBAR_WIDTH))
         self.details = Details(pos_hint={'x': SIDEBAR_WIDTH}, size_hint=(1-SIDEBAR_WIDTH, 1-TOPBAR_WIDTH))
         self.acc_details = AccountDetails()
+        self.draw_main_page()
+        self.active_state = self.states[0]
+
+    def draw_main_page(self):
+        self.clear_widgets()
         # Add widgets to Display
         self.add_widget(self.topbar)
         self.add_widget(self.sidebar)
         self.add_widget(self.details)
-        #
-        self.active_state = self.states[0]
         self.update()
 
     def update(self):
         # Update top bar
         button_list = []
-        if self.active_state == self.states[0]:
+        # Update current main GUI state, which is selected in top bar
+        self.active_state = self.topbar.drop_down_button.selection
+
+        if self.active_state == "Accounts":
             # Update sidebar
             button_list = Adapter().req_acc_list()
             # Update details content
@@ -50,8 +57,10 @@ class DisplayController(FloatLayout):
             pass
         self.sidebar.update(button_list)
 
+    def new_item(self):
+        if self.active_state == "Accounts":
+            print("New callback triggered")
+            AccountNew()
+
     def on_size(self, *args):
-        """
-        Resize callback
-        """
         self.update()
