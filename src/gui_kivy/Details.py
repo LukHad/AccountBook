@@ -1,13 +1,16 @@
 from kivy.uix.scrollview import ScrollView
+from src.gui_kivy.AccountView import AccountDetails
 
 
 class Details(ScrollView):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.content = None
+        self.account_details = AccountDetails()
+        self.content = self.account_details
+        self.update()
 
-    def update(self, content):
+    def update(self):
         self.clear_widgets()
-        self.content = content
-        self.add_widget(self.content)
+        if self.content:
+            self.add_widget(self.content)
 

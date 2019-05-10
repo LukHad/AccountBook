@@ -5,11 +5,28 @@ from kivy.uix.textinput import TextInput
 
 
 class AccountNew(GridLayout):
-    def __init__(self, **kwargs):
+    def __init__(self, ctrl, **kwargs):
         super().__init__(**kwargs)
         self.cols = 2
+        self.ctrl = ctrl
         self.label_name = Label(text="Account name:")
         self.input_name = TextInput(text=" ", multiline=False)
+
+        self.button_cancel = Button(text="Cancel")
+        self.button_cancel.bind(on_press=self.cancel_callback)
+        self.button_save = Button(text="Save")
+
+        self.update()
+
+    def update(self):
+        self.add_widget(self.label_name)
+        self.add_widget(self.input_name)
+        self.add_widget(self.button_cancel)
+        self.add_widget(self.button_save)
+
+    def cancel_callback(self, _):
+        self.ctrl.to_main_page()
+
 
 class AccountDetails(GridLayout):
     def __init__(self, **kwargs):

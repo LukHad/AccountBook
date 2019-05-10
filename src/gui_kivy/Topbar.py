@@ -21,7 +21,7 @@ class Topbar(BoxLayout):
         self.button_new.bind(on_press=self.new_callback)
         self.add_widget(self.button_new)
 
-    def new_callback(self, instance):
+    def new_callback(self, _):
         self.ctrl.new_item()
 
 
