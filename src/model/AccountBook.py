@@ -25,8 +25,11 @@ class AccountBook:
         for acc in self.accounts:
             acc.update_interest()
 
-    def new_account(self, *args):
-        self.accounts.append(Account(*args))
+    def new_account(self, name, balance, currency, interest):
+        self.accounts.append(Account(name=name,
+                                     init_balance=balance,
+                                     interest_pa=interest,
+                                     currency=currency))
 
     def new_category(self, *args):
         self.categories.append(Category(*args))

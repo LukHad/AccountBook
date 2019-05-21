@@ -1,8 +1,12 @@
 from kivy.uix.floatlayout import FloatLayout
+from kivy.core.window import Window
+import numbers
 # Internal imports
 from src.Adapter import Adapter
 from src.gui_kivy.MainView import MainView
 from src.gui_kivy.AccountView import AccountNew
+from src.gui_kivy.MsgBox import MsgBox
+
 
 ACCOUNTS = "Accounts"
 EVALUATION = "Evaluation"
@@ -17,9 +21,12 @@ class DisplayController(FloatLayout):
     def __init__(self, **kwargs):
         # Init parent
         super().__init__(**kwargs)
+        self.x = 0
+        self.y = 0
         self.page = MAIN_PAGE
         self.states = [ACCOUNTS, EVALUATION, CATEGORIES, STANDINGS]
         self.active_state = self.states[0]
+        self.adapter = Adapter()
         # Views
         self.main_view = MainView(ctrl=self)
         self.new_view = None
@@ -32,10 +39,10 @@ class DisplayController(FloatLayout):
             self.active_state = self.main_view.topbar.drop_down_button.selection
             if self.active_state == ACCOUNTS:
                 # Update sidebar
-                button_list = Adapter().req_acc_list()
+                button_list = self.adapter.req_acc_list()
                 self.main_view.details.content = self.main_view.details.account_details
             elif self.active_state == CATEGORIES:
-                button_list = Adapter().req_cat_list()
+                button_list = self.adapter.req_cat_list()
                 self.main_view.details.content = None
             else:
                 button_list = []
@@ -48,7 +55,6 @@ class DisplayController(FloatLayout):
 
     def new_item(self):
         if self.active_state == ACCOUNTS:
-            print("New callback triggered")
             self.new_view = AccountNew(ctrl=self)
             self.page = NEW_PAGE
         self.update()
@@ -59,3 +65,29 @@ class DisplayController(FloatLayout):
 
     def on_size(self, *args):
         self.update()
+        self.x, self.y = Window.size
+
+    def on_stop(self):
+        self.adapter.save()
+
+    def on_start(self):
+        self.adapter.load()
+
+    def push_new_account(self, name, balance, currency, interest):
+        if len(name) < 2:
+            MsgBox("Account name must be more than 2 digits")
+            return
+        if balance.isnumeric():
+            balance = float(balance)
+        else:
+            MsgBox("Balance must be a numeric value")
+            return
+        if interest.isnumeric():
+            interest = float(interest) / 100.0
+        else:
+            MsgBox("Interest must be a numeric value")
+            return
+        self.adapter.push_new_account(name, balance, currency, interest)
+        self.page = MAIN_PAGE
+        self.update()
+
