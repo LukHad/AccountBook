@@ -1,19 +1,16 @@
 from kivy.uix.floatlayout import FloatLayout
 from kivy.core.window import Window
-import numbers
-# Internal imports
+
 from src.model.TransactionBook import TransactionBook
 from src.gui_kivy.MainView import MainView
-from src.gui_kivy.TransactionView import TransactionNew
-from src.gui_kivy.MsgBox import MsgBox
+from src.gui_kivy.TransactionViews import TransactionDetails
 
 
 class DisplayController(FloatLayout):
     def __init__(self, **kwargs):
         # Init parent
         super().__init__(**kwargs)
-        self.x = 0
-        self.y = 0
+        self.model = TransactionBook()
 
         self.TRANSACTIONS = "Transaction"
         self.EVALUATION = "Evaluation"
@@ -31,7 +28,10 @@ class DisplayController(FloatLayout):
         self.main_view.update()
 
     def new_item(self):
-        pass
+        if self.state == self.TRANSACTIONS:
+            self.clear_widgets()
+            self.add_widget(TransactionDetails(ctrl=self))
+
 
     def to_main_page(self):
         pass

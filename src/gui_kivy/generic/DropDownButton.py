@@ -18,7 +18,7 @@ class DropDownButton(BoxLayout):
         super().__init__(**kwargs)
 
         self.selection_list = selection_list  # Item list
-        self.selection = selection_list[0]  # Currently selected item
+        self.selection = selection_list[0] if self.selection_list else " "
         self.drop_down_button = Button(text=self.selection)
         self.drop_down_button.bind(on_release=lambda _: self.show_drop_down(callback))
         self.add_widget(self.drop_down_button)
