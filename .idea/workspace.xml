@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="725e8b36-b93e-4b14-8867-4f0abe93dbf0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Adapter.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui_kivy/DisplayController.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui_kivy/DisplayController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui_kivy/DropDownButton.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui_kivy/generic/DropDownButton.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui_kivy/MainView.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui_kivy/MainView.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui_kivy/MsgBox.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui_kivy/generic/MsgBox.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui_kivy/Sidebar.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui_kivy/generic/Sidebar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui_kivy/Topbar.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui_kivy/Topbar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui_kivy/TransactionView.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui_kivy/TransactionViews.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui_kivy/TransactionViews.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui_kivy/TransactionViews.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui_kivy/generic/InputBox.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui_kivy/generic/InputBox.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,8 +17,8 @@
       <file leaf-file-name="DisplayController.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gui_kivy/DisplayController.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="12" column="18" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="18" />
+            <state relative-caret-position="371">
+              <caret line="32" column="46" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="46" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
               </folding>
@@ -36,8 +29,8 @@
       <file leaf-file-name="MsgBox.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gui_kivy/generic/MsgBox.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+            <state relative-caret-position="210">
+              <caret line="14" column="98" selection-start-line="14" selection-start-column="57" selection-end-line="14" selection-end-column="98" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -45,25 +38,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InputBox.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="InputBox.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gui_kivy/generic/InputBox.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="32" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
+            <state relative-caret-position="315">
+              <caret line="21" column="72" selection-start-line="21" selection-start-column="72" selection-end-line="21" selection-end-column="72" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TransactionBook.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/TransactionBook.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="97">
-              <caret line="17" column="23" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#29#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -72,11 +53,20 @@
       <file leaf-file-name="MainView.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gui_kivy/MainView.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
+            <state relative-caret-position="309">
               <caret line="28" column="49" selection-start-line="28" selection-start-column="49" selection-end-line="28" selection-end-column="49" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Topbar.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gui_kivy/Topbar.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="15" selection-start-line="15" selection-end-line="15" />
             </state>
           </provider>
         </entry>
@@ -117,8 +107,8 @@
       <file leaf-file-name="ListPicker.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gui_kivy/generic/ListPicker.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="383">
-              <caret line="57" column="27" selection-start-line="57" selection-start-column="27" selection-end-line="57" selection-end-column="27" />
+            <state relative-caret-position="520">
+              <caret line="63" column="18" lean-forward="true" selection-start-line="60" selection-end-line="63" selection-end-column="18" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
@@ -126,11 +116,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TransactionViews.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TransactionViews.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gui_kivy/TransactionViews.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="59" column="34" selection-start-line="59" selection-start-column="34" selection-end-line="59" selection-end-column="34" />
+            <state relative-caret-position="116">
+              <caret line="24" column="37" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="37" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
               </folding>
@@ -218,13 +208,12 @@
         <option value="$PROJECT_DIR$/src/gui_kivy/generic/datepicker.py" />
         <option value="$PROJECT_DIR$/src/gui_kivy/generic/input_box.py" />
         <option value="$PROJECT_DIR$/src/gui_kivy/generic/ListPicker.py" />
-        <option value="$PROJECT_DIR$/src/gui_kivy/TransactionViews.py" />
         <option value="$PROJECT_DIR$/src/gui_kivy/generic/InputBox.py" />
+        <option value="$PROJECT_DIR$/src/gui_kivy/TransactionViews.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1920" />
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1280" />
     <option name="height" value="733" />
@@ -447,16 +436,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1920" y="23" width="1920" height="1013" extended-state="6" />
+    <frame x="0" y="23" width="1280" height="733" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.75730336" visible="true" weight="0.2078125" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.75730336" visible="true" weight="0.31171876" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.24430956" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.19382322" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.36421725" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.26858878" />
       <window_info id="Structure" order="1" sideWeight="0.24269663" side_tool="true" weight="0.2078125" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.40515932" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -468,25 +457,6 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
     </layout>
-    <layout-to-restore>
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.19382322" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.75730336" weight="0.2078125" />
-      <window_info id="Structure" order="1" sideWeight="0.24269663" side_tool="true" weight="0.2078125" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.36421725" />
-      <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.24430956" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.49201277" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.40515932" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-    </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -660,13 +630,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui_kivy/Topbar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gui_kivy/AppMain.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -677,32 +640,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui_kivy/MainView.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="49" selection-start-line="28" selection-start-column="49" selection-end-line="28" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gui_kivy/generic/Sidebar.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="34" lean-forward="true" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="34" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui_kivy/generic/MsgBox.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -724,16 +667,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui_kivy/generic/ListPicker.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="57" column="27" selection-start-line="57" selection-start-column="27" selection-end-line="57" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/TransactionBook.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="97">
@@ -744,10 +677,57 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui_kivy/generic/MsgBox.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="98" selection-start-line="14" selection-start-column="57" selection-end-line="14" selection-end-column="98" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui_kivy/generic/ListPicker.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="63" column="18" lean-forward="true" selection-start-line="60" selection-end-line="63" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui_kivy/generic/InputBox.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="72" selection-start-line="21" selection-start-column="72" selection-end-line="21" selection-end-column="72" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui_kivy/MainView.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="28" column="49" selection-start-line="28" selection-start-column="49" selection-end-line="28" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui_kivy/Topbar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/gui_kivy/DisplayController.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="12" column="18" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="18" />
+        <state relative-caret-position="371">
+          <caret line="32" column="46" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="46" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />
           </folding>
@@ -756,20 +736,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gui_kivy/TransactionViews.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="59" column="34" selection-start-line="59" selection-start-column="34" selection-end-line="59" selection-end-column="34" />
+        <state relative-caret-position="116">
+          <caret line="24" column="37" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="37" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui_kivy/generic/InputBox.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="32" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>

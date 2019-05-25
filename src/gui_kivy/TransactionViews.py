@@ -3,10 +3,11 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.uix.anchorlayout import AnchorLayout
+from kivy.uix.popup import Popup
 
-from src.gui_kivy.generic.DropDownButton import DropDownButton
 from src.gui_kivy.generic.datepicker import DatePicker
 from src.gui_kivy.generic.ListPicker import ListPicker
+
 
 class TransactionList(GridLayout):
     def __init__(self, **kwargs):
@@ -32,15 +33,13 @@ class TransactionDetails(AnchorLayout):
         self.grid.spacing = 10
         self.grid.size_hint_y = None
         self.grid.bind(minimum_height=self.setter('height'))
-        self.grid.row_default_height = 40
+        self.grid.row_default_height = 50
 
         # Input data
         self.grid.label_date = Label(text="Date:")
         self.grid.input_date = DatePicker()
-        self.grid.label_acc_from = Label(text="Account from:")
-        self.grid.input_acc_from = DropDownButton(ctrl.model.accounts, callback=None)
-        self.grid.label_acc_to = Label(text="Account to")
-        self.grid.input_acc_to = DropDownButton(ctrl.model.accounts, callback=None)
+        self.grid.label_acc = Label(text="Account:")
+        self.grid.input_acc = ListPicker(ctrl.model.accounts, add_callback=self.cb_add_account, topic="Account")
         self.grid.label_amount = Label(text="Amount:")
         self.grid.input_amount = TextInput(text="", multiline=False)
         self.grid.label_category = Label(text="Category:")
@@ -61,24 +60,31 @@ class TransactionDetails(AnchorLayout):
         self.update()
 
     def cb_add_category(self, text):
-        # Write category text in text box
-        self.grid.input_category.text = text
         # Add category to model
         self.ctrl.model.categories.append(text)
         # Update GUI element to take new category into account
         self.grid.input_category = ListPicker(self.ctrl.model.categories,
                                               add_callback=self.cb_add_category,
                                               topic="Category")
+        # Write category text in text box
+        self.grid.input_category.text = text
+        self.update()
+
+    def cb_add_account(self, text):
+        self.ctrl.model.accounts.append(text)
+        # Update GUI element to take new category into account
+        self.grid.input_acc = ListPicker(self.ctrl.model.accounts,
+                                         add_callback=self.cb_add_account,
+                                         topic="Account")
+        self.grid.input_acc.text = text
         self.update()
 
     def update(self):
         self.grid.clear_widgets()
         self.grid.add_widget(self.grid.label_date)
         self.grid.add_widget(self.grid.input_date)
-        self.grid.add_widget(self.grid.label_acc_from)
-        self.grid.add_widget(self.grid.input_acc_from)
-        self.grid.add_widget(self.grid.label_acc_to)
-        self.grid.add_widget(self.grid.input_acc_to)
+        self.grid.add_widget(self.grid.label_acc)
+        self.grid.add_widget(self.grid.input_acc)
         self.grid.add_widget(self.grid.label_amount)
         self.grid.add_widget(self.grid.input_amount)
         self.grid.add_widget(self.grid.label_category)
