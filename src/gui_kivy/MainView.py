@@ -24,9 +24,9 @@ class MainView(FloatLayout):
         self.full_details = ScrollView(size_hint=(1, 1 - self.top_bar_width))
 
         # Populate GUI objects
-        self.transaction_details = TransactionList()
+        self.transaction_details = TransactionList(ctrl=self.ctrl)
         self.full_details.add_widget(self.transaction_details)
-        self.evaluation_details = TransactionList()  # temporary as a dummy
+        self.evaluation_details = FloatLayout()  # temporary as a dummy
         self.split_details.add_widget(self.evaluation_details )
         self.sidebar.button_str_list = ["Year overview", "Custom graphs"]  # temporary as a dummy -> delete
 
@@ -37,16 +37,17 @@ class MainView(FloatLayout):
         self.clear_widgets()
         if self.ctrl.state == self.ctrl.TRANSACTIONS:
             """
-                    Topbar
-            -----------------------
-            Sidebar | split_details
-            """
-            self.add_widget(self.full_details)
-        elif self.ctrl.state == self.ctrl.EVALUATION:
-            """
                   Topbar
             -----------------
                full_details
+            """
+            self.add_widget(self.full_details)
+            self.transaction_details.update()
+        elif self.ctrl.state == self.ctrl.EVALUATION:
+            """
+                    Topbar
+            -----------------------
+            Sidebar | split_details
             """
             self.add_widget(self.split_details)
             self.add_widget(self.sidebar)

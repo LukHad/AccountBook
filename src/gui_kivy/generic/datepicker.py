@@ -148,7 +148,7 @@ class CalendarWidget(RelativeLayout):
         
         scr = Screen()
         m = self.month_names_eng[self.active_date[1] - 1]
-        scr.name = f"%s{DATE_DELIMITER}%s" % (m, self.active_date[2])  # like march-2015
+        scr.name = f"%s-%s" % (m, self.active_date[2])  # like march-2015
         
         # Grid for days
         grid_layout = ButtonsGrid()

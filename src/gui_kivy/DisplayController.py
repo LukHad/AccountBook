@@ -1,9 +1,9 @@
 from kivy.uix.floatlayout import FloatLayout
 from kivy.core.window import Window
-
+from kivy.uix.popup import Popup
 from src.model.TransactionBook import TransactionBook
 from src.gui_kivy.MainView import MainView
-from src.gui_kivy.TransactionViews import TransactionDetails
+from src.gui_kivy.TransactionViews import TransactionDetailsPopUp
 
 
 class DisplayController(FloatLayout):
@@ -19,19 +19,21 @@ class DisplayController(FloatLayout):
 
         # Views
         self.main_view = MainView(ctrl=self)
+        self.popup = None
+        self.popup_size = (1000, 450)
         self.new_view = None
         self.update()
 
     def update(self):
+        if self.popup:
+            self.popup.dismiss()
         self.clear_widgets()
         self.add_widget(self.main_view)
         self.main_view.update()
 
     def new_item(self):
         if self.state == self.TRANSACTIONS:
-            self.clear_widgets()
-            self.add_widget(TransactionDetails(ctrl=self))
-
+            self.popup = TransactionDetailsPopUp(ctrl=self)
 
     def to_main_page(self):
         pass

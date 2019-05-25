@@ -4,21 +4,26 @@ from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.popup import Popup
+from kivy.properties import NumericProperty, ReferenceListProperty
+from kivy.core.window import Window
 
 from src.gui_kivy.generic.datepicker import DatePicker
 from src.gui_kivy.generic.ListPicker import ListPicker
 
 
 class TransactionList(GridLayout):
-    def __init__(self, **kwargs):
+    def __init__(self, ctrl, **kwargs):
         super().__init__(**kwargs)
-
         self.cols = 1
         self.spacing = 10
         self.size_hint_y = None
         self.bind(minimum_height=self.setter('height'))
-        for i in range(100):
-            btn = Button(text=str(i), size_hint_y=None, height=40)
+        self.ctrl = ctrl
+
+    def update(self):
+        self.clear_widgets()
+        for index, row in self.ctrl.model.data.iterrows():
+            btn = Button(text=row[self.ctrl.model.DESCRIPTION], size_hint_y=None, height=40)
             self.add_widget(btn)
 
 
@@ -100,11 +105,23 @@ class TransactionDetails(AnchorLayout):
         self.ctrl.update()
 
     def save_callback(self, _):
-        self.ctrl.push_new_account(self.grid.input_name.text,
-                                   self.grid.input_balance.text,
-                                   self.grid.input_currency.text,
-                                   self.grid.input_interest.text)
+        print("Here the transaction will be saved to the model")
         self.ctrl.update()
+
+
+class TransactionDetailsPopUp(Popup):
+    pHint_x = NumericProperty(0.7)
+    pHint_y = NumericProperty(0.7)
+    pHint = ReferenceListProperty(pHint_x, pHint_y)
+
+    def __init__(self, ctrl, **kwargs):
+        super().__init__(**kwargs)
+        self.content = TransactionDetails(ctrl)
+        self.title = "Transaction"
+
+        self.size_hint = self.pHint
+        Window.release_all_keyboards()
+        self.open()
 
 
 

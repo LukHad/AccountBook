@@ -52,8 +52,8 @@ def test_filter_date(save_load_test=False):
     df_filtered = tb.filter_date(from_date, to_date, tb.data)
     df_filtered = df_filtered.reset_index()
 
-    ass_cond = (df_filtered[DATE][0] == datetime.strptime("24.12.2017", DATE_TIME_FORMAT) and
-                df_filtered[DATE][1] == datetime.strptime("03.02.2018", DATE_TIME_FORMAT))
+    ass_cond = (df_filtered[tb.DATE][0] == datetime.strptime("24.12.2017", DATE_TIME_FORMAT) and
+                df_filtered[tb.DATE][1] == datetime.strptime("03.02.2018", DATE_TIME_FORMAT))
 
     nose.tools.ok_(ass_cond, err_message)
 
@@ -63,7 +63,20 @@ def test_save_load():
     test_account_balance(True)
 
 
+def test_populate_list_from_data():
+    tb = dummy_transactions()
+    tb.populate_lists_from_data()
+
+    exp_cat = ['Income', 'Entertainment', 'Food', 'Mobility']
+    exp_acc = ['Account 1', 'Account 2']
+    ass_cond_cat = all(x in tb.categories for x in exp_cat) and (len(tb.categories) == len(exp_cat))
+    ass_cond_acc = all(x in tb.accounts for x in exp_acc) and (len(tb.accounts) == len(exp_acc))
+
+    nose.tools.ok_(ass_cond_cat and ass_cond_acc, "populate_lists_from_data failed")
+
+
 if __name__ == '__main__':
+    test_populate_list_from_data()
     test_filter_date()
     test_account_balance()
     test_save_load()
