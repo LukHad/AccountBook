@@ -1,4 +1,5 @@
-pyobjc==4.1 # tkinter gui
 nose==1.3.7 #unit tests
 Cython==0.26.1 #kivy gui
 kivy
+pandas==0.24.2
+numpy

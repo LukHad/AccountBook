@@ -5,7 +5,7 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.anchorlayout import AnchorLayout
 
 
-class AccountNew(AnchorLayout):
+class TransactionNew(AnchorLayout):
     def __init__(self, ctrl, **kwargs):
         super().__init__(**kwargs)
         self.anchor_y = 'top'
@@ -58,7 +58,7 @@ class AccountNew(AnchorLayout):
                                    self.grid.input_interest.text)
 
 
-class AccountDetails(GridLayout):
+class TransactionDetails(GridLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
