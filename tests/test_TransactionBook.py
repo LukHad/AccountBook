@@ -47,13 +47,13 @@ def test_filter_date(save_load_test=False):
         err_message = "Method test_filter_date failed after save and load"
     else:
         err_message = "Method test_filter_date failed"
-    from_date = datetime.strptime("01.09.2017", DATE_TIME_FORMAT)
-    to_date = datetime.strptime("01.03.2018", DATE_TIME_FORMAT)
+    from_date = datetime.strptime("01.09.2017", tb.DATE_TIME_FORMAT)
+    to_date = datetime.strptime("01.03.2018", tb.DATE_TIME_FORMAT)
     df_filtered = tb.filter_date(from_date, to_date, tb.data)
     df_filtered = df_filtered.reset_index()
 
-    ass_cond = (df_filtered[tb.DATE][0] == datetime.strptime("24.12.2017", DATE_TIME_FORMAT) and
-                df_filtered[tb.DATE][1] == datetime.strptime("03.02.2018", DATE_TIME_FORMAT))
+    ass_cond = (df_filtered[tb.DATE][0] == datetime.strptime("24.12.2017", tb.DATE_TIME_FORMAT) and
+                df_filtered[tb.DATE][1] == datetime.strptime("03.02.2018", tb.DATE_TIME_FORMAT))
 
     nose.tools.ok_(ass_cond, err_message)
 

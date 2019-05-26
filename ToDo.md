@@ -1,15 +1,12 @@
 ## To do list:
-**ToDo_2**: String is hard coded...
+The list is roughly ordered by priority. 
 
-**ToDo_3**: Make total days in year for interest calculation configurable
+* change topbar to have a absolute height instead of relative
+* change sidebar to be a list similar to transaction list
+* Add transaction column descriptions - Date | Account | Amount | ...
+* add cancel button to InputBox
+* change date time string returned from datepicker to the format dd.mm.yyyy
+* dynamically adapt transaction grid widths to content
 
-**ToDo_4**: Calculate balance at date backwards (from .balance instead of from .init_balance).
-More efficient with an increasing number of transactions
 
-**ToDo_5**: Use correct rounding methods for Cent digits.
 
-**ToDo_6**: Put interest details in dedicated class
-
-**ToDo_7**: Make sidebar scrollable
-
-**ToDo8**: Replace hardcoded strings like "Accounts" etc.

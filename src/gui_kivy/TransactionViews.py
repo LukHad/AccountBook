@@ -6,12 +6,45 @@ from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.popup import Popup
 from kivy.properties import NumericProperty, ReferenceListProperty
 from kivy.core.window import Window
-
+from src.gui_kivy.generic.MsgBox import MsgBox
 from src.gui_kivy.generic.datepicker import DatePicker
 from src.gui_kivy.generic.ListPicker import ListPicker
 
 
+class TransactionItemGrid(GridLayout):
+    """
+    Date | Account | Amount | Description | Category | Edit-Button
+    """
+    def __init__(self, date, account, amount, description, category, ctrl, index, **kwargs):
+        super().__init__(**kwargs)
+        self.rows = 1
+        self.index = index
+        self.ctrl = ctrl
+        label_date = Label(text=date, size_hint_x=None, width=150)
+        label_account = Label(text=account)
+        label_amount = Label(text=amount, size_hint_x=None, width=150)
+        label_description = Label(text=description)
+        label_category = Label(text=category)
+        btn_edit = Button(text="Edit", size_hint_x=None, width=90)
+        btn_edit.bind(on_press=self.edit_callback)
+
+        self.add_widget(label_date)
+        self.add_widget(label_account)
+        self.add_widget(label_amount)
+        self.add_widget(label_description)
+        self.add_widget(label_category)
+        self.add_widget(btn_edit)
+
+    def edit_callback(self, _):
+        self.ctrl.popup = TransactionDetailsPopUp(ctrl=self.ctrl, index=self.index)
+
+
 class TransactionList(GridLayout):
+    """
+    Transaction
+    Transaction
+    ...
+    """
     def __init__(self, ctrl, **kwargs):
         super().__init__(**kwargs)
         self.cols = 1
@@ -22,16 +55,30 @@ class TransactionList(GridLayout):
 
     def update(self):
         self.clear_widgets()
+        model = self.ctrl.model
         for index, row in self.ctrl.model.data.iterrows():
-            btn = Button(text=row[self.ctrl.model.DESCRIPTION], size_hint_y=None, height=40)
+            btn = TransactionItemGrid(row[self.ctrl.model.DATE].strftime(model.DATE_TIME_FORMAT),
+                                      str(row[self.ctrl.model.ACCOUNT]),
+                                      str(row[self.ctrl.model.AMOUNT]) + model.CURRENCY,
+                                      str(row[self.ctrl.model.DESCRIPTION]),
+                                      str(row[self.ctrl.model.CATEGORY]),
+                                      ctrl=self.ctrl,
+                                      index=index,
+                                      size_hint_y=None, height=40)
             self.add_widget(btn)
 
 
 class TransactionDetails(AnchorLayout):
-    def __init__(self, ctrl, **kwargs):
+    """
+    Date: in date
+    Account: in account
+    ...
+    """
+    def __init__(self, ctrl, index=None, **kwargs):
         super().__init__(**kwargs)
         self.anchor_y = 'top'
         self.ctrl = ctrl
+        self.index = index  # Only used when a transaction is edited and not created!
 
         self.grid = GridLayout()
         self.grid.cols = 2
@@ -46,7 +93,7 @@ class TransactionDetails(AnchorLayout):
         self.grid.label_acc = Label(text="Account:")
         self.grid.input_acc = ListPicker(ctrl.model.accounts, add_callback=self.cb_add_account, topic="Account")
         self.grid.label_amount = Label(text="Amount:")
-        self.grid.input_amount = TextInput(text="", multiline=False)
+        self.grid.input_amount = TextInput(text="", multiline=False, input_type='number')
         self.grid.label_category = Label(text="Category:")
         self.grid.input_category = ListPicker(self.ctrl.model.categories,
                                               add_callback=self.cb_add_category,
@@ -85,6 +132,15 @@ class TransactionDetails(AnchorLayout):
         self.update()
 
     def update(self):
+        if self.index != None:  # The transaction is not new -> fill fields with data
+            model = self.ctrl.model
+            row = model.data.loc[self.index]
+            self.grid.input_date.text = row[self.ctrl.model.DATE].strftime(model.DATE_TIME_FORMAT)
+            self.grid.input_acc.text = str(row[self.ctrl.model.ACCOUNT])
+            self.grid.input_amount.text = str(row[self.ctrl.model.AMOUNT])
+            self.grid.input_description.text = str(row[self.ctrl.model.DESCRIPTION])
+            self.grid.input_category.text = str(row[self.ctrl.model.CATEGORY])
+
         self.grid.clear_widgets()
         self.grid.add_widget(self.grid.label_date)
         self.grid.add_widget(self.grid.input_date)
@@ -104,9 +160,32 @@ class TransactionDetails(AnchorLayout):
     def cancel_callback(self, _):
         self.ctrl.update()
 
+    def _check_input(self):
+        amount_str = self.grid.input_amount.text
+        try:
+            float(amount_str)
+            return True
+        except:
+            return False
+
     def save_callback(self, _):
-        print("Here the transaction will be saved to the model")
-        self.ctrl.update()
+        if self._check_input():
+            if self.index != None:
+                self.ctrl.model.edit_transaction(self.index,
+                                                 self.grid.input_date.text,
+                                                 self.grid.input_acc.text,
+                                                 self.grid.input_description.text,
+                                                 float(self.grid.input_amount.text),
+                                                 self.grid.input_category.text)
+            else:
+                self.ctrl.model.new_transaction(self.grid.input_date.text,
+                                                self.grid.input_acc.text,
+                                                self.grid.input_description.text,
+                                                float(self.grid.input_amount.text),
+                                                self.grid.input_category.text)
+            self.ctrl.update()
+        else:
+            MsgBox("The entered amount is not valid.\nThe decimal separator is \".\"")
 
 
 class TransactionDetailsPopUp(Popup):
@@ -114,9 +193,9 @@ class TransactionDetailsPopUp(Popup):
     pHint_y = NumericProperty(0.7)
     pHint = ReferenceListProperty(pHint_x, pHint_y)
 
-    def __init__(self, ctrl, **kwargs):
+    def __init__(self, ctrl, index=None, **kwargs):
         super().__init__(**kwargs)
-        self.content = TransactionDetails(ctrl)
+        self.content = TransactionDetails(ctrl, index=index)
         self.title = "Transaction"
 
         self.size_hint = self.pHint
