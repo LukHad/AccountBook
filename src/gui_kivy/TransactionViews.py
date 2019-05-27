@@ -6,6 +6,7 @@ from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.popup import Popup
 from kivy.properties import NumericProperty, ReferenceListProperty
 from kivy.core.window import Window
+from kivy.graphics import Color
 from src.gui_kivy.generic.MsgBox import MsgBox
 from src.gui_kivy.generic.datepicker import DatePicker
 from src.gui_kivy.generic.ListPicker import ListPicker
@@ -15,25 +16,29 @@ class TransactionItemGrid(GridLayout):
     """
     Date | Account | Amount | Description | Category | Edit-Button
     """
-    def __init__(self, date, account, amount, description, category, ctrl, index, **kwargs):
+    def __init__(self, date, account, amount, description, category, ctrl, index=None, **kwargs):
         super().__init__(**kwargs)
         self.rows = 1
         self.index = index
         self.ctrl = ctrl
-        label_date = Label(text=date, size_hint_x=None, width=150)
-        label_account = Label(text=account)
-        label_amount = Label(text=amount, size_hint_x=None, width=150)
-        label_description = Label(text=description)
-        label_category = Label(text=category)
-        btn_edit = Button(text="Edit", size_hint_x=None, width=90)
-        btn_edit.bind(on_press=self.edit_callback)
+        self.label_date = Label(text=date, size_hint_x=None, width=150)
+        self.label_account = Label(text=account)
+        self.label_amount = Label(text=amount, size_hint_x=None, width=150)
+        self.label_description = Label(text=description)
+        self.label_category = Label(text=category)
 
-        self.add_widget(label_date)
-        self.add_widget(label_account)
-        self.add_widget(label_amount)
-        self.add_widget(label_description)
-        self.add_widget(label_category)
-        self.add_widget(btn_edit)
+        self.add_widget(self.label_date)
+        self.add_widget(self.label_account)
+        self.add_widget(self.label_amount)
+        self.add_widget(self.label_description)
+        self.add_widget(self.label_category)
+        if index != None:
+            btn_edit = Button(text="Edit", size_hint_x=None, width=90)
+            btn_edit.bind(on_press=self.edit_callback)
+            self.add_widget(btn_edit)
+        else:
+            btn_edit_dummy = Label(text="", size_hint_x=None, width=90)
+            self.add_widget(btn_edit_dummy)
 
     def edit_callback(self, _):
         self.ctrl.popup = TransactionDetailsPopUp(ctrl=self.ctrl, index=self.index)
@@ -56,6 +61,17 @@ class TransactionList(GridLayout):
     def update(self):
         self.clear_widgets()
         model = self.ctrl.model
+        heading = TransactionItemGrid(model.DATE,
+                                      model.ACCOUNT,
+                                      model.AMOUNT,
+                                      model.DESCRIPTION,
+                                      model.CATEGORY,
+                                      ctrl=self.ctrl,
+                                      index=None,
+                                      size_hint_y=None,
+                                      height=40)
+        self.add_widget(heading)
+
         for index, row in self.ctrl.model.data.iterrows():
             btn = TransactionItemGrid(row[self.ctrl.model.DATE].strftime(model.DATE_TIME_FORMAT),
                                       str(row[self.ctrl.model.ACCOUNT]),
