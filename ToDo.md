@@ -1,6 +1,7 @@
 ## To do list:
 The list is roughly ordered by priority. 
 
+* Add init file and use this as save / load option first
 * Check how many transactions can be loaded
 * Add transaction column descriptions - Date | Account | Amount | ...
 * add cancel button to InputBox

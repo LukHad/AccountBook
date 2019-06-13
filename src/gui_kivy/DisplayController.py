@@ -32,8 +32,7 @@ class DisplayController(FloatLayout):
         self.main_view.update()
 
     def new_item(self):
-        if self.state == self.TRANSACTIONS:
-            self.popup = TransactionDetailsPopUp(ctrl=self)
+        self.popup = TransactionDetailsPopUp(ctrl=self)
 
     def to_main_page(self):
         pass
@@ -46,8 +45,5 @@ class DisplayController(FloatLayout):
         pass
 
     def on_start(self):
-        pass
-
-    def push_new_account(self, name, balance, currency, interest):
         pass
 

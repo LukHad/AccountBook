@@ -6,7 +6,6 @@ from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.popup import Popup
 from kivy.properties import NumericProperty, ReferenceListProperty
 from kivy.core.window import Window
-from kivy.graphics import Color
 from src.gui_kivy.generic.MsgBox import MsgBox
 from src.gui_kivy.generic.datepicker import DatePicker
 from src.gui_kivy.generic.ListPicker import ListPicker
