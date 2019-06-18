@@ -24,7 +24,7 @@ def save_load(tb):
     filename = "dummy_database.csv"
     tb.save_as(filename)
     tb2 = TransactionBook()
-    tb2.load(filename)
+    tb2.load_from(filename)
     os.remove(filename)
     return tb2
 

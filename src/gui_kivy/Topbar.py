@@ -15,7 +15,7 @@ class Topbar(BoxLayout):
 
         # Add drop down menu for main GUI options
         self.menu = Menu(self.ctrl)
-        # self.add_widget(self.menu)
+        self.add_widget(self.menu)
 
         self.drop_down_button = DropDownButton(ctrl.states, ctrl.update)
         self.add_widget(self.drop_down_button)

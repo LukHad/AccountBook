@@ -51,11 +51,15 @@ class TransactionBook:
         self.save_as(self.path)
 
     def save_as(self, file_path):
-        df = self.data
+        df = self.data.copy()
         df[self.DATE] = df[self.DATE].dt.strftime(self.DATE_TIME_FORMAT)
-        self.data.to_csv(file_path, sep=';', index=False)
+        df.to_csv(file_path, sep=';', index=False)
 
-    def load(self, file_path):
+    def load(self):
+        file_path = self.path
+        self.load_from(file_path)
+
+    def load_from(self, file_path):
         df = pd.read_csv(file_path, sep=';')
         df[self.DATE] = pd.to_datetime(df[self.DATE], format=self.DATE_TIME_FORMAT)
         self.data = df

@@ -1,6 +1,9 @@
 from kivy.uix.dropdown import DropDown
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
+from src.gui_kivy.generic.InputBox import InputBox
+from kivy.core.window import Window
+
 from kivy.uix.filechooser import FileChooserListView
 from kivy.uix.popup import Popup
 from kivy.properties import NumericProperty, ReferenceListProperty
@@ -11,6 +14,7 @@ from kivy.uix.gridlayout import GridLayout
 
 
 class Menu(BoxLayout):
+    DB_PATH = "Database path"
     SAVE = "Save"
     LOAD = "Load"
 
@@ -25,7 +29,7 @@ class Menu(BoxLayout):
         super().__init__(**kwargs)
         self.ctrl = ctrl
 
-        self.selection_list = [self.SAVE, self.LOAD]  # Item list
+        self.selection_list = [self.DB_PATH, self.LOAD, self.SAVE]  # Item list
         self.drop_down_button = Button(text="Menu")
         self.drop_down_button.bind(on_release=lambda _: self.show_drop_down())
         self.add_widget(self.drop_down_button)
@@ -46,46 +50,39 @@ class Menu(BoxLayout):
 
     def callback(self, btn_text):
         if btn_text == self.SAVE:
-            # self.save()
-            print("Save")
+            self.save()
         elif btn_text == self.LOAD:
-            print("Load")
+            self.load()
+        elif btn_text == self.DB_PATH:
+            self.db_path()
+
+    def db_path(self):
+        x, y = Window.size
+        size = (x, 250)
+        InputBox(title="Enter path to data base",
+                 callback=self.config_path,
+                 text=self.ctrl.model.path,
+                 size=size)
+
+    def config_path(self, path):
+        self.ctrl.model.path = path
 
     def save(self):
-        popup = ChooseFile()
-        popup.open()
+        model = self.ctrl.model
+        if model.path != None:
+            # ToDo: Check for valid directory path
+            model.save()
+        else:
+            self.db_path()
 
-
-class ChooseFile(Popup):
-    pHint_x = NumericProperty(0.7)
-    pHint_y = NumericProperty(0.7)
-    pHint = ReferenceListProperty(pHint_x, pHint_y)
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.box_layout = BoxLayout(orientation="vertical")
-        self.button_box = BoxLayout(orientation="horizontal", size_hint_y=None, height=50)
-        self.cancle = Button(text="Cancel")
-        self.select = Button(text="OK")
-
-        self.label_path = Label(text="Enter full path to data file")
-        self.input_path = TextInput(text="")
-
-        self.box_layout.add_widget(self.label_path)
-        self.box_layout.add_widget(self.input_path)
-        self.button_box.add_widget(self.cancle)
-        self.button_box.add_widget(self.select)
-
-        self.box_layout.add_widget(self.button_box)
-
-        self.content = self.box_layout
-        self.title = "Choose file"
-
-        self.size_hint = self.pHint
-        Window.release_all_keyboards()
-        self.open()
-
-
+    def load(self):
+        model = self.ctrl.model
+        if model.path != None:
+            # ToDo: Check for valid file path
+            model.load()
+        else:
+            self.db_path()
+        self.ctrl.update()
 
 
 
