@@ -5,6 +5,14 @@ from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 import matplotlib.pyplot as plt
+import matplotlib
+import datetime
+import numpy as np
+
+font = {'weight': 'bold',
+        'size': 12}
+
+matplotlib.rc('font', **font)
 
 
 class EvalView(GridLayout):
@@ -20,9 +28,7 @@ class EvalView(GridLayout):
 
         # Add widgets
         self.add_widget(self.account_balance_box())
-        self.add_widget(self.year_trend_box())
-        self.add_widget(self.year_trend_box())
-        self.add_widget(self.year_trend_box())
+        self.add_widget(self.monthly_trend_box())
 
     def account_balance_box(self):
         box = GridLayout()
@@ -41,9 +47,24 @@ class EvalView(GridLayout):
             box.add_widget(balance_label)
         return box
 
-    def year_trend_box(self):
-        plt.plot([1, 23, 2, 4])
-        plt.ylabel('some numbers')
+    def monthly_trend_box(self):
+        # Clear old figure
+        plt.clf()
+        # Get data
+        label, data = self.ctrl.model.pivot_monthly_trend(datetime.date.today().year)  # ToDo: Implement year selection / dropdown
+        # Plot data and switch color depending on sign of months balance
+        for i, dat in enumerate(data):
+            if dat >= 0:
+                plt.bar(label[i], dat, color='blue')
+            else:
+                plt.bar(label[i], dat, color='red')
+        # Add currency as y-Label
+        plt.ylabel(self.ctrl.model.CURRENCY)
+        # Set x-Label vertical
+        plt.xticks(rotation='vertical')
+        # Add Grid
+        plt.grid(True)
+        # Package in layout
         box = BoxLayout()
         box.add_widget(FigureCanvasKivyAgg(plt.gcf()))
         return box

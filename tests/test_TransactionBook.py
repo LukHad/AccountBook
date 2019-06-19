@@ -49,7 +49,7 @@ def test_filter_date(save_load_test=False):
         err_message = "Method test_filter_date failed"
     from_date = datetime.strptime("01.09.2017", tb.DATE_TIME_FORMAT)
     to_date = datetime.strptime("01.03.2018", tb.DATE_TIME_FORMAT)
-    df_filtered = tb.filter_date(from_date, to_date, tb.data)
+    df_filtered = tb.filter_date(from_date, to_date)
     df_filtered = df_filtered.reset_index()
 
     ass_cond = (df_filtered[tb.DATE][0] == datetime.strptime("24.12.2017", tb.DATE_TIME_FORMAT) and
@@ -75,8 +75,16 @@ def test_populate_list_from_data():
     nose.tools.ok_(ass_cond_cat and ass_cond_acc, "populate_lists_from_data failed")
 
 
+def test_pivot_monthly_trend():
+    tb = dummy_transactions()
+    year = 2018
+    _, result = tb.pivot_monthly_trend(year)
+    nose.tools.ok_(result == [0, -30, 0, 0, 0, 0, 0, 0, 0, 0, 0, -11.95])
+
+
 if __name__ == '__main__':
-    test_populate_list_from_data()
-    test_filter_date()
-    test_account_balance()
-    test_save_load()
+    # test_populate_list_from_data()
+    # test_filter_date()
+    # test_account_balance()
+    # test_save_load()
+    pivot_monthly_trend()
