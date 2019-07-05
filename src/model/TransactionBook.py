@@ -96,9 +96,7 @@ class TransactionBook:
             result[i - 1] = df.loc[df[month] == i, self.AMOUNT].sum()
         return label, result
 
-    def pivot_category_pie(self, year, percent=False):
-        # Filter data for passed year
-        df = self.filter_date(datetime(year, 1, 1), datetime(year, 12, 31))
+    def pivot_category_pie(self, df, percent=False):
         # Filter for expenses -> negative amounts only
         df = df.loc[df[self.AMOUNT] < 0]
         # Get categories which have a negative balance

@@ -10,8 +10,7 @@ def test_filter():
     tb = dummy_transactions_2()
     print(tb.data)
     my_filter = Filter()
-    my_filter.select(tb.CATEGORY, "Food")
-    #my_filter.deselect(tb.CATEGORY, "Food")
+   # my_filter.select(tb.CATEGORY, "Food")
    # my_filter.select(tb.CATEGORY, "Income")
    # my_filter.select(tb.CATEGORY, "Income")
 
@@ -22,6 +21,8 @@ def test_filter():
     my_filter.deselect_date_range(tb.DATE)
     print(my_filter.filter_date_time)
     print(f"Result: {my_filter.filter(tb.data)}")
+
+    print(my_filter.check_if_selected(tb.CATEGORY, ["Income", "Blub", "Food", "Blob"]))
 
 
 if __name__ == '__main__':

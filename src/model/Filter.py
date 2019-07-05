@@ -7,6 +7,9 @@ class Filter:
         self.filter_select = {}  # Column: [List of selected items]
         self.filter_date_time = {}  # Column: (from, to)
 
+    def select_everything(self, df):
+        pass  # ToDo: add all elements
+
     def select(self, column, item):
         if column in self.filter_select.keys():
             existing_list = self.filter_select[column]
@@ -36,9 +39,9 @@ class Filter:
             return df
         # Initialize empty result
         result = pd.DataFrame(columns=df.columns)
-        # If no item is selected return empty data frame
-        if not self.filter_select:
-            return result
+        # # If no item is selected return empty data frame
+        # if not self.filter_select:
+        #     return result
         # ToDo: Add check if configured filter fits to data frame columns
         relevant = None
         # Filter selections
@@ -68,4 +71,13 @@ class Filter:
                 result = result.loc[df[column] >= itm[0]]
             result = result.loc[result[column] <= itm[1]]
         # Return result
+        return result
+
+    def check_if_selected(self, column, item_list):
+        result = []
+        for itm in item_list:
+            if (column in self.filter_select.keys()) and (itm in self.filter_select[column]):
+                result.append(True)
+            else:
+                result.append(False)
         return result

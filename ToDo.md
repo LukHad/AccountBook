@@ -7,6 +7,7 @@ The list is roughly ordered by priority.
 * Add transaction column descriptions - Date | Account | Amount | ... with filter functionality
 * add cancel button to InputBox
 * dynamically adapt transaction grid widths to content
+* [Refac] Create own Popup class to avoid duplicating NumericProperty settings
 
 
 
