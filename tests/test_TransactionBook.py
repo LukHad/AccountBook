@@ -15,6 +15,18 @@ def dummy_transactions():
     return tb
 
 
+def dummy_transactions_2():
+    tb = TransactionBook()
+    tb.new_transaction("01.07.2018", "Account 1", "My first transaction", 1000, "Income")
+    tb.new_transaction("11.08.2018", "Account 1", "Cinema", -17, "Entertainment")
+    tb.new_transaction("24.12.2019", "Account 2", "Bread and Milk", -5.0, "Food")
+    tb.new_transaction("03.02.2019", "Account 1", "Fuel", -30, "Mobility")
+    tb.new_transaction("01.12.2019", "Account 1", "Netflix", -11.95, "Entertainment")
+    tb.new_transaction("06.01.2019", "Account 2", "Sugar", -0.99, "Food")
+    tb.new_transaction("13.05.2019", "Account 2", "Strawberries", -6.49, "Food")
+    tb.new_transaction("17.09.2019", "Account 2", "Cheese", -5.0, "Food")
+    return tb
+
 def save_load(tb):
     """
     Helper function wich does save and load the data.
@@ -82,9 +94,17 @@ def test_pivot_monthly_trend():
     nose.tools.ok_(result == [0, -30, 0, 0, 0, 0, 0, 0, 0, 0, 0, -11.95])
 
 
+def test_pivot_category_pie():
+    tb = dummy_transactions_2()
+    year = 2019
+    cat, result = tb.pivot_category_pie(year)
+    nose.tools.ok_(result == [-30, -17.48, -11.95] and cat == ['Mobility', 'Food', 'Entertainment'])
+
+
 if __name__ == '__main__':
     # test_populate_list_from_data()
     # test_filter_date()
     # test_account_balance()
     # test_save_load()
-    pivot_monthly_trend()
+    # pivot_monthly_trend()
+    test_pivot_category_pie()

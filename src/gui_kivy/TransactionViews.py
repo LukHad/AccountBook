@@ -71,7 +71,9 @@ class TransactionList(GridLayout):
                                       height=40)
         self.add_widget(heading)
 
-        for index, row in self.ctrl.model.data.iterrows():
+        i = 1
+        for index in reversed(self.ctrl.model.data.index):  # self.ctrl.model.data.iterrows():
+            row = self.ctrl.model.data.iloc[index]
             btn = TransactionItemGrid(row[self.ctrl.model.DATE].strftime(model.DATE_TIME_FORMAT),
                                       str(row[self.ctrl.model.ACCOUNT]),
                                       str(row[self.ctrl.model.AMOUNT]) + model.CURRENCY,
@@ -81,6 +83,9 @@ class TransactionList(GridLayout):
                                       index=index,
                                       size_hint_y=None, height=40)
             self.add_widget(btn)
+            if i > 100:  # ToDo Make listed transaction dynamic
+                break
+            i = i + 1
 
 
 class TransactionDetails(AnchorLayout):

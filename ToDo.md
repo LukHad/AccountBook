@@ -1,11 +1,11 @@
 ## To do list:
 The list is roughly ordered by priority. 
 
-* Add init file and use this as save / load option first
-* Check how many transactions can be loaded
-* Add transaction column descriptions - Date | Account | Amount | ...
+* Fix bug when an ";" is added to transaction field
+* Fix bug that leads to crash when a transaction is created without a category
+* Add function and GUI elements to delete a transaction
+* Add transaction column descriptions - Date | Account | Amount | ... with filter functionality
 * add cancel button to InputBox
-* change date time string returned from datepicker to the format dd.mm.yyyy
 * dynamically adapt transaction grid widths to content
 
 
