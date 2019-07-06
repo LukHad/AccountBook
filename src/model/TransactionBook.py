@@ -79,13 +79,23 @@ class TransactionBook:
         self.data = df
         self.populate_lists_from_data()
 
+    def years(self):
+        df = self.data
+        df["Year"] = [el.year for el in df[self.DATE]]
+        years = df["Year"].unique()
+        years = years.tolist()
+        return years
+
 # Data aggregation methods:
-    def pivot_monthly_trend(self, year):
+    def pivot_monthly_trend(self, df):
         month = 'Month'
-        # Filter data for passed year
-        df = self.filter_date(datetime(year, 1, 1), datetime(year, 12, 31))
+
         # Add additional helper column with months
         df[month] = [el.month for el in df[self.DATE]]
+        df["Year"] = [el.year for el in df[self.DATE]]
+        years = df["Year"].unique()
+        years = years.tolist()
+        year = max(years)
         # Create list with formatted months
         label = ["01.", "02.", "03.", "04.", "05.", "06.", "07.", "08.", "09.", "10.", "11.", "12."]
         label = [i + str(year) for i in label]

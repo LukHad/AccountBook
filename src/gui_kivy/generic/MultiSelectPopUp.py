@@ -21,7 +21,7 @@ class MultiSelectPopUp(Popup):
     pHint_y = NumericProperty(0.7)
     pHint = ReferenceListProperty(pHint_x, pHint_y)
 
-    def __init__(self, title, option_list, option_init=None, callback=None, **kwargs):
+    def __init__(self, title, option_list, option_init=None, callback=None, multiselect=True, **kwargs):
         super().__init__(**kwargs)
         self.title = title
         self.callback = callback
@@ -34,7 +34,9 @@ class MultiSelectPopUp(Popup):
         self.labels = []
         for i, opt in enumerate(option_list):
             check_box = CheckBox(active=option_init[i])
-            label = Label(text=opt)
+            if not multiselect:
+                check_box.group = "Single_Select_Only_Group"
+            label = Label(text=str(opt))
             self.opt_boxes.append(check_box)
             self.labels.append(label)
             self.grid.add_widget(check_box)

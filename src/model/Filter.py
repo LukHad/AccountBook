@@ -7,9 +7,6 @@ class Filter:
         self.filter_select = {}  # Column: [List of selected items]
         self.filter_date_time = {}  # Column: (from, to)
 
-    def select_everything(self, df):
-        pass  # ToDo: add all elements
-
     def select(self, column, item):
         if column in self.filter_select.keys():
             existing_list = self.filter_select[column]

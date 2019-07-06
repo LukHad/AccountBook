@@ -97,9 +97,16 @@ def test_pivot_monthly_trend():
 def test_pivot_category_pie():
     tb = dummy_transactions_2()
     year = 2019
-    cat, result = tb.pivot_category_pie(year)
+    df = tb.data
+    df = df.loc[df[tb.DATE] >= datetime(2019, 1, 1)]
+    df = df.loc[df[tb.DATE] <= datetime(2019, 12, 31)]
+    cat, result = tb.pivot_category_pie(df)
     nose.tools.ok_(result == [-30, -17.48, -11.95] and cat == ['Mobility', 'Food', 'Entertainment'])
 
+
+def test_years():
+    tb = dummy_transactions()
+    nose.tools.ok_(tb.years() == [2017, 2018])
 
 if __name__ == '__main__':
     # test_populate_list_from_data()
@@ -107,4 +114,5 @@ if __name__ == '__main__':
     # test_account_balance()
     # test_save_load()
     # pivot_monthly_trend()
-    test_pivot_category_pie()
+    # test_pivot_category_pie()
+    test_years()
