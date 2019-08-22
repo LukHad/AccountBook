@@ -2,7 +2,6 @@ from datetime import datetime
 import pandas as pd
 import numpy as np
 
-
 class TransactionBook:
     DATE = "Date"
     ACCOUNT = "Account"
@@ -13,7 +12,7 @@ class TransactionBook:
     DATE_TIME_FORMAT = "%d.%m.%Y"
     DATE_DELIMITER = "."
 
-    def __init__(self, path=None):
+    def __init__(self, path=""):
         self.path = path  # Hold the entire path to the database file including the filename
         self.accounts = []  # Holds the list of all accounts in the dataset
         self.categories = []  # Holds the list of all categories in the dataset
@@ -46,6 +45,10 @@ class TransactionBook:
     def account_balance(self, account, data):
         df = data
         return df.loc[df[self.ACCOUNT] == account, self.AMOUNT].sum()
+
+    def total_balance(self, data):
+        df = data
+        return df[self.AMOUNT].sum()
 
     def filter_date(self, from_date, to_date):
         data = self.data
@@ -87,7 +90,7 @@ class TransactionBook:
         return years
 
 # Data aggregation methods:
-    def pivot_monthly_trend(self, df):
+    def pivot_monthly_trend(self, df, negative_amount_only=False):
         month = 'Month'
 
         # Add additional helper column with months
@@ -102,6 +105,8 @@ class TransactionBook:
         # Init result list
         result = [0] * 12
         # Calculate balance at months
+        if negative_amount_only:
+            df = df.loc[df[self.AMOUNT] < 0]
         for i in range(1, 13):
             result[i - 1] = df.loc[df[month] == i, self.AMOUNT].sum()
         return label, result

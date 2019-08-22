@@ -30,6 +30,7 @@ class EvalView(GridLayout):
 
         self.filter_pie = Filter()
         self.filter_monthly_trend = Filter()
+        self.filter_monthly_expenses_trend = Filter()
         self.filter_initialized = False
 
     def update(self):
@@ -48,14 +49,19 @@ class EvalView(GridLayout):
             self.filter_monthly_trend.select_date_range(model.DATE,
                                                         datetime(max(years), 1, 1),
                                                         datetime(max(years), 12, 31))
+            self.filter_monthly_expenses_trend.select_date_range(model.DATE,
+                                                                 datetime(max(years), 1, 1),
+                                                                 datetime(max(years), 12, 31))
             # Select all categories
             for cat in model.categories:
                 self.filter_pie.select(model.CATEGORY, cat)
                 self.filter_monthly_trend.select(model.CATEGORY, cat)
+                self.filter_monthly_expenses_trend.select(model.CATEGORY, cat)
             # Select all categories
             for acc in model.accounts:
                 self.filter_pie.select(model.ACCOUNT, acc)
                 self.filter_monthly_trend.select(model.ACCOUNT, acc)
+                self.filter_monthly_expenses_trend.select(model.ACCOUNT, acc)
 
             self.filter_initialized = True
         # End Init filters
@@ -64,22 +70,33 @@ class EvalView(GridLayout):
         self.add_widget(self.account_balance_box())
         self.add_widget(self.monthly_trend_box())
         self.add_widget(self.category_expenses_pie_box())
+        self.add_widget(self.monthly_expenses_trend_box())
 
     def account_balance_box(self):
         box = GridLayout()
-        box.cols = 2
+        box.cols = 3
 
         m = self.ctrl.model
+        total_balance = m.total_balance(m.data)
+
+        # Heading:
+        box.add_widget(Label(text="Name"))
+        box.add_widget(Label(text="Balance"))
+        box.add_widget(Label(text="% of total"))
         for acc in m.accounts:
             # Calculate account balance
             balance = m.account_balance(acc, m.data)
             balance_str = f"{balance:.2f} {m.CURRENCY}"
+            percentage = (balance / total_balance)*100
+            percentage_str = f"{percentage:.2f} %"
 
             acc_label = Label(text=acc)
             balance_label = Label(text=balance_str)
+            percentage_label = Label(text=percentage_str)
 
             box.add_widget(acc_label)
             box.add_widget(balance_label)
+            box.add_widget(percentage_label)
         return box
 
     def monthly_trend_box(self):
@@ -93,6 +110,39 @@ class EvalView(GridLayout):
         df_filtered = self.filter_monthly_trend.filter(self.ctrl.model.data)
         if not df_filtered.empty:
             label, data = self.ctrl.model.pivot_monthly_trend(df_filtered)  # ToDo: Implement year selection / dropdown
+            # Plot data and switch color depending on sign of months balance
+            for i, dat in enumerate(data):
+                if dat >= 0:
+                    plt.bar(label[i], dat, color='blue')
+                else:
+                    plt.bar(label[i], dat, color='red')
+            # Add currency as y-Label
+            plt.ylabel(self.ctrl.model.CURRENCY)
+            # Set x-Label vertical
+            plt.xticks(rotation=25)
+            # Add Grid
+            plt.grid(True)
+            # Package in layout
+            box.add_widget(FigureCanvasKivyAgg(fig))
+        else:
+            no_data_label = Label(text="Not enough data")
+            box.add_widget(no_data_label)
+        return box
+
+    def monthly_expenses_trend_box(self):
+        return self.trend_box(self.filter_monthly_expenses_trend, True)
+
+    def trend_box(self, filter_obj, negative_amount_only=False):
+        fig = plt.figure()
+        button_grid = self.get_filter_grid(filter_obj, year_multiselect=False)
+        box = BoxLayout()
+        box.add_widget(button_grid)
+        box.orientation = 'vertical'
+
+        # Get data
+        df_filtered = self.filter_monthly_expenses_trend.filter(self.ctrl.model.data)
+        if not df_filtered.empty:
+            label, data = self.ctrl.model.pivot_monthly_trend(df_filtered, negative_amount_only)  # ToDo: Implement year selection / dropdown
             # Plot data and switch color depending on sign of months balance
             for i, dat in enumerate(data):
                 if dat >= 0:

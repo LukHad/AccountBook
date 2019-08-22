@@ -69,7 +69,7 @@ class Menu(BoxLayout):
 
     def save(self):
         model = self.ctrl.model
-        if model.path != None:
+        if model.path != "":
             # ToDo: Check for valid directory path
             model.save()
         else:
@@ -77,7 +77,7 @@ class Menu(BoxLayout):
 
     def load(self):
         model = self.ctrl.model
-        if model.path != None:
+        if model.path != "":
             # ToDo: Check for valid file path
             model.load()
         else:

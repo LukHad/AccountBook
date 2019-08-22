@@ -27,6 +27,7 @@ def dummy_transactions_2():
     tb.new_transaction("17.09.2019", "Account 2", "Cheese", -5.0, "Food")
     return tb
 
+
 def save_load(tb):
     """
     Helper function wich does save and load the data.
@@ -108,6 +109,11 @@ def test_years():
     tb = dummy_transactions()
     nose.tools.ok_(tb.years() == [2017, 2018])
 
+
+def test_total_balance():
+    tb = dummy_transactions()
+    nose.tools.ok_(tb.total_balance(tb.data) == 936.05)
+
 if __name__ == '__main__':
     # test_populate_list_from_data()
     # test_filter_date()
@@ -116,3 +122,4 @@ if __name__ == '__main__':
     # pivot_monthly_trend()
     # test_pivot_category_pie()
     test_years()
+    test_current_total_balance()
