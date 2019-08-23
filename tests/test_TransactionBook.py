@@ -90,8 +90,8 @@ def test_populate_list_from_data():
 
 def test_pivot_monthly_trend():
     tb = dummy_transactions()
-    year = 2018
-    _, result = tb.pivot_monthly_trend(year)
+    _, result = tb.pivot_monthly_trend(tb.data)
+
     nose.tools.ok_(result == [0, -30, 0, 0, 0, 0, 0, 0, 0, 0, 0, -11.95])
 
 
@@ -121,5 +121,6 @@ if __name__ == '__main__':
     # test_save_load()
     # pivot_monthly_trend()
     # test_pivot_category_pie()
-    test_years()
-    test_current_total_balance()
+    #test_years()
+    #test_total_balance()
+    test_pivot_monthly_trend()

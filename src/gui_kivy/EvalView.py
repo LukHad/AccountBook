@@ -100,34 +100,7 @@ class EvalView(GridLayout):
         return box
 
     def monthly_trend_box(self):
-        fig = plt.figure()
-        button_grid = self.get_filter_grid(self.filter_monthly_trend, year_multiselect=False)
-        box = BoxLayout()
-        box.add_widget(button_grid)
-        box.orientation = 'vertical'
-
-        # Get data
-        df_filtered = self.filter_monthly_trend.filter(self.ctrl.model.data)
-        if not df_filtered.empty:
-            label, data = self.ctrl.model.pivot_monthly_trend(df_filtered)  # ToDo: Implement year selection / dropdown
-            # Plot data and switch color depending on sign of months balance
-            for i, dat in enumerate(data):
-                if dat >= 0:
-                    plt.bar(label[i], dat, color='blue')
-                else:
-                    plt.bar(label[i], dat, color='red')
-            # Add currency as y-Label
-            plt.ylabel(self.ctrl.model.CURRENCY)
-            # Set x-Label vertical
-            plt.xticks(rotation=25)
-            # Add Grid
-            plt.grid(True)
-            # Package in layout
-            box.add_widget(FigureCanvasKivyAgg(fig))
-        else:
-            no_data_label = Label(text="Not enough data")
-            box.add_widget(no_data_label)
-        return box
+        return self.trend_box(self.filter_monthly_trend, False)
 
     def monthly_expenses_trend_box(self):
         return self.trend_box(self.filter_monthly_expenses_trend, True)

@@ -99,6 +99,7 @@ class TransactionBook:
         years = df["Year"].unique()
         years = years.tolist()
         year = max(years)
+        df = df.loc[df["Year"] == year]  # Pivot latest year of data set
         # Create list with formatted months
         label = ["01.", "02.", "03.", "04.", "05.", "06.", "07.", "08.", "09.", "10.", "11.", "12."]
         label = [i + str(year) for i in label]

@@ -1,5 +1,11 @@
 import nose
-from tests.test_TransactionBook import *
+import os
+
+test_files = ["tests.test_TransactionBook",
+              "tests.test_Filter"]
 
 
-nose.main()
+os.system("nosetests " + " ".join(test_files))
+
+
+
