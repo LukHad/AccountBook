@@ -13,7 +13,7 @@ class DisplayController(FloatLayout):
         self.model = TransactionBook()
 
         self.TRANSACTIONS = "Transaction"
-        self.EVALUATION = "Evaluation"
+        self.EVALUATION = "Plots"
         self.states = [self.TRANSACTIONS, self.EVALUATION]
         self.state = self.states[0]
 

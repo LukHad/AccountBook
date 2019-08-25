@@ -1,6 +1,8 @@
 ## To do list:
 The list is roughly ordered by priority. 
 
+* Restructure EvalView to scrolling view with fixed matplot height
+* Implement import functions / template and add column with original transaction comment to data set
 * Fix bug when an ";" is added to transaction field
 * Fix bug that leads to crash when a transaction is created without a category
 * Add function and GUI elements to delete a transaction

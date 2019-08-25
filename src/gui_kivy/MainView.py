@@ -21,7 +21,6 @@ class MainView(FloatLayout):
         # Create GUI objects
         # topbar is always visible
         self.topbar = Topbar(ctrl=ctrl, size_hint_y=None, height=self.top_bar_abs_height, pos_hint={'top': 1})
-        # sidebar and split_details always visible together
         self.scroll_view = ScrollView()
 
         # Populate GUI objects

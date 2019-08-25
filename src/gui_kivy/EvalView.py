@@ -26,7 +26,12 @@ class EvalView(GridLayout):
     def __init__(self, ctrl, **kwargs):
         super().__init__(**kwargs)
         self.ctrl = ctrl
-        self.cols = 2
+        # Layout:
+        self.cols = 1
+        # self.spacing = 10
+        self.size_hint_y = None
+        self.height = 2200  # ToDo: Check magic number on other displays
+        self.bind(minimum_height=self.setter('height'))
 
         self.filter_pie = Filter()
         self.filter_monthly_trend = Filter()
@@ -67,10 +72,10 @@ class EvalView(GridLayout):
         # End Init filters
 
         # Add widgets
-        self.add_widget(self.account_balance_box())
+        # self.add_widget(self.account_balance_box())
         self.add_widget(self.monthly_trend_box())
-        self.add_widget(self.category_expenses_pie_box())
         self.add_widget(self.monthly_expenses_trend_box())
+        self.add_widget(self.category_expenses_pie_box())
 
     def account_balance_box(self):
         box = GridLayout()
