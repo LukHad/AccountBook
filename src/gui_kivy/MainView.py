@@ -4,6 +4,7 @@ from kivy.uix.scrollview import ScrollView
 from src.gui_kivy.TransactionViews import TransactionList
 from kivy.core.window import Window
 from src.gui_kivy.EvalView import EvalView
+from src.gui_kivy.NumbersView import NumbersView
 
 class MainView(FloatLayout):
     """
@@ -26,6 +27,7 @@ class MainView(FloatLayout):
         # Populate GUI objects
         self.transaction_details = TransactionList(ctrl=self.ctrl)
         self.eval_view = EvalView(ctrl=self.ctrl)
+        self.num_view = NumbersView(ctrl=self.ctrl)
 
         self.update()
 
@@ -44,6 +46,9 @@ class MainView(FloatLayout):
         elif self.ctrl.state == self.ctrl.EVALUATION:
             self.scroll_view.add_widget(self.eval_view)
             self.eval_view.update()
+        elif self.ctrl.state == self.ctrl.NUMBERS:
+            self.scroll_view.add_widget(self.num_view)
+            self.num_view.update()
 
         self.add_widget(self.topbar)
 

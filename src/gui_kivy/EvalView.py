@@ -72,37 +72,9 @@ class EvalView(GridLayout):
         # End Init filters
 
         # Add widgets
-        # self.add_widget(self.account_balance_box())
         self.add_widget(self.monthly_trend_box())
         self.add_widget(self.monthly_expenses_trend_box())
         self.add_widget(self.category_expenses_pie_box())
-
-    def account_balance_box(self):
-        box = GridLayout()
-        box.cols = 3
-
-        m = self.ctrl.model
-        total_balance = m.total_balance(m.data)
-
-        # Heading:
-        box.add_widget(Label(text="Name"))
-        box.add_widget(Label(text="Balance"))
-        box.add_widget(Label(text="% of total"))
-        for acc in m.accounts:
-            # Calculate account balance
-            balance = m.account_balance(acc, m.data)
-            balance_str = f"{balance:.2f} {m.CURRENCY}"
-            percentage = (balance / total_balance)*100
-            percentage_str = f"{percentage:.2f} %"
-
-            acc_label = Label(text=acc)
-            balance_label = Label(text=balance_str)
-            percentage_label = Label(text=percentage_str)
-
-            box.add_widget(acc_label)
-            box.add_widget(balance_label)
-            box.add_widget(percentage_label)
-        return box
 
     def monthly_trend_box(self):
         return self.trend_box(self.filter_monthly_trend, False)
@@ -114,11 +86,10 @@ class EvalView(GridLayout):
         fig = plt.figure()
         button_grid = self.get_filter_grid(filter_obj, year_multiselect=False)
         box = BoxLayout()
-        box.add_widget(button_grid)
         box.orientation = 'vertical'
 
         # Get data
-        df_filtered = self.filter_monthly_expenses_trend.filter(self.ctrl.model.data)
+        df_filtered = filter_obj.filter(self.ctrl.model.data)
         if not df_filtered.empty:
             label, data = self.ctrl.model.pivot_monthly_trend(df_filtered, negative_amount_only)  # ToDo: Implement year selection / dropdown
             # Plot data and switch color depending on sign of months balance
@@ -138,6 +109,7 @@ class EvalView(GridLayout):
         else:
             no_data_label = Label(text="Not enough data")
             box.add_widget(no_data_label)
+        box.add_widget(button_grid)
         return box
 
     def category_expenses_pie_box(self):
@@ -147,7 +119,6 @@ class EvalView(GridLayout):
         df_filtered = self.filter_pie.filter(df)
         button_grid = self.get_filter_grid(self.filter_pie)
         box = BoxLayout()
-        box.add_widget(button_grid)
         box.orientation = 'vertical'
         if not df_filtered.empty:
             label, data = self.ctrl.model.pivot_category_pie(df_filtered, percent=True)  # ToDo: Implement year selection / dropdown
@@ -165,6 +136,7 @@ class EvalView(GridLayout):
         else:
             no_data_label = Label(text="Not enough data")
             box.add_widget(no_data_label)
+        box.add_widget(button_grid)
         return box
 
     def get_filter_grid(self, my_filter, year_multiselect=True):

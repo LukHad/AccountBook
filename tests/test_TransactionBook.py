@@ -114,6 +114,16 @@ def test_total_balance():
     tb = dummy_transactions()
     nose.tools.ok_(tb.total_balance(tb.data) == 936.05)
 
+
+def test_delete_transaction():
+    tb = dummy_transactions()
+    nose.tools.ok_(tb.total_balance(tb.data) == 936.05)
+    tb.delete_transaction(2)
+    nose.tools.ok_(tb.total_balance(tb.data) == 941.05)
+    tb.delete_transaction(1)
+    nose.tools.ok_(tb.total_balance(tb.data) == 958.05)
+
+
 if __name__ == '__main__':
     # test_populate_list_from_data()
     # test_filter_date()
@@ -121,6 +131,7 @@ if __name__ == '__main__':
     # test_save_load()
     # pivot_monthly_trend()
     # test_pivot_category_pie()
-    #test_years()
-    #test_total_balance()
-    test_pivot_monthly_trend()
+    # test_years()
+    # test_total_balance()
+    # test_pivot_monthly_trend()
+    test_delete_transaction()

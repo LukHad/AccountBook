@@ -71,9 +71,8 @@ class TransactionList(GridLayout):
                                       height=40)
         self.add_widget(heading)
 
-        i = 1
-        for index in reversed(self.ctrl.model.data.index):  # self.ctrl.model.data.iterrows():
-            row = self.ctrl.model.data.iloc[index]
+        i = 0
+        for index, row in self.ctrl.model.data.iterrows():
             btn = TransactionItemGrid(row[self.ctrl.model.DATE].strftime(model.DATE_TIME_FORMAT),
                                       str(row[self.ctrl.model.ACCOUNT]),
                                       str(row[self.ctrl.model.AMOUNT]) + model.CURRENCY,
@@ -83,7 +82,7 @@ class TransactionList(GridLayout):
                                       index=index,
                                       size_hint_y=None, height=40)
             self.add_widget(btn)
-            if i > 100:  # ToDo Make listed transaction dynamic
+            if i > 100:  # ToDo Make listed transaction dynamic -> Introduce filter
                 break
             i = i + 1
 
@@ -127,6 +126,8 @@ class TransactionDetails(AnchorLayout):
         self.grid.button_cancel.bind(on_press=self.cancel_callback)
         self.grid.button_save = Button(text="Save")
         self.grid.button_save.bind(on_press=self.save_callback)
+        self.grid.button_delete = Button(text="Delete")
+        self.grid.button_delete.bind(on_press=self.delete_callback)
 
         self.add_widget(self.grid)
         self.update()
@@ -175,7 +176,13 @@ class TransactionDetails(AnchorLayout):
 
         # Buttons:
         self.grid.add_widget(self.grid.button_cancel)
-        self.grid.add_widget(self.grid.button_save)
+        if self.index != None:
+            additional_grid = GridLayout(cols=2)
+            additional_grid.add_widget(self.grid.button_delete)
+            additional_grid.add_widget(self.grid.button_save)
+            self.grid.add_widget(additional_grid)
+        else:
+            self.grid.add_widget(self.grid.button_save)
 
     def cancel_callback(self, _):
         self.ctrl.update()
@@ -206,6 +213,11 @@ class TransactionDetails(AnchorLayout):
             self.ctrl.update()
         else:
             MsgBox("The entered amount is not valid.\nThe decimal separator is \".\"")
+
+    def delete_callback(self, _):
+        # ToDo: Implement additional question if the user is sure to delete the transaction
+        self.ctrl.model.delete_transaction(self.index)
+        self.ctrl.update()
 
 
 class TransactionDetailsPopUp(Popup):

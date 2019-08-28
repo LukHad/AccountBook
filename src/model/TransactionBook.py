@@ -2,6 +2,7 @@ from datetime import datetime
 import pandas as pd
 import numpy as np
 
+
 class TransactionBook:
     DATE = "Date"
     ACCOUNT = "Account"
@@ -39,8 +40,7 @@ class TransactionBook:
         self.data.loc[index] = [date, account, description, amount, category]
 
     def delete_transaction(self, index):
-        #ToDo: Implement
-        pass
+        self.data = self.data.drop(index)
 
     def account_balance(self, account, data):
         df = data

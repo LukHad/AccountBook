@@ -14,7 +14,8 @@ class DisplayController(FloatLayout):
 
         self.TRANSACTIONS = "Transaction"
         self.EVALUATION = "Plots"
-        self.states = [self.TRANSACTIONS, self.EVALUATION]
+        self.NUMBERS = "Numbers"
+        self.states = [self.TRANSACTIONS, self.NUMBERS, self.EVALUATION]
         self.state = self.states[0]
 
         # Views

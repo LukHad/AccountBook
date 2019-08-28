@@ -29,24 +29,28 @@ class MultiSelectPopUp(Popup):
         if option_init is None:
             option_init = [True] * len(option_list)
 
-        self.grid = GridLayout(cols=2)
+        self.grid = GridLayout(cols=1)
         self.opt_boxes = []
         self.labels = []
         for i, opt in enumerate(option_list):
+            box = BoxLayout(orientation='horizontal')
             check_box = CheckBox(active=option_init[i])
             if not multiselect:
                 check_box.group = "Single_Select_Only_Group"
             label = Label(text=str(opt))
             self.opt_boxes.append(check_box)
             self.labels.append(label)
-            self.grid.add_widget(check_box)
-            self.grid.add_widget(label)
+            box.add_widget(check_box)
+            box.add_widget(label)
+            self.grid.add_widget(box)
         cancel_button = Button(text="Cancel")
         cancel_button.bind(on_press=self.cancel_callback)
         ok_button = Button(text="Ok")
         ok_button.bind(on_press=self.ok_callback)
-        self.grid.add_widget(cancel_button)
-        self.grid.add_widget(ok_button)
+        box = BoxLayout(orientation='horizontal')
+        box.add_widget(cancel_button)
+        box.add_widget(ok_button)
+        self.grid.add_widget(box)
 
         self.main_layout.add_widget(self.grid)
 
