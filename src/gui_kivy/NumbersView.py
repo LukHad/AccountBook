@@ -38,7 +38,7 @@ class NumbersView(GridLayout):
         box.cols = 3
 
         m = self.ctrl.model
-        total_balance = m.total_balance(m.data)
+        total_balance = m.total_balance(m.get_data())
 
         # Heading:
         box.add_widget(Label(text="Name"))
@@ -46,7 +46,7 @@ class NumbersView(GridLayout):
         box.add_widget(Label(text="% of total"))
         for acc in m.accounts:
             # Calculate account balance
-            balance = m.account_balance(acc, m.data)
+            balance = m.account_balance(acc, m.get_data())
             balance_str = f"{balance:.2f} {m.CURRENCY}"
             percentage = (balance / total_balance)*100
             percentage_str = f"{percentage:.2f} %"

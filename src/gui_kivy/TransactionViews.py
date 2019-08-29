@@ -72,7 +72,8 @@ class TransactionList(GridLayout):
         self.add_widget(heading)
 
         i = 0
-        for index, row in self.ctrl.model.data.iterrows():
+        data = self.ctrl.model.get_data()
+        for index, row in data.iterrows():
             btn = TransactionItemGrid(row[self.ctrl.model.DATE].strftime(model.DATE_TIME_FORMAT),
                                       str(row[self.ctrl.model.ACCOUNT]),
                                       str(row[self.ctrl.model.AMOUNT]) + model.CURRENCY,
@@ -155,7 +156,8 @@ class TransactionDetails(AnchorLayout):
     def update(self):
         if self.index != None:  # The transaction is not new -> fill fields with data
             model = self.ctrl.model
-            row = model.data.loc[self.index]
+            data = model.get_data()
+            row = data.loc[self.index]
             self.grid.input_date.text = row[self.ctrl.model.DATE].strftime(model.DATE_TIME_FORMAT)
             self.grid.input_acc.text = str(row[self.ctrl.model.ACCOUNT])
             self.grid.input_amount.text = str(row[self.ctrl.model.AMOUNT])
@@ -197,7 +199,10 @@ class TransactionDetails(AnchorLayout):
 
     def save_callback(self, _):
         if self._check_input():
+            print(self.grid.input_category.text)
             if self.index != None:
+                print(self.index)
+                print(self.ctrl.model.get_data())
                 self.ctrl.model.edit_transaction(self.index,
                                                  self.grid.input_date.text,
                                                  self.grid.input_acc.text,

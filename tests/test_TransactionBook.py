@@ -49,8 +49,8 @@ def test_account_balance(save_load_test=False):
         err_message = "Method account_balance failed after save and load"
     else:
         err_message = "Method account_balance failed"
-    nose.tools.ok_(tb.account_balance("Account 1", tb.data) == 941.05, err_message)
-    nose.tools.ok_(tb.account_balance("Account 2", tb.data) == -5, err_message)
+    nose.tools.ok_(tb.account_balance("Account 1", tb.get_data()) == 941.05, err_message)
+    nose.tools.ok_(tb.account_balance("Account 2", tb.get_data()) == -5, err_message)
 
 
 def test_filter_date(save_load_test=False):
@@ -90,7 +90,7 @@ def test_populate_list_from_data():
 
 def test_pivot_monthly_trend():
     tb = dummy_transactions()
-    _, result = tb.pivot_monthly_trend(tb.data)
+    _, result = tb.pivot_monthly_trend(tb.get_data())
 
     nose.tools.ok_(result == [0, -30, 0, 0, 0, 0, 0, 0, 0, 0, 0, -11.95])
 
@@ -98,7 +98,7 @@ def test_pivot_monthly_trend():
 def test_pivot_category_pie():
     tb = dummy_transactions_2()
     year = 2019
-    df = tb.data
+    df = tb.get_data()
     df = df.loc[df[tb.DATE] >= datetime(2019, 1, 1)]
     df = df.loc[df[tb.DATE] <= datetime(2019, 12, 31)]
     cat, result = tb.pivot_category_pie(df)
@@ -112,26 +112,25 @@ def test_years():
 
 def test_total_balance():
     tb = dummy_transactions()
-    nose.tools.ok_(tb.total_balance(tb.data) == 936.05)
+    nose.tools.ok_(tb.total_balance(tb.get_data()) == 936.05)
 
 
 def test_delete_transaction():
     tb = dummy_transactions()
-    nose.tools.ok_(tb.total_balance(tb.data) == 936.05)
+    nose.tools.ok_(tb.total_balance(tb.get_data()) == 936.05)
     tb.delete_transaction(2)
-    nose.tools.ok_(tb.total_balance(tb.data) == 941.05)
+    nose.tools.ok_(tb.total_balance(tb.get_data()) == 941.05)
     tb.delete_transaction(1)
-    nose.tools.ok_(tb.total_balance(tb.data) == 958.05)
+    nose.tools.ok_(tb.total_balance(tb.get_data()) == 958.05)
 
 
 if __name__ == '__main__':
-    # test_populate_list_from_data()
-    # test_filter_date()
-    # test_account_balance()
-    # test_save_load()
-    # pivot_monthly_trend()
-    # test_pivot_category_pie()
-    # test_years()
-    # test_total_balance()
-    # test_pivot_monthly_trend()
+    test_populate_list_from_data()
+    test_filter_date()
+    test_account_balance()
+    test_save_load()
+    test_pivot_category_pie()
+    test_years()
+    test_total_balance()
+    test_pivot_monthly_trend()
     test_delete_transaction()

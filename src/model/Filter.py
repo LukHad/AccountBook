@@ -30,7 +30,7 @@ class Filter:
         _ = self.filter_date_time.pop(column, None)
 
     def filter(self, data_frame):
-        df = data_frame
+        df = data_frame.copy()
         # If filtering is inactive then just return passed data frame
         if not self.active:
             return df

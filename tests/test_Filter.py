@@ -8,7 +8,7 @@ from datetime import datetime
 
 def test_filter():
     tb = dummy_transactions_2()
-    print(tb.data)
+    print(tb.get_data())
     my_filter = Filter()
    # my_filter.select(tb.CATEGORY, "Food")
    # my_filter.select(tb.CATEGORY, "Income")
@@ -20,7 +20,7 @@ def test_filter():
     my_filter.select_date_range(tb.DATE, from_date, to_date)
     my_filter.deselect_date_range(tb.DATE)
     print(my_filter.filter_date_time)
-    print(f"Result: {my_filter.filter(tb.data)}")
+    print(f"Result: {my_filter.filter(tb.get_data())}")
 
     print(my_filter.check_if_selected(tb.CATEGORY, ["Income", "Blub", "Food", "Blob"]))
 

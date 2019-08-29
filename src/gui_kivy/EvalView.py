@@ -89,7 +89,7 @@ class EvalView(GridLayout):
         box.orientation = 'vertical'
 
         # Get data
-        df_filtered = filter_obj.filter(self.ctrl.model.data)
+        df_filtered = filter_obj.filter(self.ctrl.model.get_data())
         if not df_filtered.empty:
             label, data = self.ctrl.model.pivot_monthly_trend(df_filtered, negative_amount_only)  # ToDo: Implement year selection / dropdown
             # Plot data and switch color depending on sign of months balance
@@ -115,7 +115,7 @@ class EvalView(GridLayout):
     def category_expenses_pie_box(self):
         # Clear old figure
         # Get data
-        df = self.ctrl.model.data
+        df = self.ctrl.model.get_data()
         df_filtered = self.filter_pie.filter(df)
         button_grid = self.get_filter_grid(self.filter_pie)
         box = BoxLayout()
