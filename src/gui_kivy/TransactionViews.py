@@ -12,6 +12,8 @@ from src.gui_kivy.generic.ListPicker import ListPicker
 from datetime import datetime
 from src.gui_kivy.generic.InputBox import InputBox
 from src.gui_kivy.generic.TextCheck import TextCheck
+from src.gui_kivy.generic.MultiSelectPopUp import MultiSelectPopUp
+
 
 class TransactionItemGrid(GridLayout):
     """
@@ -25,10 +27,13 @@ class TransactionItemGrid(GridLayout):
 
         if index == None:  # Heading row
             self.gui_el_date = Button(text=date, size_hint_x=None, width=150)
+            self.gui_el_date.bind(on_press=self.filter_date_callback)
             self.gui_el_account = Button(text=account)
+            self.gui_el_account.bind(on_press=self.filter_account_callback)
             self.gui_el_amount = Button(text=amount, size_hint_x=None, width=150)
             self.gui_el_description = Button(text=description)
             self.gui_el_category = Button(text=category)
+            self.gui_el_category.bind(on_press=self.filter_category_callback)
             btn = Button(text="N", size_hint_x=None, width=90)
             btn.bind(on_press=self.filter_itemcount_callback)
 
@@ -50,6 +55,29 @@ class TransactionItemGrid(GridLayout):
 
     def edit_callback(self, _):
         self.ctrl.popup = TransactionDetailsPopUp(ctrl=self.ctrl, index=self.index)
+
+    def filter_date_callback(self, _):
+        DateSelectionPopup(self.ctrl)
+
+    def filter_account_callback(self, _):
+        topic = self.ctrl.model.ACCOUNT
+        options = self.ctrl.model.accounts
+        self._multi_select_filter(topic, options)
+
+    def filter_category_callback(self, _):
+        topic = self.ctrl.model.CATEGORY
+        options = self.ctrl.model.categories
+        self._multi_select_filter(topic, options)
+
+    def _multi_select_filter(self, topic, options):
+        my_filter = self.ctrl.transaction_filter
+
+        def cb(new_selected_list):
+            my_filter.filter_select[topic] = new_selected_list
+            self.ctrl.update()
+        callback = cb
+        selection = my_filter.check_if_selected(topic, options)
+        MultiSelectPopUp(title=topic, option_list=options, option_init=selection, callback=callback)
 
     def filter_itemcount_callback(self, _):
         def cb(text):
@@ -87,7 +115,14 @@ class TransactionList(GridLayout):
                 self.ctrl.transaction_filter.select_date_range(self.ctrl.model.DATE,
                                                                datetime(min(years), 1, 1),
                                                                datetime(max(years), 12, 31))
+                # Select all categories
+                for cat in self.ctrl.model.categories:
+                    self.ctrl.transaction_filter.select(self.ctrl.model.CATEGORY, cat)
+                # Select all categories
+                for acc in self.ctrl.model.accounts:
+                    self.ctrl.transaction_filter.select(self.ctrl.model.ACCOUNT, acc)
             self.filter_initialized = True
+
         # Renew GUI elements
         self.clear_widgets()
         model = self.ctrl.model
@@ -218,11 +253,7 @@ class TransactionDetails(AnchorLayout):
 
     def _check_input(self):
         amount_str = self.grid.input_amount.text
-        try:
-            float(amount_str)
-            return True
-        except:
-            return False
+        return TextCheck(amount_str).check_float()
 
     def save_callback(self, _):
         if self._check_input():
@@ -261,6 +292,85 @@ class TransactionDetailsPopUp(Popup):
         super().__init__(**kwargs)
         self.content = TransactionDetails(ctrl, index=index)
         self.title = "Transaction"
+
+        self.size_hint = self.pHint
+        Window.release_all_keyboards()
+        self.open()
+
+
+class DateSelectionDetails(AnchorLayout):
+    def __init__(self, ctrl, **kwargs):
+        super().__init__(**kwargs)
+        self.anchor_y = 'top'
+        self.ctrl = ctrl
+
+        self.grid = GridLayout()
+        self.grid.cols = 2
+        self.grid.spacing = 10
+        self.grid.size_hint_y = None
+        self.grid.bind(minimum_height=self.setter('height'))
+        self.grid.row_default_height = 50
+
+        # Input data
+        self.grid.label_date_from = Label(text="Date from:")
+        self.grid.input_date_from = DatePicker()
+        self.grid.label_date_to = Label(text="Date to:")
+        self.grid.input_date_to = DatePicker()
+        self.grid.button_all = Button(text="All dates")
+        self.grid.button_all.bind(on_press=self.btn_all_cb)
+        self.grid.button_ok = Button(text="Ok")
+        self.grid.button_ok.bind(on_press=self.btn_ok_cb)
+        self.add_widget(self.grid)
+        self.update()
+
+    def update(self):
+        self.grid.clear_widgets()
+        # Set dates to current filter values
+        date_from = self.ctrl.transaction_filter.get_filter_date_from(self.ctrl.model.DATE)
+        date_to = self.ctrl.transaction_filter.get_filter_date_to(self.ctrl.model.DATE)
+        date_from_txt = date_from.strftime(self.ctrl.model.DATE_TIME_FORMAT)
+        date_to_txt = date_to.strftime(self.ctrl.model.DATE_TIME_FORMAT)
+        self.grid.input_date_from.text = date_from_txt
+        self.grid.input_date_to.text = date_to_txt
+
+        # Add GUI elements
+        self.grid.add_widget(self.grid.label_date_from)
+        self.grid.add_widget(self.grid.input_date_from)
+        self.grid.add_widget(self.grid.label_date_to)
+        self.grid.add_widget(self.grid.input_date_to)
+        self.grid.add_widget(self.grid.button_all)
+        self.grid.add_widget(self.grid.button_ok)
+
+    def btn_all_cb(self, _):
+        years = self.ctrl.model.years()
+        date_from = datetime(min(years), 1, 1)
+        date_to = datetime(max(years), 12, 31)
+        date_from_txt = date_from.strftime(self.ctrl.model.DATE_TIME_FORMAT)
+        date_to_txt = date_to.strftime(self.ctrl.model.DATE_TIME_FORMAT)
+        self.grid.input_date_from.text = date_from_txt
+        self.grid.input_date_to.text = date_to_txt
+
+    def btn_ok_cb(self, _):
+        date_from_txt = self.grid.input_date_from.text
+        date_to_txt = self.grid.input_date_to.text
+        date_from = datetime.strptime(date_from_txt, self.ctrl.model.DATE_TIME_FORMAT)
+        date_to = datetime.strptime(date_to_txt, self.ctrl.model.DATE_TIME_FORMAT)
+        self.ctrl.transaction_filter.select_date_range(self.ctrl.model.DATE,
+                                                       date_from,
+                                                       date_to)
+        self.ctrl.update()
+
+
+class DateSelectionPopup(Popup):
+    pHint_x = NumericProperty(0.7)
+    pHint_y = NumericProperty(0.7)
+    pHint = ReferenceListProperty(pHint_x, pHint_y)
+
+    def __init__(self, ctrl, **kwargs):
+        super().__init__(**kwargs)
+        self.content = DateSelectionDetails(ctrl)
+        self.title = "Date selection"
+        ctrl.popup = self
 
         self.size_hint = self.pHint
         Window.release_all_keyboards()

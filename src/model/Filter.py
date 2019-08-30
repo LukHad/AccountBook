@@ -13,7 +13,20 @@ class Filter:
     def set_max_number_of_elements(self, max_number_of_elements, max_number_from_tail=False):
         self.max_number_of_elements = max_number_of_elements
         self.max_number_from_tail = max_number_from_tail
-        print(f"Set max value to {max_number_of_elements}")
+
+    def get_filter_date_from(self, column):
+        if self.filter_date_time[column]:
+            dates = self.filter_date_time[column]
+            return dates[0]
+        else:
+            return None
+
+    def get_filter_date_to(self, column):
+        if self.filter_date_time[column]:
+            dates = self.filter_date_time[column]
+            return dates[1]
+        else:
+            return None
 
     def select(self, column, item):
         if column in self.filter_select.keys():
