@@ -9,7 +9,9 @@ from kivy.core.window import Window
 from src.gui_kivy.generic.MsgBox import MsgBox
 from src.gui_kivy.generic.datepicker import DatePicker
 from src.gui_kivy.generic.ListPicker import ListPicker
-
+from datetime import datetime
+from src.gui_kivy.generic.InputBox import InputBox
+from src.gui_kivy.generic.TextCheck import TextCheck
 
 class TransactionItemGrid(GridLayout):
     """
@@ -20,27 +22,45 @@ class TransactionItemGrid(GridLayout):
         self.rows = 1
         self.index = index
         self.ctrl = ctrl
-        self.label_date = Label(text=date, size_hint_x=None, width=150)
-        self.label_account = Label(text=account)
-        self.label_amount = Label(text=amount, size_hint_x=None, width=150)
-        self.label_description = Label(text=description)
-        self.label_category = Label(text=category)
 
-        self.add_widget(self.label_date)
-        self.add_widget(self.label_account)
-        self.add_widget(self.label_amount)
-        self.add_widget(self.label_description)
-        self.add_widget(self.label_category)
-        if index != None:
-            btn_edit = Button(text="Edit", size_hint_x=None, width=90)
-            btn_edit.bind(on_press=self.edit_callback)
-            self.add_widget(btn_edit)
-        else:
-            btn_edit_dummy = Label(text="", size_hint_x=None, width=90)
-            self.add_widget(btn_edit_dummy)
+        if index == None:  # Heading row
+            self.gui_el_date = Button(text=date, size_hint_x=None, width=150)
+            self.gui_el_account = Button(text=account)
+            self.gui_el_amount = Button(text=amount, size_hint_x=None, width=150)
+            self.gui_el_description = Button(text=description)
+            self.gui_el_category = Button(text=category)
+            btn = Button(text="N", size_hint_x=None, width=90)
+            btn.bind(on_press=self.filter_itemcount_callback)
+
+        else:  # Data row
+            btn = Button(text="Edit", size_hint_x=None, width=90)
+            btn.bind(on_press=self.edit_callback)
+            self.gui_el_date = Label(text=date, size_hint_x=None, width=150)
+            self.gui_el_account = Label(text=account)
+            self.gui_el_amount = Label(text=amount, size_hint_x=None, width=150)
+            self.gui_el_description = Label(text=description)
+            self.gui_el_category = Label(text=category)
+
+        self.add_widget(self.gui_el_date)
+        self.add_widget(self.gui_el_account)
+        self.add_widget(self.gui_el_amount)
+        self.add_widget(self.gui_el_description)
+        self.add_widget(self.gui_el_category)
+        self.add_widget(btn)
 
     def edit_callback(self, _):
         self.ctrl.popup = TransactionDetailsPopUp(ctrl=self.ctrl, index=self.index)
+
+    def filter_itemcount_callback(self, _):
+        def cb(text):
+            tc = TextCheck(text)
+            if tc.check_integer():
+                self.ctrl.transaction_filter.set_max_number_of_elements(int(text), True)
+                self.ctrl.update()
+            else:
+                MsgBox("The entered value is not an integer and will be ignored")
+        n = self.ctrl.transaction_filter.max_number_of_elements
+        InputBox(callback=cb, title="Enter maximal rows which are shown", text=f"{n}", size=(600, 200))
 
 
 class TransactionList(GridLayout):
@@ -56,8 +76,19 @@ class TransactionList(GridLayout):
         self.size_hint_y = None
         self.bind(minimum_height=self.setter('height'))
         self.ctrl = ctrl
+        self.filter_initialized = False
 
     def update(self):
+        # Init filter
+        if not self.filter_initialized and self.ctrl.model.years():
+            years = self.ctrl.model.years()
+            self.ctrl.transaction_filter.set_max_number_of_elements(50, True)
+            if years:
+                self.ctrl.transaction_filter.select_date_range(self.ctrl.model.DATE,
+                                                               datetime(min(years), 1, 1),
+                                                               datetime(max(years), 12, 31))
+            self.filter_initialized = True
+        # Renew GUI elements
         self.clear_widgets()
         model = self.ctrl.model
         heading = TransactionItemGrid(model.DATE,
@@ -70,10 +101,9 @@ class TransactionList(GridLayout):
                                       size_hint_y=None,
                                       height=40)
         self.add_widget(heading)
-
-        i = 0
-        data = self.ctrl.model.get_data()
-        for index, row in data.iterrows():
+        data = self.ctrl.transaction_filter.filter(self.ctrl.model.get_data())
+        for index in reversed(data.index):
+            row = data.loc[index]
             btn = TransactionItemGrid(row[self.ctrl.model.DATE].strftime(model.DATE_TIME_FORMAT),
                                       str(row[self.ctrl.model.ACCOUNT]),
                                       str(row[self.ctrl.model.AMOUNT]) + model.CURRENCY,
@@ -83,9 +113,6 @@ class TransactionList(GridLayout):
                                       index=index,
                                       size_hint_y=None, height=40)
             self.add_widget(btn)
-            if i > 100:  # ToDo Make listed transaction dynamic -> Introduce filter
-                break
-            i = i + 1
 
 
 class TransactionDetails(AnchorLayout):

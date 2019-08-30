@@ -4,6 +4,7 @@ from kivy.uix.popup import Popup
 from src.model.TransactionBook import TransactionBook
 from src.gui_kivy.MainView import MainView
 from src.gui_kivy.TransactionViews import TransactionDetailsPopUp
+from src.model.Filter import Filter
 
 
 class DisplayController(FloatLayout):
@@ -18,11 +19,16 @@ class DisplayController(FloatLayout):
         self.states = [self.TRANSACTIONS, self.NUMBERS, self.EVALUATION]
         self.state = self.states[0]
 
+        # Filter
+        self.transaction_filter = Filter()
+
         # Views
         self.main_view = MainView(ctrl=self)
         self.popup = None
         self.popup_size = (1000, 450)
         self.new_view = None
+
+        #
         self.update()
 
     def update(self):

@@ -7,6 +7,14 @@ class Filter:
         self.filter_select = {}  # Column: [List of selected items]
         self.filter_date_time = {}  # Column: (from, to)
 
+        self.max_number_of_elements = None
+        self.max_number_from_tail = False
+
+    def set_max_number_of_elements(self, max_number_of_elements, max_number_from_tail=False):
+        self.max_number_of_elements = max_number_of_elements
+        self.max_number_from_tail = max_number_from_tail
+        print(f"Set max value to {max_number_of_elements}")
+
     def select(self, column, item):
         if column in self.filter_select.keys():
             existing_list = self.filter_select[column]
@@ -67,7 +75,13 @@ class Filter:
                 # Add logic connection to new column filter
                 result = result.loc[df[column] >= itm[0]]
             result = result.loc[result[column] <= itm[1]]
-        # Return result
+
+        # Filter maximum number of items if configured
+        if self.max_number_of_elements != None:
+            if self.max_number_from_tail:
+                result = result.tail(self.max_number_of_elements)
+            else:
+                result = result.head(self.max_number_of_elements)
         return result
 
     def check_if_selected(self, column, item_list):
