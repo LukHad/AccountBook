@@ -1,7 +1,7 @@
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
-from src.gui_kivy.generic.DropDownButton import DropDownButton
-from src.gui_kivy.Menu import Menu
+from TransactionBook.gui_kivy.generic.DropDownButton import DropDownButton
+from TransactionBook.gui_kivy.Menu import Menu
 
 
 class Topbar(BoxLayout):

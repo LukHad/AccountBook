@@ -1,10 +1,10 @@
 from kivy.uix.floatlayout import FloatLayout
-from src.gui_kivy.Topbar import Topbar
+from TransactionBook.gui_kivy.Topbar import Topbar
 from kivy.uix.scrollview import ScrollView
-from src.gui_kivy.TransactionViews import TransactionList
+from TransactionBook.gui_kivy.TransactionViews import TransactionList
 from kivy.core.window import Window
-from src.gui_kivy.EvalView import EvalView
-from src.gui_kivy.NumbersView import NumbersView
+from TransactionBook.gui_kivy.EvalView import EvalView
+from TransactionBook.gui_kivy.NumbersView import NumbersView
 
 class MainView(FloatLayout):
     """

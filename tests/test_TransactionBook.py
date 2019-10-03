@@ -2,7 +2,7 @@ from datetime import datetime
 import os
 import nose
 import nose.tools
-from src.model.TransactionBook import *
+from TransactionBook.model.TransactionBook import *
 
 
 def dummy_transactions():

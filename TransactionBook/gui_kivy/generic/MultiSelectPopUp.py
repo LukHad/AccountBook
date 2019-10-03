@@ -8,7 +8,7 @@ from kivy.uix.button import Button
 import matplotlib.pyplot as plt
 import matplotlib
 import datetime
-from src.model.Filter import Filter
+from TransactionBook.model.Filter import Filter
 from datetime import datetime
 from kivy.uix.popup import Popup
 from kivy.properties import NumericProperty, ReferenceListProperty

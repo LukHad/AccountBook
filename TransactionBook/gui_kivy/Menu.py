@@ -1,7 +1,7 @@
 from kivy.uix.dropdown import DropDown
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
-from src.gui_kivy.generic.InputBox import InputBox
+from TransactionBook.gui_kivy.generic.InputBox import InputBox
 from kivy.core.window import Window
 
 from kivy.uix.filechooser import FileChooserListView

@@ -6,13 +6,13 @@ from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.popup import Popup
 from kivy.properties import NumericProperty, ReferenceListProperty
 from kivy.core.window import Window
-from src.gui_kivy.generic.MsgBox import MsgBox
-from src.gui_kivy.generic.datepicker import DatePicker
-from src.gui_kivy.generic.ListPicker import ListPicker
+from TransactionBook.gui_kivy.generic.MsgBox import MsgBox
+from TransactionBook.gui_kivy.generic.datepicker import DatePicker
+from TransactionBook.gui_kivy.generic.ListPicker import ListPicker
 from datetime import datetime
-from src.gui_kivy.generic.InputBox import InputBox
-from src.gui_kivy.generic.TextCheck import TextCheck
-from src.gui_kivy.generic.MultiSelectPopUp import MultiSelectPopUp
+from TransactionBook.gui_kivy.generic.InputBox import InputBox
+from TransactionBook.gui_kivy.generic.TextCheck import TextCheck
+from TransactionBook.gui_kivy.generic.MultiSelectPopUp import MultiSelectPopUp
 
 
 class TransactionItemGrid(GridLayout):

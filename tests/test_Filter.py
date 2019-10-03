@@ -1,7 +1,7 @@
 import os
 import nose
 import nose.tools
-from src.model.Filter import *
+from TransactionBook.model.Filter import *
 from tests.test_TransactionBook import dummy_transactions_2
 from datetime import datetime
 

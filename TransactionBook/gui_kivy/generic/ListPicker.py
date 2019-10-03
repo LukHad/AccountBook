@@ -5,7 +5,7 @@ from kivy.uix.popup import Popup
 from kivy.properties import NumericProperty, ReferenceListProperty
 from kivy.core.window import Window
 from kivy.uix.scrollview import ScrollView
-from src.gui_kivy.generic.InputBox import InputBox
+from TransactionBook.gui_kivy.generic.InputBox import InputBox
 
 
 class ListPicker(TextInput):

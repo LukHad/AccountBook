@@ -1,10 +1,10 @@
 from kivy.uix.floatlayout import FloatLayout
 from kivy.core.window import Window
 from kivy.uix.popup import Popup
-from src.model.TransactionBook import TransactionBook
-from src.gui_kivy.MainView import MainView
-from src.gui_kivy.TransactionViews import TransactionDetailsPopUp
-from src.model.Filter import Filter
+from TransactionBook.model.TransactionBook import TransactionBook
+from TransactionBook.gui_kivy.MainView import MainView
+from TransactionBook.gui_kivy.TransactionViews import TransactionDetailsPopUp
+from TransactionBook.model.Filter import Filter
 
 
 class DisplayController(FloatLayout):

@@ -1,5 +1,5 @@
 from kivy.app import App
-from src.gui_kivy.DisplayController import DisplayController
+from TransactionBook.gui_kivy.DisplayController import DisplayController
 
 
 class AppMain(App):

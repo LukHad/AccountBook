@@ -1,6 +1,6 @@
 import os
 from tests.test_TransactionBook import dummy_transactions_2
-from src.gui_kivy.AppMain import AppMain
+from TransactionBook.gui_kivy.AppMain import AppMain
 
 main = AppMain()
 main.display_controller.model = dummy_transactions_2()

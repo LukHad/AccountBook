@@ -12,7 +12,7 @@ from datetime import datetime
 from kivy.uix.popup import Popup
 from kivy.properties import NumericProperty, ReferenceListProperty
 from kivy.uix.checkbox import CheckBox
-from src.gui_kivy.generic.MultiSelectPopUp import MultiSelectPopUp
+from TransactionBook.gui_kivy.generic.MultiSelectPopUp import MultiSelectPopUp
 import numpy as np
 
 
