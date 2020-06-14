@@ -26,8 +26,8 @@ You can use the buttons below each plot to filter for the Information which the 
 #### Installing Instructions for developing with PyCharm
 
 * Get repository from Github
-* In project tree mark "AccountBook" as source directory. As shown here: 
-![Image_PyCharm_Project_Setting](docu/screenshots/PyCharm_Project_Setting.png)
+* In project tree mark the main folder (TransactionBook) as the projects source directory 
+(Right click -> "Mark Directory as" -> "Sources Root").
 
 #### Install required packages (Linux commands)
 * sudo pip3 install pandas
