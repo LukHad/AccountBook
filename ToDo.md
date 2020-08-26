@@ -8,6 +8,7 @@
 * dynamically adapt transaction grid widths to content
 * [Refac] Create own Popup class to avoid duplicating NumericProperty settings
 * [Refac] Filter class and initialization. Currently too much code clones
+* [Refac] Use Accessor functions only from outside the TransactionBook class
 
 
 

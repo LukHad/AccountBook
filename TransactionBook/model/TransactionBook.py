@@ -20,9 +20,32 @@ class TransactionBook:
         # Main dataset:
         self._data = pd.DataFrame(columns=[self.DATE, self.ACCOUNT, self.DESCRIPTION, self.AMOUNT, self.CATEGORY])
 
+    # Accessors
+    def get_path(self):
+        return self.path
+
+    def set_path(self, path):
+        self.path = path
+
+    def get_accounts(self):
+        return self.accounts
+
+    def set_accounts(self, accounts):
+        self.accounts = accounts
+
+    def get_categories(self):
+        return self.categories
+
+    def set_categories(self, categories):
+        self.categories = categories
+
     def get_data(self):
         return self._data.copy()
 
+    def set_data(self, data):
+        self._data = data
+
+    # Methods
     def new_transaction(self, date, account, description, amount, category):
         df = self.get_data()
         # If its the first element in the dataset: set index to 0, else: set index to the next index available
@@ -31,7 +54,7 @@ class TransactionBook:
         date = datetime.strptime(date, self.DATE_TIME_FORMAT)
         # Add transaction to dataset
         df.loc[index] = [date, account, description, amount, category]
-        self._data = df
+        self.set_data(df)
         # Add elemets to lists if they are new
         if category not in self.categories:
             self.categories.append(category)
@@ -82,7 +105,7 @@ class TransactionBook:
     def load_from(self, file_path):
         df = pd.read_csv(file_path, sep=';')
         df[self.DATE] = pd.to_datetime(df[self.DATE], format=self.DATE_TIME_FORMAT)
-        self._data = df
+        self.set_data(df)
         self.populate_lists_from_data()
 
     def years(self):
