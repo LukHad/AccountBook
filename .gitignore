@@ -5,4 +5,5 @@ __pycache__/
 .idea/
 saved_data/
 tests/myTransactions.py
+venv/
 

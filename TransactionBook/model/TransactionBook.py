@@ -4,21 +4,25 @@ import numpy as np
 
 
 class TransactionBook:
-    DATE = "Date"
-    ACCOUNT = "Account"
-    DESCRIPTION = "Description"
-    AMOUNT = "Amount"
-    CATEGORY = "Category"
-    CURRENCY = "€"
-    DATE_TIME_FORMAT = "%d.%m.%Y"
-    DATE_DELIMITER = "."
-
     def __init__(self, path=""):
+        # Constants ToDo: Shall be initialized from configuration file
+        #   Pandas dataframe headings
+        self.DATE = "Date"
+        self.ACCOUNT = "Account"
+        self.DESCRIPTION = "Description"
+        self.AMOUNT = "Amount"
+        self.CATEGORY = "Category"
+        #   Other constants
+        self.CURRENCY = "€"
+        self.DATE_TIME_FORMAT = "%d.%m.%Y"
+        self.DATE_DELIMITER = "."
+
+        # Init data set columns:
+        self._data = pd.DataFrame(columns=[self.DATE, self.ACCOUNT, self.DESCRIPTION, self.AMOUNT, self.CATEGORY])
+
         self.path = path  # Hold the entire path to the database file including the filename
         self.accounts = []  # Holds the list of all accounts in the dataset
         self.categories = []  # Holds the list of all categories in the dataset
-        # Main dataset:
-        self._data = pd.DataFrame(columns=[self.DATE, self.ACCOUNT, self.DESCRIPTION, self.AMOUNT, self.CATEGORY])
 
     # Accessors
     def get_path(self):
@@ -46,6 +50,7 @@ class TransactionBook:
         self._data = data
 
     # Methods
+    #   Transaction
     def new_transaction(self, date, account, description, amount, category):
         df = self.get_data()
         # If its the first element in the dataset: set index to 0, else: set index to the next index available
@@ -68,6 +73,7 @@ class TransactionBook:
     def delete_transaction(self, index):
         self._data = self._data.drop(index)
 
+    #   Account
     def account_balance(self, account, data):
         df = data
         return df.loc[df[self.ACCOUNT] == account, self.AMOUNT].sum()
@@ -83,12 +89,19 @@ class TransactionBook:
         df = df.loc[df[self.DATE] <= to_date]
         return df
 
-    def populate_lists_from_data(self):
+    def populate_categories_from_data(self):
         df = self.get_data()
         categories = df[self.CATEGORY].unique()
         self.categories = categories.tolist()
+
+    def populate_accounts_from_data(self):
+        df = self.get_data()
         accounts = df[self.ACCOUNT].unique()
         self.accounts = accounts.tolist()
+
+    def populate_lists_from_data(self):
+        self.populate_categories_from_data()
+        self.populate_accounts_from_data()
 
     def save(self):
         self.save_as(self.path)

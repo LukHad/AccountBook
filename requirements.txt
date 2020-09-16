@@ -1,8 +1,3 @@
-nose>=1.3.7
-Cython>=0.26.1
-kivy
-kivy-garden
-garden matplotlib
-pandas>=0.24.2
+nose
+pandas
 numpy
-matplotlib
