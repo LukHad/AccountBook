@@ -1,3 +1,5 @@
 nose
 pandas
 numpy
+
+PySide2
