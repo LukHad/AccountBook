@@ -7,15 +7,21 @@ from TransactionBook.gui.TransactionWidget import TransactionWidget
 
 class MainWindow(QMainWindow):
 
-    def __init__(self, *args, **kwargs):
-        super(MainWindow, self).__init__(*args, **kwargs)
+    def __init__(self):
+        super(MainWindow, self).__init__()
+
         # Window settings
         self.window_title = "Transaction Book"
         self.setWindowTitle(self.window_title)
         self.setMinimumSize(600, 400)
         self.resize(1500, 900)
-        # Initialization of MainWindow elements
+
+        # Menu Bar
         self.init_menu_bar()
+
+        # Central Widgets
+        self.transaction_widget = TransactionWidget()
+        self.account_widget = QWidget()
         self.init_central_widget()
 
     def init_menu_bar(self):
@@ -33,11 +39,8 @@ class MainWindow(QMainWindow):
 
     def init_central_widget(self):
         tab_widget = QTabWidget()
-        transaction_tab = TransactionWidget()  # QWidget will be TransactionWidget
-        account_tab = QWidget()
-
-        tab_widget.addTab(transaction_tab, "Transactions")
-        tab_widget.addTab(account_tab, "Accounts")
+        tab_widget.addTab(self.transaction_widget, self.transaction_widget.name)
+        tab_widget.addTab(self.account_widget, "Accounts")
 
         self.setCentralWidget(tab_widget)
 
@@ -58,8 +61,3 @@ class MainWindow(QMainWindow):
         print("Close File")
 
 
-if __name__ == '__main__':
-    application = QApplication(sys.argv)
-    window = MainWindow()
-    window.show()
-    sys.exit(application.exec_())
