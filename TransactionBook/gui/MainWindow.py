@@ -7,8 +7,9 @@ from TransactionBook.gui.TransactionWidget import TransactionWidget
 
 class MainWindow(QMainWindow):
 
-    def __init__(self):
+    def __init__(self, view_manager):
         super(MainWindow, self).__init__()
+        self.vm = view_manager
 
         # Window settings
         self.window_title = "Transaction Book"
@@ -20,7 +21,7 @@ class MainWindow(QMainWindow):
         self.init_menu_bar()
 
         # Central Widgets
-        self.transaction_widget = TransactionWidget()
+        self.transaction_widget = TransactionWidget(self.vm)
         self.account_widget = QWidget()
         self.init_central_widget()
 

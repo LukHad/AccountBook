@@ -4,10 +4,9 @@ from PySide2.QtWidgets import QWidget, QTableWidget, QTableWidgetItem, QHBoxLayo
 
 
 class TransactionWidget(QWidget):
-    def __init__(self):
+    def __init__(self, view_manager):
         super(TransactionWidget, self).__init__()
         self.name = "Transactions"
-
         layout = QHBoxLayout()
         self.table = QTableWidget(3, 3)
         # self.columnLabels = ["Make", "Model", "Price"]
@@ -18,4 +17,10 @@ class TransactionWidget(QWidget):
 
         layout.addWidget(self.table)
         self.setLayout(layout)
+
+        self.table.itemChanged.connect(view_manager.cb_transaction_changed)
+
+
+
+
 
