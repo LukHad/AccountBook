@@ -5,8 +5,6 @@ from TransactionBook.model.TransactionBook import TransactionBook
 from TransactionBook.Controller import Controller
 
 application = QApplication(sys.argv)
-vm = ViewManager()
-tb = TransactionBook()
-ctrl = Controller(model=tb, view=vm)
-vm.main_window.show()
+ctrl = Controller()
+ctrl.view.main_window.show()
 sys.exit(application.exec_())

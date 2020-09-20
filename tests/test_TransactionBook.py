@@ -34,7 +34,7 @@ def save_load(tb):
     :param tb: Transaction Book
     :return tb2: Transaction Book after save load operation
     """
-    filename = "dummy_database.csv"
+    filename = "test_database.csv"
     tb.save_as(filename)
     tb2 = TransactionBook()
     tb2.load_from(filename)
@@ -124,6 +124,20 @@ def test_delete_transaction():
     nose.tools.ok_(tb.total_balance(tb.get_data()) == 958.05)
 
 
+def test_edit_transaction_field():
+    tb = dummy_transactions()
+    # Test amount
+    tb.edit_transaction_field(3, tb.AMOUNT, -50)
+    nose.tools.ok_(tb.total_balance(tb.get_data()) == 916.05)
+
+    # Test description
+    new_description = "Movies and Popcorn"
+    df_num = 1
+    tb.edit_transaction_field(df_num, tb.DESCRIPTION, new_description)
+    df = tb.get_data()
+    nose.tools.ok_(df[tb.DESCRIPTION].values[df_num] == new_description)
+
+
 if __name__ == '__main__':
     test_populate_list_from_data()
     test_filter_date()
@@ -134,3 +148,4 @@ if __name__ == '__main__':
     test_total_balance()
     test_pivot_monthly_trend()
     test_delete_transaction()
+    test_edit_transaction_field()

@@ -19,6 +19,7 @@ class TransactionWidget(QWidget):
         self.setLayout(layout)
 
         self.table.itemChanged.connect(view_manager.cb_transaction_changed)
+        # self.table.itemDoubleClicked.connect(view_manager.cb_transaction_item_entered)
 
 
 

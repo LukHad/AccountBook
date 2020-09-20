@@ -72,6 +72,11 @@ class TransactionBook:
         date = datetime.strptime(date, self.DATE_TIME_FORMAT)
         self._data.loc[index] = [date, account, description, amount, category]
 
+    def edit_transaction_field(self, index, field, content):
+        if field == self.DATE:
+            content = datetime.strptime(content, self.DATE_TIME_FORMAT)
+        self._data[field].values[index] = content
+
     def delete_transaction(self, index):
         self._data = self._data.drop(index)
 
