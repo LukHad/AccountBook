@@ -1,4 +1,5 @@
 from PySide2.QtWidgets import QTableWidgetItem
+from PySide2.QtWidgets import QAbstractItemView
 from PySide2.QtCore import Qt
 from TransactionBook.gui.MainWindow import MainWindow
 
@@ -27,7 +28,8 @@ class ViewManager:
             for column in range(num_columns):
                 table_item = QTableWidgetItem()
                 table_item.setData(Qt.DisplayRole, data[row][column])
-                # table_item.setFlags(Qt.ItemIsEnabled)
+                # table_item.setFlags(Qt.ItemIsEnabled) # Make table read only
+                table.setEditTriggers(QAbstractItemView.NoEditTriggers)
                 table.setItem(row, column, table_item)
 
         self.send_callbacks = True

@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 import sys
-
-from PySide2.QtWidgets import QApplication, QMainWindow, QAction, QTabWidget, QWidget
+from PySide2.QtWidgets import QApplication, QMainWindow, QAction, QTabWidget, QWidget, QAction, QToolBar
+from PySide2.QtCore import Qt
+from PySide2.QtGui import QIcon
 from TransactionBook.gui.TransactionWidget import TransactionWidget
 
 
@@ -20,6 +21,9 @@ class MainWindow(QMainWindow):
         # Menu Bar
         self.init_menu_bar()
 
+        # Toolbar
+        self.init_toolbar()
+
         # Central Widgets
         self.transaction_widget = TransactionWidget(self.vm)
         self.account_widget = QWidget()
@@ -37,6 +41,14 @@ class MainWindow(QMainWindow):
         file_menu.addSeparator()
         file_menu.addAction(QAction("Close File", self, triggered=self.close_file))
         file_menu.addAction("Exit", QApplication.quit)
+
+    def init_toolbar(self):
+        toolbar = self.addToolBar("Toolbar")
+        add_action = QAction(QIcon('gui/icons/add.png'), "New", self)
+        add_action.setToolTip("Add transaction")
+        add_action.triggered.connect(self.new_file)
+        # add_action.setShortcut('Ctrl+Q')
+        toolbar.addAction(add_action)
 
     def init_central_widget(self):
         tab_widget = QTabWidget()
