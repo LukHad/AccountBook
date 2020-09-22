@@ -36,3 +36,9 @@ class Controller:
         self.debug_print(f"In row {view_row} the field {field} changed to {new_content}")
         self.model.edit_transaction_field(view_row, field, new_content)
         self.update_view()
+
+    def get_account_list(self):
+        return self.model.get_accounts()
+
+    def get_category_list(self):
+        return self.model.get_categories()

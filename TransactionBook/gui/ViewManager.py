@@ -34,6 +34,16 @@ class ViewManager:
 
         self.send_callbacks = True
 
+    def populate_account_combo_box(self, combo_box):
+        account_list = self.ctrl.get_account_list()
+        for account in account_list:
+            combo_box.addItem(account)
+
+    def populate_category_combo_box(self, combo_box):
+        category_list = self.ctrl.get_category_list()
+        for category in category_list:
+            combo_box.addItem(category)
+
     def cb_transaction_changed(self, item):
         if self.send_callbacks:
             new_content = item.text()
