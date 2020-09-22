@@ -29,7 +29,7 @@ class ViewManager:
                 table_item = QTableWidgetItem()
                 table_item.setData(Qt.DisplayRole, data[row][column])
                 # table_item.setFlags(Qt.ItemIsEnabled) # Make table read only
-                table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+                #table.setEditTriggers(QAbstractItemView.NoEditTriggers)
                 table.setItem(row, column, table_item)
 
         self.send_callbacks = True
@@ -41,5 +41,8 @@ class ViewManager:
             column = item.column()
             field = self.transaction_table_header_labels[column]
             self.ctrl.event_transaction_changed(row, field, new_content)
+
+    def cb_new_transaction(self):
+        print("CB new transaction")
 
 

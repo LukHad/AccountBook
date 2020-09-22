@@ -3,14 +3,14 @@ import sys
 from PySide2.QtWidgets import QApplication, QMainWindow, QAction, QTabWidget, QWidget, QAction, QToolBar
 from PySide2.QtCore import Qt
 from PySide2.QtGui import QIcon
-from TransactionBook.gui.TransactionWidget import TransactionWidget
+from TransactionBook.gui.TransactionWidget import TransactionTableWidget, NewTransactionPopUp
 
 
 class MainWindow(QMainWindow):
 
     def __init__(self, view_manager):
         super(MainWindow, self).__init__()
-        self.vm = view_manager
+        self.view_manager = view_manager
 
         # Window settings
         self.window_title = "Transaction Book"
@@ -25,9 +25,12 @@ class MainWindow(QMainWindow):
         self.init_toolbar()
 
         # Central Widgets
-        self.transaction_widget = TransactionWidget(self.vm)
+        self.transaction_widget = TransactionTableWidget(self.view_manager)
         self.account_widget = QWidget()
         self.init_central_widget()
+
+        #
+        self.popup = None
 
     def init_menu_bar(self):
         menu_bar = self.menuBar()
@@ -46,7 +49,7 @@ class MainWindow(QMainWindow):
         toolbar = self.addToolBar("Toolbar")
         add_action = QAction(QIcon('gui/icons/add.png'), "New", self)
         add_action.setToolTip("Add transaction")
-        add_action.triggered.connect(self.new_file)
+        add_action.triggered.connect(self.cb_new_transaction_button)
         # add_action.setShortcut('Ctrl+Q')
         toolbar.addAction(add_action)
 
@@ -57,6 +60,9 @@ class MainWindow(QMainWindow):
 
         self.setCentralWidget(tab_widget)
 
+    def cb_new_transaction_button(self):
+        self.popup = NewTransactionPopUp(self.view_manager, self)
+        self.popup.show()
 
     def new_file(self):
         print("New File")
