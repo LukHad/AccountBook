@@ -29,13 +29,15 @@ class TransactionTableWidget(QWidget):
         row = item.row()
         column = item.column()
         field = self.column_labels[column]
-        self.ctrl.event_transaction_changed(row, field, new_content)
+
+        self.ctrl.debug_print(f"Cell ({row}, {column}) / field {field} changed to {new_content}")
+
+        #self.ctrl.event_transaction_changed(row, field, new_content)
 
     def update_data(self):
         self.send_callbacks = False
-        column_headings = self.ctrl.get_data_columns()
+        column_headings, data = self.ctrl.get_table_data()
         self.column_labels = column_headings
-        data = self.ctrl.get_table_data()
         num_columns = len(column_headings)
 
         table = self.table
@@ -44,13 +46,32 @@ class TransactionTableWidget(QWidget):
 
         num_rows = len(data)
         table.setRowCount(num_rows)
-        for row in range(num_rows):
-            for column in range(num_columns):
-                table_item = QTableWidgetItem()
-                table_item.setData(Qt.DisplayRole, data[row][column])
-                # table_item.setFlags(Qt.ItemIsEnabled) # Make table read only
-                #table.setEditTriggers(QAbstractItemView.NoEditTriggers)
-                table.setItem(row, column, table_item)
+        for column in range(num_columns):
+            for row in range(num_rows):
+                col_label = self.column_labels[column]
+                # For different columns different widgets are necessary to restrict possible cell values
+                if col_label == self.ctrl.get_account_name():  # ACCOUNT
+                    table.setCellWidget(row, column,
+                                        QCustomComboBox(self.ctrl.get_account_list,
+                                                        self.cb_item_changed,
+                                                        row=row,
+                                                        column=column
+                                                        )
+                                        )
+                elif col_label == self.ctrl.get_category_name():  # CATEGORY
+                    table.setCellWidget(row, column,
+                                        QCustomComboBox(self.ctrl.get_category_list,
+                                                        self.cb_item_changed,
+                                                        row=row,
+                                                        column=column
+                                                        )
+                                        )
+                else:
+                    table_item = QTableWidgetItem()
+                    table_item.setData(Qt.DisplayRole, data[row][column])
+                    # table_item.setFlags(Qt.ItemIsEnabled) # Make table read only
+                    #table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+                    table.setItem(row, column, table_item)
         self.send_callbacks = True
 
 
@@ -62,34 +83,39 @@ class QAmountSpinBox(QDoubleSpinBox):
         self.setSuffix(f" {ctrl.get_currency()}")
 
 
-class QCategoryComboBox(QComboBox):
-    def __init__(self, ctrl):
-        super(QCategoryComboBox, self).__init__()
-        self.ctrl = ctrl
+class QCustomComboBox(QComboBox):
+    def __init__(self, get_list_function, selection_changed_callback=None, row=None, column=None):
+        super(QCustomComboBox, self).__init__()
+        self.list_fun = get_list_function
         self.update_data()
 
+        self.tbl_row = row
+        self.tbl_column = column
+
+        if selection_changed_callback is not None:
+            self.currentIndexChanged.connect(lambda: selection_changed_callback(self))
+
+    def row(self):
+        return self.tbl_row
+
+    def column(self):
+        return self.tbl_column
+
     def update_data(self):
-        category_list = self.ctrl.get_category_list()
-        for category in category_list:
-            self.addItem(category)
+        self.clear()
+        item_list = self.list_fun()
+        for el in item_list:
+            self.addItem(el)
 
-
-class QAccountComboBox(QComboBox):
-    def __init__(self, ctrl):
-        super(QAccountComboBox, self).__init__()
-        self.ctrl = ctrl
-        self.update_data()
-
-    def update_data(self):
-        account_list = self.ctrl.get_account_list()
-        for account in account_list:
-            self.addItem(account)
+    def text(self):
+        return self.itemText(self.currentIndex())
 
 
 class NewTransactionPopUp(QWidget):
     def __init__(self, ctrl, parent=None):
         super(NewTransactionPopUp, self).__init__()
-        self.setWindowTitle('Input dialog')
+        self.name = "New Transaction"
+        self.setWindowTitle(self.name)
         self.ctrl = ctrl
 
         layout = QGridLayout(self)
@@ -104,10 +130,10 @@ class NewTransactionPopUp(QWidget):
         self.category_label = QLabel("Category: ")
         # - Inputs
         self.date_input = QLineEdit()
-        self.account_input = QAccountComboBox(ctrl)
+        self.account_input = QCustomComboBox(self.ctrl.get_account_list)
         self.description_input = QLineEdit()
         self.amount_input = QAmountSpinBox(ctrl)
-        self.category_input = QCategoryComboBox(ctrl)
+        self.category_input = QCustomComboBox(self.ctrl.get_category_list)
         self.ok_btn = QPushButton("OK")
         self.cancel_btn = QPushButton("Cancel")
 
@@ -132,15 +158,15 @@ class NewTransactionPopUp(QWidget):
 
     def cb_ok(self):
         date = self.date_input.text()
-        account = self.account_input.itemText(self.account_input.currentIndex())
+        account = self.account_input.text()
         description = self.description_input.text()
         amount = self.amount_input.value()
-        category = self.category_input.itemText(self.category_input.currentIndex())
-        print(f"Date: {date}")
-        print(f"account: {account}")
-        print(f"description: {description}")
-        print(f"amount: {amount}, Type: {type(amount)}")
-        print(f"category: {category}")
+        category = self.category_input.text()
+        self.ctrl.debug_print(f"Date: {date}")
+        self.ctrl.debug_print(f"account: {account}")
+        self.ctrl.debug_print(f"description: {description}")
+        self.ctrl.debug_print(f"amount: {amount}, Type: {type(amount)}")
+        self.ctrl.debug_print(f"category: {category}")
 
 
 

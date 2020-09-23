@@ -16,14 +16,10 @@ class Controller:
         if self.DEBUG:
             print(text)
 
-    def get_data_columns(self):
+    def get_table_data(self):
         df = self.model.get_data()
         columns = df.columns.tolist()
         columns.remove(self.model.ID)
-        return columns
-
-    def get_table_data(self):
-        df = self.model.get_data()
         if not df.empty:
             # Convert date to string according to date format
             df[self.model.DATE] = df[self.model.DATE].dt.strftime(self.model.DATE_TIME_FORMAT)
@@ -33,7 +29,7 @@ class Controller:
         else:
             data = []
 
-        return data
+        return columns, data
 
     def event_transaction_changed(self, view_row, field, new_content):
         self.debug_print(f"In row {view_row} the field {field} changed to {new_content}")
@@ -45,6 +41,12 @@ class Controller:
 
     def get_category_list(self):
         return self.model.get_categories()
+
+    def get_category_name(self):
+        return self.model.CATEGORY
+
+    def get_account_name(self):
+        return self.model.ACCOUNT
 
     def get_currency(self):
         return self.model.CURRENCY
