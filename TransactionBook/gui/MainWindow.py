@@ -8,13 +8,12 @@ from TransactionBook.gui.TransactionWidget import TransactionTableWidget, NewTra
 
 class MainWindow(QMainWindow):
 
-    def __init__(self, view_manager):
+    def __init__(self, ctrl):
         super(MainWindow, self).__init__()
-        self.view_manager = view_manager
-
+        self.ctrl = ctrl
         # Window settings
-        self.window_title = "Transaction Book"
-        self.setWindowTitle(self.window_title)
+        self.name = "Transaction Book"
+        self.setWindowTitle(self.name)
         self.setMinimumSize(600, 400)
         self.resize(1500, 900)
 
@@ -25,12 +24,16 @@ class MainWindow(QMainWindow):
         self.init_toolbar()
 
         # Central Widgets
-        self.transaction_widget = TransactionTableWidget(self.view_manager)
+        self.transaction_widget = TransactionTableWidget(self.ctrl)
         self.account_widget = QWidget()
         self.init_central_widget()
 
         #
         self.popup = None
+
+    def update_data(self):
+        self.transaction_widget.update_data()
+
 
     def init_menu_bar(self):
         menu_bar = self.menuBar()
@@ -61,7 +64,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(tab_widget)
 
     def cb_new_transaction_button(self):
-        self.popup = NewTransactionPopUp(self.view_manager, self)
+        self.popup = NewTransactionPopUp(self.ctrl, self)
         self.popup.show()
 
     def new_file(self):
