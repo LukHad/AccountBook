@@ -30,9 +30,9 @@ class TransactionTableWidget(QWidget):
         column = item.column()
         field = self.column_labels[column]
 
-        self.ctrl.debug_print(f"Cell ({row}, {column}) / field {field} changed to {new_content}")
-
-        #self.ctrl.event_transaction_changed(row, field, new_content)
+        self.ctrl.debug_print(f"View: Cell ({row}, {column}) / field {field} changed to {new_content}")
+        # Write to data base
+        self.ctrl.event_transaction_changed(row, field, new_content)
 
     def update_data(self):
         self.send_callbacks = False
@@ -51,41 +51,64 @@ class TransactionTableWidget(QWidget):
                 col_label = self.column_labels[column]
                 # For different columns different widgets are necessary to restrict possible cell values
                 if col_label == self.ctrl.get_account_name():  # ACCOUNT
-                    table.setCellWidget(row, column,
-                                        QCustomComboBox(self.ctrl.get_account_list,
+                    account_combo_box = QCustomComboBox(self.ctrl.get_account_list,
                                                         self.cb_item_changed,
                                                         row=row,
                                                         column=column
                                                         )
-                                        )
+                    account_combo_box.set_text(data[row][column])
+                    table.setCellWidget(row, column, account_combo_box)
                 elif col_label == self.ctrl.get_category_name():  # CATEGORY
-                    table.setCellWidget(row, column,
-                                        QCustomComboBox(self.ctrl.get_category_list,
-                                                        self.cb_item_changed,
-                                                        row=row,
-                                                        column=column
-                                                        )
-                                        )
+                    category_combo_box = QCustomComboBox(self.ctrl.get_category_list,
+                                                         self.cb_item_changed,
+                                                         row=row,
+                                                         column=column
+                                                         )
+                    category_combo_box.set_text(data[row][column])
+                    table.setCellWidget(row, column, category_combo_box)
+                elif col_label == self.ctrl.get_amount_name():
+                    amount_widget = QAmountSpinBox(self.ctrl.get_currency,
+                                                   self.cb_item_changed,
+                                                   row=row,
+                                                   column=column
+                                                   )
+                    amount_widget.setValue(data[row][column])
+                    table.setCellWidget(row, column, amount_widget)
                 else:
                     table_item = QTableWidgetItem()
                     table_item.setData(Qt.DisplayRole, data[row][column])
-                    # table_item.setFlags(Qt.ItemIsEnabled) # Make table read only
-                    #table.setEditTriggers(QAbstractItemView.NoEditTriggers)
                     table.setItem(row, column, table_item)
         self.send_callbacks = True
 
 
 class QAmountSpinBox(QDoubleSpinBox):
-    def __init__(self, ctrl):
+    def __init__(self, get_currency_function, double_changed_callback=None, row=None, column=None):
         super(QAmountSpinBox, self).__init__()
         self.setMaximum(9999999.99)
         self.setMinimum(-9999999.99)
-        self.setSuffix(f" {ctrl.get_currency()}")
+        self.setSuffix(f" {get_currency_function()}")
+
+        self.tbl_row = row
+        self.tbl_column = column
+
+        if double_changed_callback is not None:
+            self.valueChanged.connect(lambda: double_changed_callback(self))
+
+    def row(self):
+        return self.tbl_row
+
+    def column(self):
+        return self.tbl_column
+
+    def text(self):
+        return self.value()  # ToDo: Fix this workaround .text() should not return a float
 
 
 class QCustomComboBox(QComboBox):
     def __init__(self, get_list_function, selection_changed_callback=None, row=None, column=None):
         super(QCustomComboBox, self).__init__()
+        self.setStyleSheet("QComboBox { background-color: white; }")
+
         self.list_fun = get_list_function
         self.update_data()
 
@@ -100,6 +123,11 @@ class QCustomComboBox(QComboBox):
 
     def column(self):
         return self.tbl_column
+
+    def set_text(self, text):
+        item_list = self.list_fun()
+        index = item_list.index(text)
+        self.setCurrentIndex(index)
 
     def update_data(self):
         self.clear()
@@ -132,7 +160,7 @@ class NewTransactionPopUp(QWidget):
         self.date_input = QLineEdit()
         self.account_input = QCustomComboBox(self.ctrl.get_account_list)
         self.description_input = QLineEdit()
-        self.amount_input = QAmountSpinBox(ctrl)
+        self.amount_input = QAmountSpinBox(self.ctrl.get_currency)
         self.category_input = QCustomComboBox(self.ctrl.get_category_list)
         self.ok_btn = QPushButton("OK")
         self.cancel_btn = QPushButton("Cancel")

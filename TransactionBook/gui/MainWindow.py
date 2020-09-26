@@ -34,7 +34,6 @@ class MainWindow(QMainWindow):
     def update_data(self):
         self.transaction_widget.update_data()
 
-
     def init_menu_bar(self):
         menu_bar = self.menuBar()
         # File Menu

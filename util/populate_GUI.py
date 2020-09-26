@@ -1,13 +1,19 @@
+from TransactionBook.model.TransactionBook import TransactionBook
 import sys
 from PySide2.QtWidgets import QApplication
 from TransactionBook.Controller import Controller
 
+tb = TransactionBook()
+for i in range(0, 5):
+    tb.new_transaction("01.07.2017", "Account 1", "My first transaction", 1000, "Income")
+
 application = QApplication(sys.argv)
 ctrl = Controller()
-# Test
-ctrl.model.load_from(r"C:\Users\Win10VM\Documents\MyLocalFiles\Python_Projects\TransactionBook\tests\test_database.csv")
+
+ctrl.model = tb
 ctrl.view.update_data()
-# End Test
 
 ctrl.view.show()
 sys.exit(application.exec_())
+
+

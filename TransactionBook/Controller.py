@@ -7,9 +7,6 @@ class Controller:
         self.DEBUG = True
         self.model = TransactionBook()
         self.view = MainWindow(self)
-        # Test
-        self.model.load_from(r"C:\Users\Win10VM\Documents\MyLocalFiles\Python_Projects\TransactionBook\tests\test_database.csv")
-        # End Test
         self.view.update_data()
 
     def debug_print(self, text):
@@ -32,7 +29,7 @@ class Controller:
         return columns, data
 
     def event_transaction_changed(self, view_row, field, new_content):
-        self.debug_print(f"In row {view_row} the field {field} changed to {new_content}")
+        self.debug_print(f"Ctrl: Writing cell change to data base")
         self.model.edit_transaction_field(view_row, field, new_content)
         self.view.update_data()
 
@@ -47,6 +44,9 @@ class Controller:
 
     def get_account_name(self):
         return self.model.ACCOUNT
+
+    def get_amount_name(self):
+        return self.model.AMOUNT
 
     def get_currency(self):
         return self.model.CURRENCY
