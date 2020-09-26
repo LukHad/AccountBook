@@ -1,3 +1,5 @@
+import os
+
 from TransactionBook.gui.MainWindow import MainWindow
 from TransactionBook.model.TransactionBook import TransactionBook
 
@@ -5,6 +7,9 @@ from TransactionBook.model.TransactionBook import TransactionBook
 class Controller:
     def __init__(self):
         self.DEBUG = True
+        self.file_path = None
+        self.file_name = "Transaction Book"
+
         self.model = TransactionBook()
         self.view = MainWindow(self)
         self.view.update_data()
@@ -31,7 +36,38 @@ class Controller:
     def event_transaction_changed(self, view_row, field, new_content):
         self.debug_print(f"Ctrl: Writing cell change to data base")
         self.model.edit_transaction_field(view_row, field, new_content)
+        # self.view.update_data()
+
+    def event_new_transaction(self, date, account, description, amount, category):
+        self.model.new_transaction(date, account, description, amount, category)
         self.view.update_data()
+
+    def event_open_file(self, file_path):
+        self.__update_file(file_path)
+
+        self.debug_print(f"Ctrl: File {self.file_name} loaded")
+
+        self.model.load_from(self.file_path)
+        self.view.update_data()
+
+    def event_save_file(self, file_path=None):
+        if file_path is None:
+            assert self.file_path is not None, "Controller:event_save_file: Attempting to save without " \
+                                           "stored or passed file_path"
+            file_path = self.file_path
+        self.__update_file(file_path)
+        self.model.save_as(file_path)
+        self.view.update_data()
+
+    def __update_file(self, file_path):
+        self.file_path = file_path
+        self.file_name = os.path.basename(file_path)
+
+    def get_file_path(self):
+        return self.file_path
+
+    def get_loaded_file_name(self):
+        return self.file_name
 
     def get_account_list(self):
         return self.model.get_accounts()

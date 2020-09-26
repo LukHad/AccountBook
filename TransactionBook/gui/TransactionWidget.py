@@ -196,6 +196,9 @@ class NewTransactionPopUp(QWidget):
         self.ctrl.debug_print(f"amount: {amount}, Type: {type(amount)}")
         self.ctrl.debug_print(f"category: {category}")
 
+        # ToDo: Validate input e.g. no empty field
+        self.ctrl.event_new_transaction(date, account, description, amount, category)
+        self.close()
 
 
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import sys
-from PySide2.QtWidgets import QApplication, QMainWindow, QAction, QTabWidget, QWidget, QAction, QToolBar
+from PySide2.QtWidgets import QApplication, QMainWindow, QAction, QTabWidget, QWidget, QAction, QToolBar, QFileDialog
 from PySide2.QtCore import Qt
 from PySide2.QtGui import QIcon
 from TransactionBook.gui.TransactionWidget import TransactionTableWidget, NewTransactionPopUp
@@ -12,8 +12,8 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
         self.ctrl = ctrl
         # Window settings
-        self.name = "Transaction Book"
-        self.setWindowTitle(self.name)
+        # self.name = self.ctrl.get_loaded_file_name()
+        # self.setWindowTitle(self.name)
         self.setMinimumSize(600, 400)
         self.resize(1500, 900)
 
@@ -32,6 +32,8 @@ class MainWindow(QMainWindow):
         self.popup = None
 
     def update_data(self):
+        self.setWindowTitle(self.ctrl.get_loaded_file_name())
+
         self.transaction_widget.update_data()
 
     def init_menu_bar(self):
@@ -70,13 +72,25 @@ class MainWindow(QMainWindow):
         print("New File")
 
     def open_file(self):
-        print("Open File")
+        file_path = QFileDialog.getOpenFileName(self, self.tr("Open..."), self.tr(""), self.tr("*.csv"))[0]
+        if file_path != '':
+            # ToDo: Check if file is valid database
+            self.ctrl.debug_print(f"View: Open {file_path}")
+            self.ctrl.event_open_file(file_path)
 
     def save_file(self):
-        print("Save")
+        if self.ctrl.get_file_path() is not None:
+            self.ctrl.debug_print(f"View: Save file")
+            self.ctrl.event_save_file()
+        else:
+            self.ctrl.debug_print(f"View: Redirection to save as...")
+            self.save_as_file()
 
     def save_as_file(self):
-        print("Save As")
+        file_path = QFileDialog.getSaveFileName(self, self.tr("Save as..."), self.tr(""), self.tr("*.csv"))[0]
+        if file_path != '':
+            self.ctrl.debug_print(f"View: save as {file_path}")
+            self.ctrl.event_save_file(file_path)
 
     def close_file(self):
         print("Close File")
