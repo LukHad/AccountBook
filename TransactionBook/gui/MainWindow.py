@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 import sys
-from PySide2.QtWidgets import QApplication, QMainWindow, QAction, QTabWidget, QWidget, QAction, QToolBar, QFileDialog
+from PySide2.QtWidgets import QApplication, QMainWindow, QAction, QTabWidget, QWidget, QAction, QToolBar, QFileDialog, \
+                              QMessageBox
 from PySide2.QtCore import Qt
 from PySide2.QtGui import QIcon
-from TransactionBook.gui.TransactionWidget import TransactionTableWidget, NewTransactionPopUp
+from TransactionBook.gui.TransactionWidget import TransactionTableWidget, TransactionPopUp
 
 
 class MainWindow(QMainWindow):
@@ -56,9 +57,13 @@ class MainWindow(QMainWindow):
         add_action.setToolTip("Add transaction")
         add_action.triggered.connect(self.cb_new_transaction_button)
         # Edit transaction
+        edit_action = QAction(QIcon('gui/icons/edit.png'), "New", self)
+        edit_action.setToolTip("Edit transaction")
+        edit_action.triggered.connect(self.cb_edit_transaction_button)
 
         # add_action.setShortcut('Ctrl+Q')
         toolbar.addAction(add_action)
+        toolbar.addAction(edit_action)
 
     def init_central_widget(self):
         tab_widget = QTabWidget()
@@ -68,8 +73,23 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(tab_widget)
 
     def cb_new_transaction_button(self):
-        self.popup = NewTransactionPopUp(self.ctrl, self)
+        self.popup = TransactionPopUp(self.ctrl, self)
         self.popup.show()
+
+    def cb_edit_transaction_button(self):
+        #self.popup = TransactionPopUp(self.ctrl, self)
+        #self.popup.show()
+        # Get a list of all selected rows
+        row_list = [item.row() for item in self.transaction_widget.table.selectionModel().selectedIndexes()]
+        # Remove duplicates in case several cells of one row are selected
+        unique_row_list = list(set(row_list))
+        if len(unique_row_list) != 1:
+            msg_box = QMessageBox()
+            msg_box.setText("To edit a transaction exactly one transaction row needs to be selected")
+            msg_box.exec_()
+        else:
+            selected_row = unique_row_list[0]
+            self.ctrl.debug_print(selected_row)
 
     def new_file(self):
         print("New File")

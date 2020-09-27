@@ -20,7 +20,8 @@ class TransactionBook:
         self.DATE_DELIMITER = "."
 
         # Init data set columns:
-        self._data = pd.DataFrame(columns=[self.ID, self.DATE, self.ACCOUNT, self.DESCRIPTION, self.AMOUNT, self.CATEGORY])
+        self._data = pd.DataFrame(columns=[self.ID, self.DATE, self.ACCOUNT,
+                                           self.DESCRIPTION, self.AMOUNT, self.CATEGORY])
 
         self.path = path  # Hold the entire path to the database file including the filename
         self.accounts = []  # Holds the list of all accounts in the dataset

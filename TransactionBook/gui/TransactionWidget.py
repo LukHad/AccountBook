@@ -17,9 +17,9 @@ class TransactionTableWidget(QWidget):
 
         self.year_label = QLabel("Year: ")
         self.month_label = QLabel("Month: ")
-        self.year_selector = QCustomComboBox(self.ctrl.get_years_in_data,
+        self.year_selector = QCustomComboBox(self.ctrl.get_years_in_data_as_str,
                                              self.ctrl.event_selected_transaction_year_changed)
-        self.month_selector = QCustomComboBox(self.ctrl.get_months,
+        self.month_selector = QCustomComboBox(self.ctrl.get_months_as_str,
                                               self.ctrl.event_selected_transaction_month_changed)
 
         layout = QGridLayout()
@@ -50,6 +50,7 @@ class TransactionTableWidget(QWidget):
                 table.setItem(row, column, table_item)
 
         self.year_selector.update_data()
+        self.month_selector.update_data()
 
 
 class QAmountSpinBox(QDoubleSpinBox):
@@ -89,7 +90,7 @@ class QCustomComboBox(QComboBox):
     def update_data(self):
         old_text = self.text()
         item_list = self.list_fun()
-        new_index = len(item_list) - 1
+        new_index = 0
         callback_necessary = True
         if old_text in item_list:
             new_index = item_list.index(old_text)
@@ -112,10 +113,13 @@ class QCustomComboBox(QComboBox):
         return self.itemText(self.currentIndex())
 
 
-class NewTransactionPopUp(QWidget):
-    def __init__(self, ctrl, parent=None):
-        super(NewTransactionPopUp, self).__init__()
-        self.name = "New Transaction"
+class TransactionPopUp(QWidget):
+    def __init__(self, ctrl, parent=None, edit_transaction_id=None):
+        super(TransactionPopUp, self).__init__()
+        if edit_transaction_id is None:
+            self.name = "New Transaction"
+        else:
+            self.name = "Edit Transaction"
         self.setWindowTitle(self.name)
         self.ctrl = ctrl
 

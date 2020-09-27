@@ -7,15 +7,23 @@ from TransactionBook.model.TransactionBook import TransactionBook
 class Controller:
     def __init__(self):
         self.DEBUG = True
-        self.file_path = None
+        self.file_path = r"C:\Users\Win10VM\Documents\MyLocalFiles\Python_Projects\TransactionBook\util\dummy_database.csv" # ToDo: Test, remove
         self.file_name = "Transaction Book"
         self.selected_year = None
         self.selected_month = None
-
+        self.view_table_model_map = []  # [3] = 5 : 3 view table index, 5 is model df index
         self.model = TransactionBook()
         self.view = MainWindow(self)
+
+        self.initialize()
+
         self.view.update_data()
 
+    def initialize(self):
+        if self.file_path is not None:
+            self.model.load_from(self.file_path)
+            self.selected_year = int(self.get_years_in_data_as_str()[0])
+        self.selected_month = int(self.get_months_as_str()[0])
 
     def debug_print(self, text):
         if self.DEBUG:
@@ -26,14 +34,28 @@ class Controller:
         columns = df.columns.tolist()
         columns.remove(self.model.ID)
         if not df.empty:
+            # Filter selected month and date
+            month = "Month"
+            year = "Year"
+            df[month] = [el.month for el in df[self.model.DATE]]
+            df[year] = [el.year for el in df[self.model.DATE]]
+            self.debug_print(f"Ctrl: Filtering data for year {self.selected_year} and month {self.selected_month}")
+            df = df.loc[df[month] == self.selected_month]
+            df = df.loc[df[year] == self.selected_year]
             # Convert date to string according to date format
             df[self.model.DATE] = df[self.model.DATE].dt.strftime(self.model.DATE_TIME_FORMAT)
             # Convert amount to string with currency
             df[self.model.AMOUNT] = df[self.model.AMOUNT].astype(str) + " " + self.get_currency()
             # Remove ID column from dataframe
             df = df.loc[:, df.columns != self.model.ID]
+            # Remove Month and Year column
+            df = df.loc[:, df.columns != month]
+            df = df.loc[:, df.columns != year]
+
+            self.view_table_model_map = df.index.tolist()  # Save a map to know which model data corresponds to the displayed data
             data = df.values.tolist()
         else:
+            self.view_table_model_map = []
             data = []
 
         return columns, data
@@ -50,10 +72,12 @@ class Controller:
     def event_selected_transaction_year_changed(self, year_str):
         self.debug_print(f"Ctrl: Selected year changed to {year_str}")
         self.selected_year = int(year_str)
+        self.view.update_data()
 
     def event_selected_transaction_month_changed(self, month_str):
-        self.debug_print(f"Ctrl: Selected year changed to {month_str}")
+        self.debug_print(f"Ctrl: Selected month changed to {month_str}")
         self.selected_month = int(month_str)
+        self.view.update_data()
 
     def event_open_file(self, file_path):
         self.__update_file(file_path)
@@ -94,14 +118,14 @@ class Controller:
     def get_account_name(self):
         return self.model.ACCOUNT
 
-    def get_years_in_data(self):
+    def get_years_in_data_as_str(self):
         years_int = self.model.years()
         years_str = [str(year) for year in years_int]
         return years_str
 
-    def get_months(self):
-        months = [str(i) for i in range(1, 13)]
-        return months
+    def get_months_as_str(self):
+        months_str = [str(i) for i in range(1, 13)]
+        return months_str
 
     def get_amount_name(self):
         return self.model.AMOUNT
