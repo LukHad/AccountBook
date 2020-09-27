@@ -60,10 +60,15 @@ class MainWindow(QMainWindow):
         edit_action = QAction(QIcon('gui/icons/edit.png'), "New", self)
         edit_action.setToolTip("Edit transaction")
         edit_action.triggered.connect(self.cb_edit_transaction_button)
+        # Delete transaction
+        delete_action = QAction(QIcon('gui/icons/delete.png'), "New", self)
+        delete_action.setToolTip("Delete transaction")
+        delete_action.triggered.connect(self.cb_delete_transaction_button)
 
         # add_action.setShortcut('Ctrl+Q')
         toolbar.addAction(add_action)
         toolbar.addAction(edit_action)
+        toolbar.addAction(delete_action)
 
     def init_central_widget(self):
         tab_widget = QTabWidget()
@@ -77,19 +82,38 @@ class MainWindow(QMainWindow):
         self.popup.show()
 
     def cb_edit_transaction_button(self):
-        # Get a list of all selected rows
-        row_list = [item.row() for item in self.transaction_widget.table.selectionModel().selectedIndexes()]
-        # Remove duplicates in case several cells of one row are selected
-        unique_row_list = list(set(row_list))
+        unique_row_list = self.__get_selected_rows()
         if len(unique_row_list) != 1:
             msg_box = QMessageBox()
-            msg_box.setText("To edit a transaction exactly one transaction row needs to be selected")
+            msg_box.setText("Please select only one transaction you want to edit in the table below")
             msg_box.exec_()
         else:
             selected_row = unique_row_list[0]
             self.ctrl.debug_print(selected_row)
             self.popup = TransactionPopUp(self.ctrl, edit_transaction_id=selected_row)
             self.popup.show()
+
+    def cb_delete_transaction_button(self):
+        unique_row_list = self.__get_selected_rows()
+        if len(unique_row_list) < 1:
+            msg_box = QMessageBox()
+            msg_box.setText("Please select the transactions you want to delete in the table below")
+            msg_box.exec_()
+        else:
+            msg_box = QMessageBox()
+            msg_box.setText(f"Do you really want to delete the following table rows: {unique_row_list} ?")
+            msg_box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+            msg_box.setDefaultButton(QMessageBox.No)
+            answer = msg_box.exec_()
+            if answer == QMessageBox.Yes:
+                self.ctrl.event_delete_transaction(unique_row_list)
+
+    def __get_selected_rows(self):
+        # Get a list of all selected rows
+        row_list = [item.row() for item in self.transaction_widget.table.selectionModel().selectedIndexes()]
+        # Remove duplicates in case several cells of one row are selected
+        unique_row_list = list(set(row_list))
+        return unique_row_list
 
     def new_file(self):
         print("New File")

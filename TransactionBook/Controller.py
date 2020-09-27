@@ -41,6 +41,8 @@ class Controller:
             self.debug_print(f"Ctrl: Filtering data for year {self.selected_year} and month {self.selected_month}")
             df = df.loc[df[month] == self.selected_month]
             df = df.loc[df[year] == self.selected_year]
+            # Sort data by date
+            df = df.sort_values(by=self.model.DATE)
             # Convert date to string according to date format
             df[self.model.DATE] = df[self.model.DATE].dt.strftime(self.model.DATE_TIME_FORMAT)
             # Convert amount to string with currency
@@ -57,18 +59,23 @@ class Controller:
 
         return columns, data
 
-    def event_transaction_changed(self, view_row, field, new_content):
-        self.debug_print(f"Ctrl: Writing cell change to data base")
-        self.model.edit_transaction_field(view_row, field, new_content)
-        # self.view.update_data()
-
     def event_new_transaction(self, date, account, description, amount, category):
+        self.debug_print(f"Ctrl: New transaction: [{date}, {account}, {description}, {amount}, {category}]")
         self.model.new_transaction(date, account, description, amount, category)
         self.view.update_data()
 
     def event_edit_transaction(self, view_id, date, account, description, amount, category):
         model_index = self.view_table_model_map[view_id]
+        self.debug_print(f"Ctrl: Edit transaction (view={view_id}, model={model_index}): "
+                         f"[{date}, {account}, {description}, {amount}, {category}]")
         self.model.edit_transaction(model_index, date, account, description, amount, category)
+        self.view.update_data()
+
+    def event_delete_transaction(self, view_id_list):
+        for view_id in view_id_list:
+            model_index = self.view_table_model_map[view_id]
+            self.debug_print(f"Ctrl: Deleting (view={view_id}, model={model_index})")
+            self.model.delete_transaction(model_index)
         self.view.update_data()
 
     def event_selected_transaction_year_changed(self, year_str):

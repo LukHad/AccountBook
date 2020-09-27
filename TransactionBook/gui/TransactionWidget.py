@@ -177,11 +177,11 @@ class TransactionPopUp(QWidget):
         description = self.description_input.text()
         amount = self.amount_input.value()
         category = self.category_input.text()
-        self.ctrl.debug_print(f"Date: {date}")
-        self.ctrl.debug_print(f"account: {account}")
-        self.ctrl.debug_print(f"description: {description}")
-        self.ctrl.debug_print(f"amount: {amount}, Type: {type(amount)}")
-        self.ctrl.debug_print(f"category: {category}")
+        # self.ctrl.debug_print(f"Date: {date}")
+        # self.ctrl.debug_print(f"account: {account}")
+        # self.ctrl.debug_print(f"description: {description}")
+        # self.ctrl.debug_print(f"amount: {amount}, Type: {type(amount)}")
+        # self.ctrl.debug_print(f"category: {category}")
 
         # ToDo: Validate input e.g. no empty field
         if self.edit_transaction_id is None:
