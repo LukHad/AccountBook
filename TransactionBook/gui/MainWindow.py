@@ -73,12 +73,10 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(tab_widget)
 
     def cb_new_transaction_button(self):
-        self.popup = TransactionPopUp(self.ctrl, self)
+        self.popup = TransactionPopUp(self.ctrl)
         self.popup.show()
 
     def cb_edit_transaction_button(self):
-        #self.popup = TransactionPopUp(self.ctrl, self)
-        #self.popup.show()
         # Get a list of all selected rows
         row_list = [item.row() for item in self.transaction_widget.table.selectionModel().selectedIndexes()]
         # Remove duplicates in case several cells of one row are selected
@@ -90,6 +88,8 @@ class MainWindow(QMainWindow):
         else:
             selected_row = unique_row_list[0]
             self.ctrl.debug_print(selected_row)
+            self.popup = TransactionPopUp(self.ctrl, edit_transaction_id=selected_row)
+            self.popup.show()
 
     def new_file(self):
         print("New File")

@@ -32,7 +32,6 @@ class Controller:
     def get_table_data(self):
         df = self.model.get_data()
         columns = df.columns.tolist()
-        columns.remove(self.model.ID)
         if not df.empty:
             # Filter selected month and date
             month = "Month"
@@ -46,8 +45,6 @@ class Controller:
             df[self.model.DATE] = df[self.model.DATE].dt.strftime(self.model.DATE_TIME_FORMAT)
             # Convert amount to string with currency
             df[self.model.AMOUNT] = df[self.model.AMOUNT].astype(str) + " " + self.get_currency()
-            # Remove ID column from dataframe
-            df = df.loc[:, df.columns != self.model.ID]
             # Remove Month and Year column
             df = df.loc[:, df.columns != month]
             df = df.loc[:, df.columns != year]
@@ -67,6 +64,11 @@ class Controller:
 
     def event_new_transaction(self, date, account, description, amount, category):
         self.model.new_transaction(date, account, description, amount, category)
+        self.view.update_data()
+
+    def event_edit_transaction(self, view_id, date, account, description, amount, category):
+        model_index = self.view_table_model_map[view_id]
+        self.model.edit_transaction(model_index, date, account, description, amount, category)
         self.view.update_data()
 
     def event_selected_transaction_year_changed(self, year_str):
@@ -102,6 +104,11 @@ class Controller:
 
     def get_file_path(self):
         return self.file_path
+
+    def get_transaction_from_view_id(self, view_id):
+        model_index = self.view_table_model_map[view_id]
+        date, account, description, amount, category = self.model.get_transaction_by_index(model_index)
+        return date, account, description, amount, category
 
     def get_loaded_file_name(self):
         return self.file_name

@@ -138,6 +138,16 @@ def test_edit_transaction_field():
     nose.tools.ok_(df[tb.DESCRIPTION].values[df_num] == new_description)
 
 
+def test_get_transaction_by_index():
+    tb = dummy_transactions_2()
+    date, account, description, amount, category = tb.get_transaction_by_index(2)
+    nose.tools.ok_(date == "24.12.2019" and
+                   account == "Account 2" and
+                   description == "Bread and Milk" and
+                   amount == -5.0 and
+                   category == "Food")
+
+
 if __name__ == '__main__':
     test_populate_list_from_data()
     test_filter_date()

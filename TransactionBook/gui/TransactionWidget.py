@@ -114,14 +114,10 @@ class QCustomComboBox(QComboBox):
 
 
 class TransactionPopUp(QWidget):
-    def __init__(self, ctrl, parent=None, edit_transaction_id=None):
+    def __init__(self, ctrl, edit_transaction_id=None):
         super(TransactionPopUp, self).__init__()
-        if edit_transaction_id is None:
-            self.name = "New Transaction"
-        else:
-            self.name = "Edit Transaction"
-        self.setWindowTitle(self.name)
         self.ctrl = ctrl
+        self.edit_transaction_id = edit_transaction_id
 
         layout = QGridLayout(self)
         self.setLayout(layout)
@@ -146,6 +142,12 @@ class TransactionPopUp(QWidget):
         self.ok_btn.clicked.connect(self.cb_ok)
         self.cancel_btn.clicked.connect(self.close)
 
+        if self.edit_transaction_id is not None:
+            self.init_edit_transaction()
+            self.setWindowTitle("Edit Transaction")
+        else:
+            self.setWindowTitle("New Transaction")
+
         layout.addWidget(self.date_label, 0, 0)
         layout.addWidget(self.date_input, 0, 1)
         layout.addWidget(self.account_label)
@@ -161,6 +163,14 @@ class TransactionPopUp(QWidget):
 
         self.resize(600, 200)
 
+    def init_edit_transaction(self):
+        date, account, description, amount, category = self.ctrl.get_transaction_from_view_id(self.edit_transaction_id)
+        self.date_input.setText(date)
+        self.account_input.set_text(account)
+        self.description_input.setText(description)
+        self.amount_input.setValue(amount)
+        self.category_input.set_text(category)
+
     def cb_ok(self):
         date = self.date_input.text()
         account = self.account_input.text()
@@ -174,7 +184,10 @@ class TransactionPopUp(QWidget):
         self.ctrl.debug_print(f"category: {category}")
 
         # ToDo: Validate input e.g. no empty field
-        self.ctrl.event_new_transaction(date, account, description, amount, category)
+        if self.edit_transaction_id is None:
+            self.ctrl.event_new_transaction(date, account, description, amount, category)
+        else:
+            self.ctrl.event_edit_transaction(self.edit_transaction_id, date, account, description, amount, category)
         self.close()
 
 

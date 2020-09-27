@@ -1,7 +1,6 @@
 from datetime import datetime
 import pandas as pd
 import numpy as np
-import uuid
 
 
 class TransactionBook:
@@ -13,15 +12,13 @@ class TransactionBook:
         self.DESCRIPTION = "Description"
         self.AMOUNT = "Amount"
         self.CATEGORY = "Category"
-        self.ID = "ID"
         #   Other constants
         self.CURRENCY = "€"
         self.DATE_TIME_FORMAT = "%d.%m.%Y"
         self.DATE_DELIMITER = "."
 
         # Init data set columns:
-        self._data = pd.DataFrame(columns=[self.ID, self.DATE, self.ACCOUNT,
-                                           self.DESCRIPTION, self.AMOUNT, self.CATEGORY])
+        self._data = pd.DataFrame(columns=[self.DATE, self.ACCOUNT, self.DESCRIPTION, self.AMOUNT, self.CATEGORY])
 
         self.path = path  # Hold the entire path to the database file including the filename
         self.accounts = []  # Holds the list of all accounts in the dataset
@@ -52,6 +49,16 @@ class TransactionBook:
     def set_data(self, data):
         self._data = data
 
+    def get_transaction_by_index(self, index):
+        df = self.get_data()
+        date = df[self.DATE].loc[index].strftime(self.DATE_TIME_FORMAT)
+        account = df[self.ACCOUNT].loc[index]
+        description = df[self.DESCRIPTION].loc[index]
+        amount = df[self.AMOUNT].loc[index]
+        category = df[self.CATEGORY].loc[index]
+
+        return date, account, description, amount, category
+
     # Methods
     #   Transaction
     def new_transaction(self, date, account, description, amount, category):
@@ -61,7 +68,7 @@ class TransactionBook:
         # Format date string to datetime object
         date = datetime.strptime(date, self.DATE_TIME_FORMAT)
         # Add transaction to dataset
-        df.loc[index] = [str(uuid.uuid4()), date, account, description, amount, category]
+        df.loc[index] = [date, account, description, amount, category]
         self.set_data(df)
         # Add elemets to lists if they are new
         if category not in self.categories:
