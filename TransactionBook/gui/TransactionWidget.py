@@ -1,7 +1,7 @@
 import sys
 
 from PySide2.QtWidgets import QWidget, QTableWidget, QTableWidgetItem, QHBoxLayout, QGridLayout, QLabel, QLineEdit, \
-                              QPushButton, QComboBox, QDoubleSpinBox
+                              QPushButton, QComboBox, QDoubleSpinBox, QAbstractItemView
 from PySide2.QtCore import Qt, QPoint
 
 
@@ -10,32 +10,29 @@ class TransactionTableWidget(QWidget):
         super(TransactionTableWidget, self).__init__()
         self.name = "Transactions"
         self.ctrl = ctrl
-        self.send_callbacks = True
         self.column_labels = []
 
         self.table = QTableWidget(3, 3)
-        self.table.itemChanged.connect(self.cb_item_changed)
+        self.table.setEditTriggers(QAbstractItemView.NoEditTriggers)  # Set to read only
 
-        layout = QHBoxLayout()
-        layout.addWidget(self.table)
+        self.year_label = QLabel("Year: ")
+        self.month_label = QLabel("Month: ")
+        self.year_selector = QCustomComboBox(self.ctrl.get_years_in_data,
+                                             self.ctrl.event_selected_transaction_year_changed)
+        self.month_selector = QCustomComboBox(self.ctrl.get_months,
+                                              self.ctrl.event_selected_transaction_month_changed)
+
+        layout = QGridLayout()
+        layout.addWidget(self.year_label, 0, 0)
+        layout.addWidget(self.year_selector, 0, 1)
+        layout.addWidget(self.month_label, 0, 2)
+        layout.addWidget(self.month_selector, 0, 3)
+        layout.addWidget(self.table, 1, 0, 1, 16)
         self.setLayout(layout)
 
         self.update_data()
 
-    def cb_item_changed(self, item):
-        if not self.send_callbacks:
-            return
-        new_content = item.text()
-        row = item.row()
-        column = item.column()
-        field = self.column_labels[column]
-
-        self.ctrl.debug_print(f"View: Cell ({row}, {column}) / field {field} changed to {new_content}")
-        # Write to data base
-        self.ctrl.event_transaction_changed(row, field, new_content)
-
     def update_data(self):
-        self.send_callbacks = False
         column_headings, data = self.ctrl.get_table_data()
         self.column_labels = column_headings
         num_columns = len(column_headings)
@@ -48,92 +45,68 @@ class TransactionTableWidget(QWidget):
         table.setRowCount(num_rows)
         for column in range(num_columns):
             for row in range(num_rows):
-                col_label = self.column_labels[column]
-                # For different columns different widgets are necessary to restrict possible cell values
-                if col_label == self.ctrl.get_account_name():  # ACCOUNT
-                    account_combo_box = QCustomComboBox(self.ctrl.get_account_list,
-                                                        self.cb_item_changed,
-                                                        row=row,
-                                                        column=column
-                                                        )
-                    account_combo_box.set_text(data[row][column])
-                    table.setCellWidget(row, column, account_combo_box)
-                elif col_label == self.ctrl.get_category_name():  # CATEGORY
-                    category_combo_box = QCustomComboBox(self.ctrl.get_category_list,
-                                                         self.cb_item_changed,
-                                                         row=row,
-                                                         column=column
-                                                         )
-                    category_combo_box.set_text(data[row][column])
-                    table.setCellWidget(row, column, category_combo_box)
-                elif col_label == self.ctrl.get_amount_name():
-                    amount_widget = QAmountSpinBox(self.ctrl.get_currency,
-                                                   self.cb_item_changed,
-                                                   row=row,
-                                                   column=column
-                                                   )
-                    amount_widget.setValue(data[row][column])
-                    table.setCellWidget(row, column, amount_widget)
-                else:
-                    table_item = QTableWidgetItem()
-                    table_item.setData(Qt.DisplayRole, data[row][column])
-                    table.setItem(row, column, table_item)
-        self.send_callbacks = True
+                table_item = QTableWidgetItem()
+                table_item.setData(Qt.DisplayRole, data[row][column])
+                table.setItem(row, column, table_item)
+
+        self.year_selector.update_data()
 
 
 class QAmountSpinBox(QDoubleSpinBox):
-    def __init__(self, get_currency_function, double_changed_callback=None, row=None, column=None):
+    def __init__(self, get_currency_function, double_changed_callback=None):
         super(QAmountSpinBox, self).__init__()
         self.setMaximum(9999999.99)
         self.setMinimum(-9999999.99)
         self.setSuffix(f" {get_currency_function()}")
 
-        self.tbl_row = row
-        self.tbl_column = column
-
         if double_changed_callback is not None:
             self.valueChanged.connect(lambda: double_changed_callback(self))
 
-    def row(self):
-        return self.tbl_row
-
-    def column(self):
-        return self.tbl_column
-
-    def text(self):
-        return self.value()  # ToDo: Fix this workaround .text() should not return a float
-
 
 class QCustomComboBox(QComboBox):
-    def __init__(self, get_list_function, selection_changed_callback=None, row=None, column=None):
+    def __init__(self, get_list_function, selection_changed_callback=None):
         super(QCustomComboBox, self).__init__()
-        self.setStyleSheet("QComboBox { background-color: white; }")
+        #  self.setStyleSheet("QComboBox { background-color: white; }")
 
         self.list_fun = get_list_function
+        self.selection_changed_callback = selection_changed_callback
+        self.trigger_callbacks = True
+
         self.update_data()
 
-        self.tbl_row = row
-        self.tbl_column = column
-
         if selection_changed_callback is not None:
-            self.currentIndexChanged.connect(lambda: selection_changed_callback(self))
-
-    def row(self):
-        return self.tbl_row
-
-    def column(self):
-        return self.tbl_column
+            self.currentIndexChanged.connect(self.cb_selection_changed)
 
     def set_text(self, text):
         item_list = self.list_fun()
         index = item_list.index(text)
         self.setCurrentIndex(index)
 
+    def cb_selection_changed(self):
+        if self.trigger_callbacks:
+            self.selection_changed_callback(self.text())
+
     def update_data(self):
-        self.clear()
+        old_text = self.text()
         item_list = self.list_fun()
+        new_index = len(item_list) - 1
+        callback_necessary = True
+        if old_text in item_list:
+            new_index = item_list.index(old_text)
+            callback_necessary = False
+
+        self.trigger_callbacks = False  # Disable callbacks during list update
+        self.clear()
         for el in item_list:
             self.addItem(el)
+
+        if callback_necessary:
+            self.trigger_callbacks = True  # Only trigger callback if selection actually changed
+            self.setCurrentIndex(new_index)
+        else:
+            self.setCurrentIndex(new_index)
+
+        self.trigger_callbacks = True
 
     def text(self):
         return self.itemText(self.currentIndex())

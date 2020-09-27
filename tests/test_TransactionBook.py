@@ -34,7 +34,7 @@ def save_load(tb):
     :param tb: Transaction Book
     :return tb2: Transaction Book after save load operation
     """
-    filename = "test_database.csv"
+    filename = "../tests/test_database.csv"
     tb.save_as(filename)
     tb2 = TransactionBook()
     tb2.load_from(filename)
@@ -107,7 +107,7 @@ def test_pivot_category_pie():
 
 def test_years():
     tb = dummy_transactions()
-    nose.tools.ok_(tb.years() == [2017, 2018])
+    nose.tools.ok_(tb.years() == [2018, 2017])
 
 
 def test_total_balance():

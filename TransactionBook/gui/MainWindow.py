@@ -51,9 +51,12 @@ class MainWindow(QMainWindow):
 
     def init_toolbar(self):
         toolbar = self.addToolBar("Toolbar")
+        # Add transaction
         add_action = QAction(QIcon('gui/icons/add.png'), "New", self)
         add_action.setToolTip("Add transaction")
         add_action.triggered.connect(self.cb_new_transaction_button)
+        # Edit transaction
+
         # add_action.setShortcut('Ctrl+Q')
         toolbar.addAction(add_action)
 

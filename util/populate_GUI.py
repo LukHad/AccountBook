@@ -4,7 +4,7 @@ from PySide2.QtWidgets import QApplication
 from TransactionBook.Controller import Controller
 
 tb = TransactionBook()
-for i in range(0, 5):
+for i in range(0, 3000):
     tb.new_transaction("01.07.2017", "Account 1", "My first transaction", 1000, "Income")
 
 application = QApplication(sys.argv)

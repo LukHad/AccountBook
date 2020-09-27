@@ -1,0 +1,6 @@
+ID;Date;Account;Description;Amount;Category
+c0911d45-4e35-4472-8335-f2d8f8a9cf7f;01.07.2017;Account 1;My first transaction;1000;Income
+b841bf63-de22-435d-979e-071f6987b59d;11.08.2017;Account 1;Cinema;-17;Entertainment
+97b0005f-7be7-47ec-b910-7d02ea89a740;24.12.2017;Account 2;Bread and Milk;-5.0;Food
+f5c2e7bd-bcf4-4676-a91d-ca216968a231;03.02.2018;Account 1;Fuel;-30;Mobility
+e5059783-2fa6-4047-90f0-a0648f9a304b;01.12.2018;Account 1;Netflix;-11.95;Entertainment

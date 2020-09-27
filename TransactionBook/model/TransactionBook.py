@@ -132,7 +132,7 @@ class TransactionBook:
         df = self.get_data()
         df["Year"] = [el.year for el in df[self.DATE]]
         years = df["Year"].unique()
-        years = years.tolist()
+        years = sorted(years.tolist(), reverse=True)
         return years
 
 # Data aggregation methods:
