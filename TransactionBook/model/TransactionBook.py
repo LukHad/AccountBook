@@ -49,6 +49,16 @@ class TransactionBook:
     def set_data(self, data):
         self._data = data
 
+    def add_account(self, account):
+        if account not in self.accounts:
+            self.accounts.append(account)
+            self.accounts.sort()
+
+    def add_category(self, category):
+        if category not in self.categories:
+            self.categories.append(category)
+            self.categories.sort()
+
     def get_transaction_by_index(self, index):
         df = self.get_data()
         date = df[self.DATE].loc[index].strftime(self.DATE_TIME_FORMAT)
@@ -70,15 +80,16 @@ class TransactionBook:
         # Add transaction to dataset
         df.loc[index] = [date, account, description, amount, category]
         self.set_data(df)
-        # Add elemets to lists if they are new
-        if category not in self.categories:
-            self.categories.append(category)
-        if account not in self.accounts:
-            self.accounts.append(account)
+        # Append lists if new category or account is added to data
+        self.add_category(category)
+        self.add_account(account)
 
     def edit_transaction(self, index, date, account, description, amount, category):
         date = datetime.strptime(date, self.DATE_TIME_FORMAT)
         self._data.loc[index] = [date, account, description, amount, category]
+        # Append lists if new category or account is added to data
+        self.add_category(category)
+        self.add_account(account)
 
     def edit_transaction_field(self, index, field, content):
         if field == self.DATE:
@@ -107,7 +118,9 @@ class TransactionBook:
     def populate_categories_from_data(self):
         df = self.get_data()
         categories = df[self.CATEGORY].unique()
-        self.categories = categories.tolist()
+        category_list = categories.tolist()
+        category_list.sort()
+        self.categories = category_list
 
     def populate_accounts_from_data(self):
         df = self.get_data()
@@ -140,8 +153,7 @@ class TransactionBook:
         df = self.get_data()
         df["Year"] = [el.year for el in df[self.DATE]]
         years = df["Year"].unique()
-        years = sorted(years.tolist(), reverse=True)
-        return years
+        return years.tolist()
 
 # Data aggregation methods:
     def pivot_monthly_trend(self, df_in, negative_amount_only=False):

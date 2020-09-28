@@ -107,7 +107,7 @@ def test_pivot_category_pie():
 
 def test_years():
     tb = dummy_transactions()
-    nose.tools.ok_(tb.years() == [2018, 2017])
+    nose.tools.ok_(tb.years() == [2017, 2018])
 
 
 def test_total_balance():
@@ -148,6 +148,20 @@ def test_get_transaction_by_index():
                    category == "Food")
 
 
+def test_add_account():
+    tb = dummy_transactions_2()
+    tb.add_account("Depot")
+    nose.tools.ok_(tb.get_accounts() == ['Account 1', 'Account 2', 'Depot'])
+
+
+def test_add_category():
+    tb = dummy_transactions_2()
+    expected_categories = tb.get_categories()
+    expected_categories.append("Sport")
+    tb.add_category("Sport")
+    nose.tools.ok_(tb.get_categories() == expected_categories)
+
+
 if __name__ == '__main__':
     test_populate_list_from_data()
     test_filter_date()
@@ -159,3 +173,5 @@ if __name__ == '__main__':
     test_pivot_monthly_trend()
     test_delete_transaction()
     test_edit_transaction_field()
+    test_add_account()
+    test_add_category()

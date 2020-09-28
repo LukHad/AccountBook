@@ -1,7 +1,7 @@
 import sys
 
 from PySide2.QtWidgets import QWidget, QTableWidget, QTableWidgetItem, QHBoxLayout, QGridLayout, QLabel, QLineEdit, \
-                              QPushButton, QComboBox, QDoubleSpinBox, QAbstractItemView
+                              QPushButton, QComboBox, QDoubleSpinBox, QAbstractItemView, QInputDialog
 from PySide2.QtCore import Qt, QPoint
 
 
@@ -122,7 +122,7 @@ class TransactionPopUp(QWidget):
         layout = QGridLayout(self)
         self.setLayout(layout)
 
-        # Create GUI elements # ToDo: Add possiblity to add new categories and accounts
+        # Create GUI elements
         # - Labels
         self.date_label = QLabel("Date: ")
         self.account_label = QLabel("Account: ")
@@ -135,12 +135,16 @@ class TransactionPopUp(QWidget):
         self.description_input = QLineEdit()
         self.amount_input = QAmountSpinBox(self.ctrl.get_currency)
         self.category_input = QCustomComboBox(self.ctrl.get_category_list)
+        self.add_account_btn = QPushButton("Add")
+        self.add_category_btn = QPushButton("Add")
         self.ok_btn = QPushButton("OK")
         self.cancel_btn = QPushButton("Cancel")
 
         # Add button callbacks
         self.ok_btn.clicked.connect(self.cb_ok)
         self.cancel_btn.clicked.connect(self.close)
+        self.add_account_btn.clicked.connect(self.cb_add_account)
+        self.add_category_btn.clicked.connect(self.cb_add_category)
 
         if self.edit_transaction_id is not None:
             self.init_edit_transaction()
@@ -148,18 +152,20 @@ class TransactionPopUp(QWidget):
         else:
             self.setWindowTitle("New Transaction")
 
-        layout.addWidget(self.date_label, 0, 0)
+        layout.addWidget(self.date_label, 0, 0)  # ToDo: Add date widget
         layout.addWidget(self.date_input, 0, 1)
-        layout.addWidget(self.account_label)
-        layout.addWidget(self.account_input)
-        layout.addWidget(self.description_label)
-        layout.addWidget(self.description_input)
-        layout.addWidget(self.amount_label)
-        layout.addWidget(self.amount_input)
-        layout.addWidget(self.category_label)
-        layout.addWidget(self.category_input)
-        layout.addWidget(self.ok_btn)
-        layout.addWidget(self.cancel_btn)
+        layout.addWidget(self.account_label, 1, 0)
+        layout.addWidget(self.account_input, 1, 1)
+        layout.addWidget(self.add_account_btn, 1, 2)
+        layout.addWidget(self.description_label, 2, 0)
+        layout.addWidget(self.description_input, 2, 1)
+        layout.addWidget(self.amount_label, 3, 0)
+        layout.addWidget(self.amount_input, 3, 1)
+        layout.addWidget(self.category_label, 4, 0)
+        layout.addWidget(self.category_input, 4, 1)
+        layout.addWidget(self.add_category_btn, 4, 2)
+        layout.addWidget(self.ok_btn, 5, 0)
+        layout.addWidget(self.cancel_btn, 5, 2)
 
         self.resize(600, 200)
 
@@ -189,6 +195,18 @@ class TransactionPopUp(QWidget):
         else:
             self.ctrl.event_edit_transaction(self.edit_transaction_id, date, account, description, amount, category)
         self.close()
+
+    def cb_add_category(self):
+        text, ok = QInputDialog.getText(self, 'New Category', 'Enter category name:')
+        if ok:
+            self.ctrl.event_add_category(text)
+            self.category_input.update_data()
+
+    def cb_add_account(self):
+        text, ok = QInputDialog.getText(self, 'New Account', 'Enter account name:')
+        if ok:
+            self.ctrl.event_add_account(text)
+            self.account_input.update_data()
 
 
 

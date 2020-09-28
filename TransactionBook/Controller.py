@@ -105,6 +105,14 @@ class Controller:
         self.model.save_as(file_path)
         self.view.update_data()
 
+    def event_add_category(self, category):
+        self.debug_print(f"Ctrl: Adding Category {category} to model")
+        self.model.add_category(category)
+
+    def event_add_account(self, account):
+        self.debug_print(f"Ctrl: Adding Account {account} to model")
+        self.model.add_account(account)
+
     def __update_file(self, file_path):
         self.file_path = file_path
         self.file_name = os.path.basename(file_path)
@@ -126,14 +134,9 @@ class Controller:
     def get_category_list(self):
         return self.model.get_categories()
 
-    def get_category_name(self):
-        return self.model.CATEGORY
-
-    def get_account_name(self):
-        return self.model.ACCOUNT
-
     def get_years_in_data_as_str(self):
         years_int = self.model.years()
+        years_int = sorted(years_int, reverse=True)
         years_str = [str(year) for year in years_int]
         return years_str
 
