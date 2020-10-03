@@ -1,8 +1,8 @@
 import sys
 
-from PySide2.QtWidgets import QWidget, QTableWidget, QTableWidgetItem, QHBoxLayout, QGridLayout, QLabel, QLineEdit, \
-                              QPushButton, QComboBox, QDoubleSpinBox, QAbstractItemView, QInputDialog
-from PySide2.QtCore import Qt, QPoint
+from PySide2.QtWidgets import QWidget, QTableWidget, QTableWidgetItem, QGridLayout, QLabel, QLineEdit, \
+                              QPushButton, QComboBox, QDoubleSpinBox, QAbstractItemView, QInputDialog, QCalendarWidget
+from PySide2.QtCore import Qt, QPoint, QDate
 
 
 class TransactionTableWidget(QWidget):
@@ -51,7 +51,6 @@ class TransactionTableWidget(QWidget):
 
         self.year_selector.update_data()
         self.month_selector.update_data()
-
 
 class QAmountSpinBox(QDoubleSpinBox):
     def __init__(self, get_currency_function, double_changed_callback=None):
@@ -113,6 +112,20 @@ class QCustomComboBox(QComboBox):
         return self.itemText(self.currentIndex())
 
 
+class QCustomCalendarWidget(QCalendarWidget):
+    def __init__(self, date_time_format):
+        super(QCustomCalendarWidget, self).__init__()
+        self.setGridVisible(True)
+        self.date_time_format = date_time_format
+
+    def set_date_from_text(self, date_str):
+        date = QDate.fromString(date_str, self.date_time_format)
+        self.setSelectedDate(date)
+
+    def text(self):
+        return self.selectedDate().toString(self.date_time_format)
+
+
 class TransactionPopUp(QWidget):
     def __init__(self, ctrl, edit_transaction_id=None):
         super(TransactionPopUp, self).__init__()
@@ -130,7 +143,7 @@ class TransactionPopUp(QWidget):
         self.amount_label = QLabel("Amount: ")
         self.category_label = QLabel("Category: ")
         # - Inputs
-        self.date_input = QLineEdit()
+        self.date_input = QCustomCalendarWidget(date_time_format=self.ctrl.get_date_time_format())
         self.account_input = QCustomComboBox(self.ctrl.get_account_list)
         self.description_input = QLineEdit()
         self.amount_input = QAmountSpinBox(self.ctrl.get_currency)
@@ -152,7 +165,7 @@ class TransactionPopUp(QWidget):
         else:
             self.setWindowTitle("New Transaction")
 
-        layout.addWidget(self.date_label, 0, 0)  # ToDo: Add date widget
+        layout.addWidget(self.date_label, 0, 0)
         layout.addWidget(self.date_input, 0, 1)
         layout.addWidget(self.account_label, 1, 0)
         layout.addWidget(self.account_input, 1, 1)
@@ -171,7 +184,7 @@ class TransactionPopUp(QWidget):
 
     def init_edit_transaction(self):
         date, account, description, amount, category = self.ctrl.get_transaction_from_view_id(self.edit_transaction_id)
-        self.date_input.setText(date)
+        self.date_input.set_date_from_text(date)
         self.account_input.set_text(account)
         self.description_input.setText(description)
         self.amount_input.setValue(amount)

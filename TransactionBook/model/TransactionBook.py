@@ -25,6 +25,9 @@ class TransactionBook:
         self.categories = []  # Holds the list of all categories in the dataset
 
     # Accessors
+    def get_date_time_format(self):
+        return self.DATE_TIME_FORMAT
+
     def get_path(self):
         return self.path
 

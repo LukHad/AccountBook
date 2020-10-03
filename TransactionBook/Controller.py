@@ -144,6 +144,9 @@ class Controller:
         months_str = [str(i) for i in range(1, 13)]
         return months_str
 
+    def get_date_time_format(self):
+        return 'dd.MM.yyyy' #  ToDo: Implement mapping between model format and QtCore.QtDate.troString format
+
     def get_amount_name(self):
         return self.model.AMOUNT
 

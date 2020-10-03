@@ -101,7 +101,8 @@ class MainWindow(QMainWindow):
             msg_box.exec_()
         else:
             msg_box = QMessageBox()
-            msg_box.setText(f"Do you really want to delete the following table rows: {unique_row_list} ?")
+            msg_box.setText(f"Do you really want to delete the following table rows: "
+                            f"{[x + 1 for x in unique_row_list]}?")
             msg_box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
             msg_box.setDefaultButton(QMessageBox.No)
             answer = msg_box.exec_()
