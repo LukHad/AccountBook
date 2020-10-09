@@ -1,7 +1,8 @@
 import sys
 
 from PySide2.QtWidgets import QWidget, QTableWidget, QTableWidgetItem, QGridLayout, QLabel, QLineEdit, \
-                              QPushButton, QComboBox, QDoubleSpinBox, QAbstractItemView, QInputDialog, QCalendarWidget
+                              QPushButton, QComboBox, QDoubleSpinBox, QAbstractItemView, QInputDialog, \
+                              QCalendarWidget, QMessageBox
 from PySide2.QtCore import Qt, QPoint, QDate
 
 
@@ -10,7 +11,6 @@ class TransactionTableWidget(QWidget):
         super(TransactionTableWidget, self).__init__()
         self.name = "Transactions"
         self.ctrl = ctrl
-        self.column_labels = []
 
         self.table = QTableWidget(3, 3)
         self.table.setEditTriggers(QAbstractItemView.NoEditTriggers)  # Set to read only
@@ -33,8 +33,7 @@ class TransactionTableWidget(QWidget):
         self.update_data()
 
     def update_data(self):
-        column_headings, data = self.ctrl.get_table_data()
-        self.column_labels = column_headings
+        column_headings, data = self.ctrl.get_transaction_table_data()
         num_columns = len(column_headings)
 
         table = self.table
@@ -166,7 +165,7 @@ class TransactionPopUp(QWidget):
             self.setWindowTitle("New Transaction")
 
         layout.addWidget(self.date_label, 0, 0)
-        layout.addWidget(self.date_input, 0, 1)
+        layout.addWidget(self.date_input, 0, 1, 1, 2)
         layout.addWidget(self.account_label, 1, 0)
         layout.addWidget(self.account_input, 1, 1)
         layout.addWidget(self.add_account_btn, 1, 2)
@@ -196,13 +195,14 @@ class TransactionPopUp(QWidget):
         description = self.description_input.text()
         amount = self.amount_input.value()
         category = self.category_input.text()
-        # self.ctrl.debug_print(f"Date: {date}")
-        # self.ctrl.debug_print(f"account: {account}")
-        # self.ctrl.debug_print(f"description: {description}")
-        # self.ctrl.debug_print(f"amount: {amount}, Type: {type(amount)}")
-        # self.ctrl.debug_print(f"category: {category}")
 
-        # ToDo: Validate input e.g. no empty field
+        # # Validate input
+        # if description == "":
+        #     msg_box = QMessageBox()
+        #     msg_box.setText("The field <Description> is not allowed to be empty")
+        #     msg_box.exec_()
+        #     return
+
         if self.edit_transaction_id is None:
             self.ctrl.event_new_transaction(date, account, description, amount, category)
         else:

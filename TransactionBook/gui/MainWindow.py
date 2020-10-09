@@ -5,6 +5,7 @@ from PySide2.QtWidgets import QApplication, QMainWindow, QAction, QTabWidget, QW
 from PySide2.QtCore import Qt
 from PySide2.QtGui import QIcon
 from TransactionBook.gui.TransactionWidget import TransactionTableWidget, TransactionPopUp
+from TransactionBook.gui.AccountWidget import AccountTableWidget
 
 
 class MainWindow(QMainWindow):
@@ -26,7 +27,7 @@ class MainWindow(QMainWindow):
 
         # Central Widgets
         self.transaction_widget = TransactionTableWidget(self.ctrl)
-        self.account_widget = QWidget()
+        self.account_widget = AccountTableWidget(self.ctrl)
         self.init_central_widget()
 
         #
@@ -36,6 +37,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle(self.ctrl.get_loaded_file_name())
 
         self.transaction_widget.update_data()
+        self.account_widget.update_data()
 
     def init_menu_bar(self):
         menu_bar = self.menuBar()
@@ -49,6 +51,14 @@ class MainWindow(QMainWindow):
         file_menu.addSeparator()
         file_menu.addAction(QAction("Close File", self, triggered=self.close_file))
         file_menu.addAction("Exit", QApplication.quit)
+
+        # Import Menu
+        import_menu = menu_bar.addMenu("Import")
+
+        # Edit Menu
+        edit_menu = menu_bar.addMenu("Edit")
+        # Rename Account
+        # Rename Category
 
     def init_toolbar(self):
         toolbar = self.addToolBar("Toolbar")

@@ -52,6 +52,14 @@ class TransactionBook:
     def set_data(self, data):
         self._data = data
 
+    def get_account_balance(self, account):
+        df = self._data
+        return df.loc[df[self.ACCOUNT] == account, self.AMOUNT].sum()
+
+    def get_total_balance(self):
+        df = self._data
+        return df[self.AMOUNT].sum()
+
     def add_account(self, account):
         if account not in self.accounts:
             self.accounts.append(account)
@@ -101,15 +109,6 @@ class TransactionBook:
 
     def delete_transaction(self, index):
         self._data = self._data.drop(index)
-
-    #   Account
-    def account_balance(self, account, data):
-        df = data
-        return df.loc[df[self.ACCOUNT] == account, self.AMOUNT].sum()
-
-    def total_balance(self, data):
-        df = data
-        return df[self.AMOUNT].sum()
 
     def filter_date(self, from_date, to_date):
         data = self.get_data()

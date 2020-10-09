@@ -1,11 +1,14 @@
 Date;Account;Description;Amount;Category
-01.07.2017;Account 1;My first transaction;1000;Income
-11.08.2017;Account 1;Cinema;-17;Entertainment
+01.07.2017;Account 1;My first transaction;1000.0;Income
+11.08.2017;Account 1;Cinema;-17.0;Entertainment
 24.12.2017;Account 2;Bread and Milk;-5.0;Food
-03.02.2018;Account 1;Fuel;-30;Mobility
+03.02.2018;Account 1;Fuel;-30.0;Mobility
 01.12.2018;Account 1;Netflix;-11.95;Entertainment
-01.01.2018;Account 1;My first transaction;1000;Income
-11.01.2018;Account 1;Cinema;-17;Entertainment
+01.01.2018;Account 1;My first transaction;1000.0;Income
+11.01.2018;Account 1;Cinema;-17.0;Entertainment
 24.01.2018;Account 2;Bread and Milk;-5.0;Food
-03.01.2018;Account 1;Fuel;-30;Mobility
+03.01.2018;Account 1;Fuel;-30.0;Mobility
 01.01.2018;Account 1;Netflix;-11.95;Entertainment
+04.10.2020;Account 2;Bonus;1758.0;Income
+04.10.2020;Share portfolio;Splunk;1200.0;Investment
+04.10.2020;Account 1;Splunk Investment;-1200.0;Investment

@@ -49,8 +49,8 @@ def test_account_balance(save_load_test=False):
         err_message = "Method account_balance failed after save and load"
     else:
         err_message = "Method account_balance failed"
-    nose.tools.ok_(tb.account_balance("Account 1", tb.get_data()) == 941.05, err_message)
-    nose.tools.ok_(tb.account_balance("Account 2", tb.get_data()) == -5, err_message)
+    nose.tools.ok_(tb.get_account_balance("Account 1") == 941.05, err_message)
+    nose.tools.ok_(tb.get_account_balance("Account 2") == -5, err_message)
 
 
 def test_filter_date(save_load_test=False):
@@ -112,23 +112,23 @@ def test_years():
 
 def test_total_balance():
     tb = dummy_transactions()
-    nose.tools.ok_(tb.total_balance(tb.get_data()) == 936.05)
+    nose.tools.ok_(tb.get_total_balance() == 936.05)
 
 
 def test_delete_transaction():
     tb = dummy_transactions()
-    nose.tools.ok_(tb.total_balance(tb.get_data()) == 936.05)
+    nose.tools.ok_(tb.get_total_balance() == 936.05)
     tb.delete_transaction(2)
-    nose.tools.ok_(tb.total_balance(tb.get_data()) == 941.05)
+    nose.tools.ok_(tb.get_total_balance() == 941.05)
     tb.delete_transaction(1)
-    nose.tools.ok_(tb.total_balance(tb.get_data()) == 958.05)
+    nose.tools.ok_(tb.get_total_balance() == 958.05)
 
 
 def test_edit_transaction_field():
     tb = dummy_transactions()
     # Test amount
     tb.edit_transaction_field(3, tb.AMOUNT, -50)
-    nose.tools.ok_(tb.total_balance(tb.get_data()) == 916.05)
+    nose.tools.ok_(tb.get_total_balance() == 916.05)
 
     # Test description
     new_description = "Movies and Popcorn"

@@ -29,7 +29,15 @@ class Controller:
         if self.DEBUG:
             print(text)
 
-    def get_table_data(self):
+    def get_account_data(self):
+        accounts = self.model.get_accounts()
+        acc_data = {}
+        for acc in accounts:
+            acc_data[acc] = self.model.get_account_balance(acc)
+
+        return acc_data
+
+    def get_transaction_table_data(self):
         df = self.model.get_data()
         columns = df.columns.tolist()
         if not df.empty:
@@ -145,7 +153,7 @@ class Controller:
         return months_str
 
     def get_date_time_format(self):
-        return 'dd.MM.yyyy' #  ToDo: Implement mapping between model format and QtCore.QtDate.troString format
+        return 'dd.MM.yyyy'  # ToDo: Implement mapping between model format and QtCore.QtDate.troString format
 
     def get_amount_name(self):
         return self.model.AMOUNT
