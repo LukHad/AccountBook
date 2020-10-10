@@ -1,7 +1,7 @@
 import os
 
 from TransactionBook.gui.MainWindow import MainWindow
-from TransactionBook.model.TransactionBook import TransactionBook
+from TransactionBook.model.TransactionBook import TransactionBook, to_float
 
 
 class Controller:
@@ -54,6 +54,7 @@ class Controller:
             # Convert date to string according to date format
             df[self.model.DATE] = df[self.model.DATE].dt.strftime(self.model.DATE_TIME_FORMAT)
             # Convert amount to string with currency
+            df[self.model.AMOUNT] = df[self.model.AMOUNT].apply(to_float)
             df[self.model.AMOUNT] = df[self.model.AMOUNT].astype(str) + " " + self.get_currency()
             # Remove Month and Year column
             df = df.loc[:, df.columns != month]

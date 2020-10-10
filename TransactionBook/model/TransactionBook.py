@@ -3,6 +3,14 @@ import pandas as pd
 import numpy as np
 
 
+def to_float(integer_amount):
+    return integer_amount / 100.0
+
+
+def to_int(float_amount):
+    return int(round(float_amount * 100))
+
+
 class TransactionBook:
     def __init__(self, path=""):
         # Constants ToDo: Shall be initialized from configuration file
@@ -20,7 +28,6 @@ class TransactionBook:
         # Init data set columns:
         self._data = pd.DataFrame(columns=[self.DATE, self.ACCOUNT, self.DESCRIPTION, self.AMOUNT, self.CATEGORY])
 
-        self.path = path  # Hold the entire path to the database file including the filename
         self.accounts = []  # Holds the list of all accounts in the dataset
         self.categories = []  # Holds the list of all categories in the dataset
 
@@ -49,16 +56,18 @@ class TransactionBook:
     def get_data(self):
         return self._data.copy()
 
-    def set_data(self, data):
+    def __set_data(self, data):
         self._data = data
 
     def get_account_balance(self, account):
         df = self._data
-        return df.loc[df[self.ACCOUNT] == account, self.AMOUNT].sum()
+        balance = df.loc[df[self.ACCOUNT] == account, self.AMOUNT].sum()
+        return to_float(balance)
 
     def get_total_balance(self):
         df = self._data
-        return df[self.AMOUNT].sum()
+        total = df[self.AMOUNT].sum()
+        return to_float(total)
 
     def add_account(self, account):
         if account not in self.accounts:
@@ -78,26 +87,26 @@ class TransactionBook:
         amount = df[self.AMOUNT].loc[index]
         category = df[self.CATEGORY].loc[index]
 
-        return date, account, description, amount, category
+        return date, account, description, to_float(amount), category
 
     # Methods
     #   Transaction
-    def new_transaction(self, date, account, description, amount, category):
+    def new_transaction(self, date, account, description, f_amount, category):
         df = self.get_data()
         # If its the first element in the dataset: set index to 0, else: set index to the next index available
         index = 0 if np.isnan(df.index.max()) else (df.index.max() + 1)
         # Format date string to datetime object
         date = datetime.strptime(date, self.DATE_TIME_FORMAT)
         # Add transaction to dataset
-        df.loc[index] = [date, account, description, amount, category]
-        self.set_data(df)
+        df.loc[index] = [date, account, description, to_int(f_amount), category]
+        self.__set_data(df)
         # Append lists if new category or account is added to data
         self.add_category(category)
         self.add_account(account)
 
-    def edit_transaction(self, index, date, account, description, amount, category):
+    def edit_transaction(self, index, date, account, description, f_amount, category):
         date = datetime.strptime(date, self.DATE_TIME_FORMAT)
-        self._data.loc[index] = [date, account, description, amount, category]
+        self._data.loc[index] = [date, account, description, to_int(f_amount), category]
         # Append lists if new category or account is added to data
         self.add_category(category)
         self.add_account(account)
@@ -105,6 +114,8 @@ class TransactionBook:
     def edit_transaction_field(self, index, field, content):
         if field == self.DATE:
             content = datetime.strptime(content, self.DATE_TIME_FORMAT)
+        elif field == self.AMOUNT:
+            content = to_int(content)
         self._data[field].values[index] = content
 
     def delete_transaction(self, index):
@@ -133,22 +144,17 @@ class TransactionBook:
         self.populate_categories_from_data()
         self.populate_accounts_from_data()
 
-    def save(self):
-        self.save_as(self.path)
-
     def save_as(self, file_path):
         df = self.get_data()
-        df[self.DATE] = df[self.DATE].dt.strftime(self.DATE_TIME_FORMAT)
+        df[self.AMOUNT] = df[self.AMOUNT].apply(to_float)  # Save to csv with decimals
+        df[self.DATE] = df[self.DATE].dt.strftime(self.DATE_TIME_FORMAT)  # Save with nice date format
         df.to_csv(file_path, sep=';', index=False)
-
-    def load(self):
-        file_path = self.path
-        self.load_from(file_path)
 
     def load_from(self, file_path):
         df = pd.read_csv(file_path, sep=';')
         df[self.DATE] = pd.to_datetime(df[self.DATE], format=self.DATE_TIME_FORMAT)
-        self.set_data(df)
+        df[self.AMOUNT] = df[self.AMOUNT].apply(to_int)  # Convert decimals to integers
+        self.__set_data(df)
         self.populate_lists_from_data()
 
     def years(self):
@@ -177,7 +183,8 @@ class TransactionBook:
         if negative_amount_only:
             df = df.loc[df[self.AMOUNT] < 0]
         for i in range(1, 13):
-            result[i - 1] = df.loc[df[month] == i, self.AMOUNT].sum()
+            i_result = df.loc[df[month] == i, self.AMOUNT].sum()
+            result[i - 1] = to_float(i_result)
         return label, result
 
     def pivot_category_pie(self, df_in, percent=False):
@@ -191,7 +198,8 @@ class TransactionBook:
         result = [0] * len(categories)
         # Calculate negative sum for each category
         for i, cat in enumerate(categories):
-            result[i] = df.loc[df[self.CATEGORY] == cat, self.AMOUNT].sum()
+            i_result = df.loc[df[self.CATEGORY] == cat, self.AMOUNT].sum()
+            result[i] = to_float(i_result)
         # Sort lists ascending
         result, label = (list(t) for t in zip(*sorted(zip(result, categories))))
         # Calculate result in percent if requested
