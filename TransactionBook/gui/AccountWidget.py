@@ -48,9 +48,21 @@ class AccountTableWidget(QWidget):
                 table.setItem(row, column, table_item)
 
         # Pie
+        #  Reset
         self.acc_chart.removeAllSeries()
+        self.acc_chart.setTitle("Accounts with positive balance")
+        # self.acc_chart.legend().hide()
         series = QtCharts.QPieSeries()
+        #  Add data
         for key in acc_data_dict.keys():
-            series.append(key, acc_data_dict[key])
+            add_balance = acc_data_dict[key]
+            if add_balance > 0:
+                series.append(key, add_balance)
+        #  Add percentage labels
+        # series.setLabelsVisible()
+        # series.setLabelsPosition(QtCharts.QPieSlice.LabelInsideHorizontal)
+        for my_slice in series.slices():
+            percentag_str = "{:.1f}%".format(100 * my_slice.percentage())
+            my_slice.setLabel(f"{my_slice.label()}({percentag_str})")
 
         self.acc_chart.addSeries(series)

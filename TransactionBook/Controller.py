@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 from TransactionBook.gui.MainWindow import MainWindow
 from TransactionBook.model.TransactionBook import TransactionBook, to_float
@@ -17,13 +18,16 @@ class Controller:
 
         self.initialize()
 
-        self.view.update_data()
-
     def initialize(self):
         if self.file_path is not None:
             self.model.load_from(self.file_path)
+            # Select most recent year in database
             self.selected_year = int(self.get_years_in_data_as_str()[0])
-        self.selected_month = int(self.get_months_as_str()[0])
+            # Select current month
+            today = datetime.today()
+            self.view.set_selected_month(today.month)
+            self.selected_month = today.month
+        self.view.update_data()
 
     def debug_print(self, text):
         if self.DEBUG:
@@ -99,11 +103,9 @@ class Controller:
 
     def event_open_file(self, file_path):
         self.__update_file(file_path)
-
         self.debug_print(f"Ctrl: File {self.file_name} loaded")
 
-        self.model.load_from(self.file_path)
-        self.view.update_data()
+        self.initialize()
 
     def event_save_file(self, file_path=None):
         if file_path is None:

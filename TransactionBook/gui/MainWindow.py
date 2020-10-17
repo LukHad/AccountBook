@@ -95,7 +95,7 @@ class MainWindow(QMainWindow):
         unique_row_list = self.__get_selected_rows()
         if len(unique_row_list) != 1:
             msg_box = QMessageBox()
-            msg_box.setText("Please select only one transaction you want to edit in the table below")
+            msg_box.setText("Please select only one transaction you want to edit in the Transactions tab.")
             msg_box.exec_()
         else:
             selected_row = unique_row_list[0]
@@ -107,7 +107,7 @@ class MainWindow(QMainWindow):
         unique_row_list = self.__get_selected_rows()
         if len(unique_row_list) < 1:
             msg_box = QMessageBox()
-            msg_box.setText("Please select the transactions you want to delete in the table below")
+            msg_box.setText("Please select the transactions you want to delete in the Transactions tab.")
             msg_box.exec_()
         else:
             msg_box = QMessageBox()
@@ -152,5 +152,9 @@ class MainWindow(QMainWindow):
 
     def close_file(self):
         print("Close File")
+
+    def set_selected_month(self, month):
+        month_str = str(month)
+        self.transaction_widget.month_selector.set_text(month_str)
 
 
