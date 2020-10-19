@@ -41,6 +41,10 @@ class Controller:
 
         return acc_data
 
+    def get_total_balance_trend(self):
+        label, result = self.model.pivot_total_balance_trend()
+        return label, result
+
     def get_transaction_table_data(self):
         df = self.model.get_data()
         columns = df.columns.tolist()

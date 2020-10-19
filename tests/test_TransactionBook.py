@@ -162,6 +162,18 @@ def test_add_category():
     nose.tools.ok_(tb.get_categories() == expected_categories)
 
 
+def test_pivot_total_balance_trend():
+    tb = dummy_transactions_2()
+    df = tb.get_data()
+    #                  07.2018, 08.2018, 09.2018, 10.2018, 11.2018, 12.2018, 01.2019, 02.2019, 03.2019
+    expected_result = [1000,    983,     983,     983,     983,     983,     982.01,  952.01,  952.01,
+                       952.01,  945.52,  945.52,  945.52,  945.52,  940.52,  940.52,  940.52,  923.57]
+    #                  04.2019, 05.2019, 06.2019, 07.2019, 08.2019, 09.2019, 10.2019, 11.2019, 12.2019
+    _, result = tb.pivot_total_balance_trend()
+
+    nose.tools.ok_(result == expected_result)
+
+
 if __name__ == '__main__':
     test_populate_list_from_data()
     test_filter_date()
@@ -175,3 +187,4 @@ if __name__ == '__main__':
     test_edit_transaction_field()
     test_add_account()
     test_add_category()
+    test_pivot_total_balance_trend()

@@ -35,12 +35,6 @@ class TransactionBook:
     def get_date_time_format(self):
         return self.DATE_TIME_FORMAT
 
-    def get_path(self):
-        return self.path
-
-    def set_path(self, path):
-        self.path = path
-
     def get_accounts(self):
         return self.accounts
 
@@ -163,12 +157,11 @@ class TransactionBook:
         years = df["Year"].unique()
         return years.tolist()
 
-# Data aggregation methods:
+    # Data aggregation methods:
     def pivot_monthly_trend(self, df_in, negative_amount_only=False):
-        month = 'Month'
         df = df_in.copy()
         # Add additional helper column with months
-        df[month] = [el.month for el in df[self.DATE]]
+        df["Month"] = [el.month for el in df[self.DATE]]
         df["Year"] = [el.year for el in df[self.DATE]]
         years = df["Year"].unique()
         years = years.tolist()
@@ -183,7 +176,7 @@ class TransactionBook:
         if negative_amount_only:
             df = df.loc[df[self.AMOUNT] < 0]
         for i in range(1, 13):
-            i_result = df.loc[df[month] == i, self.AMOUNT].sum()
+            i_result = df.loc[df["Month"] == i, self.AMOUNT].sum()
             result[i - 1] = to_float(i_result)
         return label, result
 
@@ -208,3 +201,40 @@ class TransactionBook:
             for i, res in enumerate(result):
                 result[i] = (res / sum_of_expenses) * 100
         return label, result
+
+    def pivot_total_balance_trend(self):
+        df = self.get_data()
+        # Add additional helper column with month and year
+        df["Month"] = [el.month for el in df[self.DATE]]
+        df["Year"] = [el.year for el in df[self.DATE]]
+        # Get years and months in data
+        years = df["Year"].unique()
+        years = sorted(years.tolist())
+        if not years:  # If dataset is empty do nothing
+            return [], []
+        years_min = min(years)
+        years_max = max(years)
+
+        label = []
+        result = []
+        for year in years:
+            months = df.loc[df["Year"] == year, "Month"].unique()
+            # Only pivot available data but don not leave out months with no data
+            if year == years_min:
+                months_start = min(months.tolist())
+            else:
+                months_start = 1
+            if year == years_max:
+                months_end = max(months.tolist())
+            else:
+                months_end = 12
+            # Go through months of year
+            for month in range(months_start, months_end + 1):
+                label.append(f"{month}{self.DATE_DELIMITER}{year}")
+                # calculate sum of past years and current year with past months
+                integer_result = df.loc[(df["Year"] < year) | ((df["Year"] == year) & (df["Month"] <= month)),
+                                        self.AMOUNT].sum()
+                result.append(to_float(integer_result))
+
+        return label, result
+

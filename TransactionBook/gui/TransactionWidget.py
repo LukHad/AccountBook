@@ -46,6 +46,8 @@ class TransactionTableWidget(QWidget):
         for column in range(num_columns):
             for row in range(num_rows):
                 table_item = QTableWidgetItem()
+                if column == 3:  # Align balance to the right with vertically centered
+                    table_item.setTextAlignment(Qt.AlignRight | Qt.AlignVCenter)
                 table_item.setData(Qt.DisplayRole, data[row][column])
                 table.setItem(row, column, table_item)
 
