@@ -17,17 +17,26 @@ class AccountTableWidget(QWidget):
 
         # Account Pie
         self.acc_chart = QtCharts.QChart()
-        self.acc_pie = QtCharts.QChartView(self.acc_chart)
+        acc_pie = QtCharts.QChartView(self.acc_chart)
 
         # Total balance over months
         self.balance_trend_chart = QtCharts.QChart()
-        self.balance_trend_view = QtCharts.QChartView(self.balance_trend_chart)
+        self.balance_trend_chart.legend().hide()
+        balance_trend_view = QtCharts.QChartView(self.balance_trend_chart)
         self.balance_trend_y_axis = None
+        self.balance_trend_x_axis = None
+
+        # Monthly bar trend
+        self.monthly_bar_chart = QtCharts.QChart()
+        self.monthly_bar_chart.legend().hide()
+        monthly_bar_view = QtCharts.QChartView(self.monthly_bar_chart)
+        self.monthly_bar_chart_y_axis = None
 
         layout = QGridLayout()
         layout.addWidget(self.acc_table, 0, 0)
-        layout.addWidget(self.acc_pie, 0, 1)
-        layout.addWidget(self.balance_trend_view, 1, 0, 1, 2)
+        layout.addWidget(acc_pie, 0, 1)
+        layout.addWidget(balance_trend_view, 1, 0)
+        layout.addWidget(monthly_bar_view, 1, 1)
 
         self.setLayout(layout)
         self.update_data()
@@ -84,15 +93,63 @@ class AccountTableWidget(QWidget):
 
         # Total balance trend
         self.balance_trend_chart.removeAllSeries()
-        self.balance_trend_chart.removeAxis(self.balance_trend_y_axis)
         labels, results = self.ctrl.get_total_balance_trend()
+        # Values
         if results:
             series = QtCharts.QLineSeries()
-            for i, _ in enumerate(labels):
-                series.append(i, results[i])
-                print(results[i])
-
-            self.balance_trend_y_axis = QtCharts.QValueAxis()
-            self.balance_trend_y_axis.setRange(min(results), max(results))
+            # set properties
+            # series.legend().hide()
+            series.setPointsVisible(True)
+            # set data
+            for i, result in enumerate(results):
+                series.append(i, result)
+            # add to chart
             self.balance_trend_chart.addSeries(series)
-            self.balance_trend_chart.addAxis(self.balance_trend_y_axis, Qt.AlignLeft)
+
+            # y_Axis
+            self.balance_trend_chart.removeAxis(self.balance_trend_y_axis)
+            y_axis = QtCharts.QValueAxis()
+            # set properties
+            y_axis.setRange(min(results), max(results))
+            y_axis.setLabelFormat("%.0f")
+            y_axis.setTitleText(f"Total balance [{self.ctrl.get_currency()}]")
+            self.balance_trend_y_axis = y_axis
+            self.balance_trend_chart.addAxis(y_axis, Qt.AlignLeft)
+
+            # x_Axis
+            self.balance_trend_chart.removeAxis(self.balance_trend_x_axis)
+            x_axis = QtCharts.QBarCategoryAxis()
+            # set properties
+            x_axis.append(labels)
+            x_axis.setLabelsAngle(-90)
+            self.balance_trend_x_axis = x_axis
+            self.balance_trend_chart.addAxis(x_axis, Qt.AlignBottom)
+
+        # Monthly bar trend
+        self.monthly_bar_chart.removeAllSeries()
+        labels, results = self.ctrl.get_monthly_bar_trend()
+        if results:
+            series = QtCharts.QBarSeries()
+            for i, result in enumerate(results):
+                bar_set = QtCharts.QBarSet("Test")
+                bar_set.append(result)
+                bar_set.setLabel(labels[i])
+                series.append(bar_set)
+            self.monthly_bar_chart.addSeries(series)
+
+            # y_Axis
+            self.monthly_bar_chart.removeAxis(self.monthly_bar_chart_y_axis)
+            y_axis = QtCharts.QValueAxis()
+            # set properties
+            y_axis.setRange(min(results), max(results))
+            y_axis.setLabelFormat("%.0f")
+            y_axis.setTitleText(f"Monthly balance [{self.ctrl.get_currency()}]")
+
+            self.monthly_bar_chart.addAxis(y_axis, Qt.AlignLeft)
+            self.monthly_bar_chart_y_axis = y_axis
+
+
+
+
+
+

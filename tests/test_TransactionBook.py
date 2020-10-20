@@ -90,7 +90,7 @@ def test_populate_list_from_data():
 
 def test_pivot_monthly_trend():
     tb = dummy_transactions()
-    _, result = tb.pivot_monthly_trend(tb.get_data())
+    _, result = tb.pivot_monthly_trend(2018)
 
     nose.tools.ok_(result == [0, -30, 0, 0, 0, 0, 0, 0, 0, 0, 0, -11.95])
 

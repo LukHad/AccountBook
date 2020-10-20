@@ -158,14 +158,14 @@ class TransactionBook:
         return years.tolist()
 
     # Data aggregation methods:
-    def pivot_monthly_trend(self, df_in, negative_amount_only=False):
-        df = df_in.copy()
+    def pivot_monthly_trend(self, year, negative_amount_only=False):
+        df = self.get_data()
         # Add additional helper column with months
         df["Month"] = [el.month for el in df[self.DATE]]
         df["Year"] = [el.year for el in df[self.DATE]]
-        years = df["Year"].unique()
-        years = years.tolist()
-        year = max(years)
+        # years = df["Year"].unique()
+        # years = years.tolist()
+        # year = max(years)
         df = df.loc[df["Year"] == year]  # Pivot latest year of data set
         # Create list with formatted months
         label = ["01.", "02.", "03.", "04.", "05.", "06.", "07.", "08.", "09.", "10.", "11.", "12."]

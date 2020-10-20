@@ -45,6 +45,10 @@ class Controller:
         label, result = self.model.pivot_total_balance_trend()
         return label, result
 
+    def get_monthly_bar_trend(self):
+        label, result = self.model.pivot_monthly_trend(self.selected_year)  # ToDo: selected year is only temporary. Plot shall have its own year filter
+        return label, result
+
     def get_transaction_table_data(self):
         df = self.model.get_data()
         columns = df.columns.tolist()
