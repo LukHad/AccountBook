@@ -1,6 +1,6 @@
 from PySide2.QtWidgets import QWidget, QTableWidget, QTableWidgetItem, QGridLayout,  QAbstractItemView
 from PySide2.QtCore import Qt
-
+from PySide2.QtGui import QFont
 from PySide2.QtCharts import QtCharts
 
 
@@ -57,11 +57,11 @@ class AccountTableWidget(QWidget):
         total_balance = 0
         for key, value in acc_data_dict.items():
             total_balance += value
-            data.append([key, str(value) + " " + self.ctrl.get_currency()])
+            data.append([key, value])
         #  Add empty row
-        data.append(["", ""])
+        # data.append(["", ""])
         #  Add sum to data
-        data.append(["Total balance", str(round(total_balance, 2)) + " " + self.ctrl.get_currency()])
+        data.append(["Total balance", total_balance])
         #  Create table widget
         column_headings = ["Accounts", "Balance"]
         num_columns = len(column_headings)
@@ -73,8 +73,15 @@ class AccountTableWidget(QWidget):
         for column in range(num_columns):
             for row in range(num_rows):
                 table_item = QTableWidgetItem()
-                if column == 1:  # Align balance to the right with vertically centered
+                if column == 1:  # Special formatting for balance row
                     table_item.setTextAlignment(Qt.AlignRight | Qt.AlignVCenter)
+                    if data[row][column] < 0.0:
+                        table_item.setTextColor(Qt.red)
+                    data[row][column] = self.ctrl.get_pretty_amount_str(data[row][column])  # cast to string
+                if row == num_rows-1:  # Special formatting for last row which is total balance
+                    font = QFont()
+                    font.setBold(True)
+                    table_item.setFont(font)
                 table_item.setData(Qt.DisplayRole, data[row][column])
                 table.setItem(row, column, table_item)
 

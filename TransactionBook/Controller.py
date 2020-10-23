@@ -49,6 +49,11 @@ class Controller:
         label, result = self.model.pivot_monthly_trend(self.selected_year)  # ToDo: selected year is only temporary. Plot shall have its own year filter
         return label, result
 
+    def get_pretty_amount_str(self, amount):
+        amount_str = "{:.2f}".format(amount)
+        currency_str = self.get_currency()
+        return amount_str + " " + currency_str
+
     def get_transaction_table_data(self):
         df = self.model.get_data()
         columns = df.columns.tolist()
@@ -67,7 +72,7 @@ class Controller:
             df[self.model.DATE] = df[self.model.DATE].dt.strftime(self.model.DATE_TIME_FORMAT)
             # Convert amount to string with currency
             df[self.model.AMOUNT] = df[self.model.AMOUNT].apply(to_float)
-            df[self.model.AMOUNT] = df[self.model.AMOUNT].astype(str) + " " + self.get_currency()
+            # df[self.model.AMOUNT] = df[self.model.AMOUNT].astype(str) + " " + self.get_currency()
             # Remove Month and Year column
             df = df.loc[:, df.columns != month]
             df = df.loc[:, df.columns != year]
