@@ -1,16 +1,797 @@
 Date;Account;Description;Amount;Category
-01.07.2017;Account 1;My first transaction;1000.0;Income
-11.08.2017;Account 1;Cinema;-17.0;Entertainment
-24.12.2017;Account 2;Bread and Milk;-5.0;Food
-03.02.2018;Account 1;Fuel;-30.0;Mobility
-01.12.2018;Account 1;Netflix;-11.95;Entertainment
-01.01.2018;Account 1;My first transaction;1000.0;Income
-11.01.2018;Account 1;Cinema;-17.0;Entertainment
-24.01.2018;Account 2;Bread and Milk;-5.0;Food
-03.01.2018;Account 1;Fuel;-30.0;Mobility
-01.01.2018;Account 1;Netflix;-11.95;Entertainment
-04.10.2020;Account 2;Bonus;1758.0;Income
-04.10.2020;Share portfolio;Splunk;1200.0;Investment
-04.10.2020;Account 1;Splunk Investment;-1200.0;Investment
-14.10.2020;Savings account;Initial balance;10087.51;Initial balance
-17.10.2020;Account 1;Güter;-13.0;Food
+24.01.2016;Commerzbank;SAP salary;2800.0;Income
+27.02.2016;Commerzbank;SAP salary;2800.0;Income
+25.03.2016;Commerzbank;SAP salary;2800.0;Income
+26.04.2016;Commerzbank;SAP salary;2800.0;Income
+25.05.2016;Commerzbank;SAP salary;2800.0;Income
+24.06.2016;Commerzbank;SAP salary;2800.0;Income
+25.07.2016;Commerzbank;SAP salary;2800.0;Income
+25.08.2016;Commerzbank;SAP salary;2800.0;Income
+27.09.2016;Commerzbank;SAP salary;2800.0;Income
+25.10.2016;Commerzbank;SAP salary;2800.0;Income
+24.11.2016;Commerzbank;SAP salary;2800.0;Income
+24.12.2016;Commerzbank;SAP salary;2800.0;Income
+02.01.2016;Investment Depot;Savings;300.0;Income
+02.02.2016;Investment Depot;Savings;300.0;Income
+02.03.2016;Investment Depot;Savings;300.0;Income
+02.04.2016;Investment Depot;Savings;300.0;Income
+02.05.2016;Investment Depot;Savings;300.0;Income
+02.06.2016;Investment Depot;Savings;300.0;Income
+02.07.2016;Investment Depot;Savings;300.0;Income
+02.08.2016;Investment Depot;Savings;300.0;Income
+02.09.2016;Investment Depot;Savings;300.0;Income
+02.10.2016;Investment Depot;Savings;300.0;Income
+02.11.2016;Investment Depot;Savings;300.0;Income
+02.12.2016;Investment Depot;Savings;300.0;Income
+02.01.2016;Commerzbank;Savings;-300.0;Income
+02.02.2016;Commerzbank;Savings;-300.0;Income
+02.03.2016;Commerzbank;Savings;-300.0;Income
+02.04.2016;Commerzbank;Savings;-300.0;Income
+02.05.2016;Commerzbank;Savings;-300.0;Income
+02.06.2016;Commerzbank;Savings;-300.0;Income
+02.07.2016;Commerzbank;Savings;-300.0;Income
+02.08.2016;Commerzbank;Savings;-300.0;Income
+02.09.2016;Commerzbank;Savings;-300.0;Income
+02.10.2016;Commerzbank;Savings;-300.0;Income
+02.11.2016;Commerzbank;Savings;-300.0;Income
+02.12.2016;Commerzbank;Savings;-300.0;Income
+03.01.2016;Commerzbank;Rent & Utilities;-1240.0;Rent & Utilities
+01.02.2016;Commerzbank;Rent & Utilities;-1240.0;Rent & Utilities
+03.03.2016;Commerzbank;Rent & Utilities;-1240.0;Rent & Utilities
+02.04.2016;Commerzbank;Rent & Utilities;-1240.0;Rent & Utilities
+01.05.2016;Commerzbank;Rent & Utilities;-1240.0;Rent & Utilities
+03.06.2016;Commerzbank;Rent & Utilities;-1240.0;Rent & Utilities
+03.07.2016;Commerzbank;Rent & Utilities;-1240.0;Rent & Utilities
+02.08.2016;Commerzbank;Rent & Utilities;-1240.0;Rent & Utilities
+01.09.2016;Commerzbank;Rent & Utilities;-1240.0;Rent & Utilities
+02.10.2016;Commerzbank;Rent & Utilities;-1240.0;Rent & Utilities
+03.11.2016;Commerzbank;Rent & Utilities;-1240.0;Rent & Utilities
+02.12.2016;Commerzbank;Rent & Utilities;-1240.0;Rent & Utilities
+15.01.2016;Commerzbank;Gym;-30.0;Sport
+17.02.2016;Commerzbank;Gym;-30.0;Sport
+17.03.2016;Commerzbank;Gym;-30.0;Sport
+16.04.2016;Commerzbank;Gym;-30.0;Sport
+15.05.2016;Commerzbank;Gym;-30.0;Sport
+17.06.2016;Commerzbank;Gym;-30.0;Sport
+15.07.2016;Commerzbank;Gym;-30.0;Sport
+16.08.2016;Commerzbank;Gym;-30.0;Sport
+16.09.2016;Commerzbank;Gym;-30.0;Sport
+15.10.2016;Commerzbank;Gym;-30.0;Sport
+17.11.2016;Commerzbank;Gym;-30.0;Sport
+17.12.2016;Commerzbank;Gym;-30.0;Sport
+03.01.2016;Commerzbank;Legal protection;-40.0;Insurance
+03.02.2016;Commerzbank;Legal protection;-40.0;Insurance
+04.03.2016;Commerzbank;Legal protection;-40.0;Insurance
+04.04.2016;Commerzbank;Legal protection;-40.0;Insurance
+04.05.2016;Commerzbank;Legal protection;-40.0;Insurance
+04.06.2016;Commerzbank;Legal protection;-40.0;Insurance
+05.07.2016;Commerzbank;Legal protection;-40.0;Insurance
+04.08.2016;Commerzbank;Legal protection;-40.0;Insurance
+04.09.2016;Commerzbank;Legal protection;-40.0;Insurance
+05.10.2016;Commerzbank;Legal protection;-40.0;Insurance
+04.11.2016;Commerzbank;Legal protection;-40.0;Insurance
+03.12.2016;Commerzbank;Legal protection;-40.0;Insurance
+04.01.2016;Commerzbank;Netflix;-12.0;Entertainment
+05.02.2016;Commerzbank;Netflix;-12.0;Entertainment
+05.03.2016;Commerzbank;Netflix;-12.0;Entertainment
+05.04.2016;Commerzbank;Netflix;-12.0;Entertainment
+05.05.2016;Commerzbank;Netflix;-12.0;Entertainment
+05.06.2016;Commerzbank;Netflix;-12.0;Entertainment
+04.07.2016;Commerzbank;Netflix;-12.0;Entertainment
+03.08.2016;Commerzbank;Netflix;-12.0;Entertainment
+04.09.2016;Commerzbank;Netflix;-12.0;Entertainment
+03.10.2016;Commerzbank;Netflix;-12.0;Entertainment
+03.11.2016;Commerzbank;Netflix;-12.0;Entertainment
+05.12.2016;Commerzbank;Netflix;-12.0;Entertainment
+24.01.2016;Commerzbank;DM;-66.59;Groceries
+03.01.2016;Commerzbank;Market;-26.71;Groceries
+02.01.2016;Commerzbank;Edeka;-65.93;Groceries
+04.02.2016;Commerzbank;DM;-64.37;Groceries
+23.02.2016;Commerzbank;DM;-72.01;Groceries
+25.02.2016;Commerzbank;Kaufland;-93.4;Groceries
+09.03.2016;Commerzbank;DM;-81.05;Groceries
+18.03.2016;Commerzbank;Kaufland;-67.05;Groceries
+02.03.2016;Commerzbank;Edeka;-93.5;Groceries
+09.04.2016;Commerzbank;Edeka;-91.92;Groceries
+23.04.2016;Commerzbank;Kaufland;-76.53;Groceries
+25.04.2016;Commerzbank;Edeka;-34.23;Groceries
+16.05.2016;Commerzbank;Edeka;-42.38;Groceries
+24.05.2016;Commerzbank;Market;-65.06;Groceries
+27.05.2016;Commerzbank;Aldi;-96.54;Groceries
+05.06.2016;Commerzbank;Aldi;-15.83;Groceries
+21.06.2016;Commerzbank;Kaufland;-15.8;Groceries
+09.06.2016;Commerzbank;Market;-21.21;Groceries
+07.07.2016;Commerzbank;Market;-12.24;Groceries
+20.07.2016;Commerzbank;DM;-7.23;Groceries
+20.07.2016;Commerzbank;Aldi;-75.26;Groceries
+03.08.2016;Commerzbank;Aldi;-8.77;Groceries
+10.08.2016;Commerzbank;Edeka;-64.25;Groceries
+14.08.2016;Commerzbank;Aldi;-6.82;Groceries
+03.09.2016;Commerzbank;DM;-63.95;Groceries
+14.09.2016;Commerzbank;DM;-78.56;Groceries
+09.09.2016;Commerzbank;DM;-16.3;Groceries
+24.10.2016;Commerzbank;Aldi;-10.32;Groceries
+09.10.2016;Commerzbank;Market;-13.01;Groceries
+06.10.2016;Commerzbank;Market;-67.36;Groceries
+03.11.2016;Commerzbank;Edeka;-82.61;Groceries
+04.11.2016;Commerzbank;Aldi;-4.0;Groceries
+21.11.2016;Commerzbank;Aldi;-7.07;Groceries
+17.12.2016;Commerzbank;Kaufland;-77.1;Groceries
+22.12.2016;Commerzbank;DM;-34.57;Groceries
+06.12.2016;Commerzbank;Market;-28.45;Groceries
+09.01.2016;Commerzbank;Dinner in restaurant;-72.8;Restaurant
+23.01.2016;Commerzbank;Lunch in restaurant;-71.79;Restaurant
+18.01.2016;Commerzbank;Lunch in restaurant;-26.21;Restaurant
+17.01.2016;Commerzbank;Dinner in restaurant;-83.65;Restaurant
+16.02.2016;Commerzbank;Lunch in restaurant;-52.62;Restaurant
+23.02.2016;Commerzbank;Lunch in restaurant;-34.84;Restaurant
+14.02.2016;Commerzbank;Dinner in restaurant;-42.05;Restaurant
+02.02.2016;Commerzbank;Lunch in restaurant;-56.27;Restaurant
+01.03.2016;Commerzbank;Lunch in restaurant;-62.46;Restaurant
+09.03.2016;Commerzbank;Lunch in restaurant;-18.98;Restaurant
+18.03.2016;Commerzbank;Dinner in restaurant;-26.44;Restaurant
+27.03.2016;Commerzbank;Lunch in restaurant;-44.14;Restaurant
+02.04.2016;Commerzbank;Lunch in restaurant;-61.51;Restaurant
+05.04.2016;Commerzbank;Lunch in restaurant;-68.35;Restaurant
+17.04.2016;Commerzbank;Lunch in restaurant;-98.82;Restaurant
+05.04.2016;Commerzbank;Lunch in restaurant;-46.0;Restaurant
+19.05.2016;Commerzbank;Lunch in restaurant;-47.28;Restaurant
+03.05.2016;Commerzbank;Dinner in restaurant;-67.7;Restaurant
+24.05.2016;Commerzbank;Dinner in restaurant;-39.97;Restaurant
+01.05.2016;Commerzbank;Dinner in restaurant;-78.54;Restaurant
+25.06.2016;Commerzbank;Lunch in restaurant;-35.71;Restaurant
+11.06.2016;Commerzbank;Lunch in restaurant;-41.84;Restaurant
+06.06.2016;Commerzbank;Dinner in restaurant;-39.53;Restaurant
+10.06.2016;Commerzbank;Lunch in restaurant;-23.09;Restaurant
+04.07.2016;Commerzbank;Dinner in restaurant;-85.01;Restaurant
+21.07.2016;Commerzbank;Dinner in restaurant;-59.85;Restaurant
+23.07.2016;Commerzbank;Dinner in restaurant;-57.56;Restaurant
+17.07.2016;Commerzbank;Lunch in restaurant;-35.02;Restaurant
+06.08.2016;Commerzbank;Dinner in restaurant;-78.68;Restaurant
+25.08.2016;Commerzbank;Lunch in restaurant;-23.43;Restaurant
+08.08.2016;Commerzbank;Lunch in restaurant;-20.94;Restaurant
+02.08.2016;Commerzbank;Dinner in restaurant;-49.19;Restaurant
+09.09.2016;Commerzbank;Dinner in restaurant;-81.8;Restaurant
+22.09.2016;Commerzbank;Lunch in restaurant;-77.71;Restaurant
+02.09.2016;Commerzbank;Lunch in restaurant;-39.66;Restaurant
+06.09.2016;Commerzbank;Lunch in restaurant;-88.73;Restaurant
+16.10.2016;Commerzbank;Dinner in restaurant;-75.08;Restaurant
+15.10.2016;Commerzbank;Dinner in restaurant;-23.39;Restaurant
+14.10.2016;Commerzbank;Lunch in restaurant;-78.6;Restaurant
+01.10.2016;Commerzbank;Dinner in restaurant;-31.05;Restaurant
+06.11.2016;Commerzbank;Dinner in restaurant;-57.6;Restaurant
+16.11.2016;Commerzbank;Lunch in restaurant;-95.81;Restaurant
+11.11.2016;Commerzbank;Dinner in restaurant;-83.52;Restaurant
+10.11.2016;Commerzbank;Lunch in restaurant;-55.64;Restaurant
+03.12.2016;Commerzbank;Lunch in restaurant;-62.06;Restaurant
+13.12.2016;Commerzbank;Lunch in restaurant;-95.53;Restaurant
+03.12.2016;Commerzbank;Lunch in restaurant;-32.21;Restaurant
+23.12.2016;Commerzbank;Lunch in restaurant;-53.22;Restaurant
+18.01.2016;Commerzbank;Bus;-52.95;Fuel & Mobility
+02.01.2016;Commerzbank;Bus;-44.23;Fuel & Mobility
+07.02.2016;Commerzbank;Bus;-22.82;Fuel & Mobility
+18.02.2016;Commerzbank;Train;-52.42;Fuel & Mobility
+17.03.2016;Commerzbank;Train;-59.76;Fuel & Mobility
+19.03.2016;Commerzbank;Train;-86.63;Fuel & Mobility
+01.04.2016;Commerzbank;Fuel;-81.67;Fuel & Mobility
+24.04.2016;Commerzbank;Train;-36.49;Fuel & Mobility
+17.05.2016;Commerzbank;Fuel;-26.24;Fuel & Mobility
+21.05.2016;Commerzbank;Fuel;-93.9;Fuel & Mobility
+06.06.2016;Commerzbank;Fuel;-57.22;Fuel & Mobility
+24.06.2016;Commerzbank;Train;-69.44;Fuel & Mobility
+16.07.2016;Commerzbank;Train;-90.74;Fuel & Mobility
+22.07.2016;Commerzbank;Fuel;-30.22;Fuel & Mobility
+01.08.2016;Commerzbank;Train;-87.57;Fuel & Mobility
+12.08.2016;Commerzbank;Bus;-34.76;Fuel & Mobility
+03.09.2016;Commerzbank;Train;-11.95;Fuel & Mobility
+14.09.2016;Commerzbank;Bus;-28.15;Fuel & Mobility
+17.10.2016;Commerzbank;Fuel;-30.62;Fuel & Mobility
+14.10.2016;Commerzbank;Fuel;-44.08;Fuel & Mobility
+11.11.2016;Commerzbank;Bus;-99.0;Fuel & Mobility
+07.11.2016;Commerzbank;Train;-43.92;Fuel & Mobility
+10.12.2016;Commerzbank;Train;-85.41;Fuel & Mobility
+04.12.2016;Commerzbank;Train;-77.96;Fuel & Mobility
+01.11.2016;Commerzbank;SAP yearly bonus;5000.0;Income
+06.11.2016;Commerzbank;Bonus savings;-4000.0;Savings
+06.11.2016;Savings Account;Bonus savings;4000.0;Savings
+19.04.2016;Commerzbank;Trip to Asia;-4888.08;Holidays & Trips
+26.07.2016;Commerzbank;Trip to Asia;-737.7;Holidays & Trips
+15.01.2016;Commerzbank;n;-64.5;Insurance
+26.01.2017;Commerzbank;SAP salary;2856.0;Income
+24.02.2017;Commerzbank;SAP salary;2856.0;Income
+26.03.2017;Commerzbank;SAP salary;2856.0;Income
+25.04.2017;Commerzbank;SAP salary;2856.0;Income
+25.05.2017;Commerzbank;SAP salary;2856.0;Income
+26.06.2017;Commerzbank;SAP salary;2856.0;Income
+25.07.2017;Commerzbank;SAP salary;2856.0;Income
+24.08.2017;Commerzbank;SAP salary;2856.0;Income
+26.09.2017;Commerzbank;SAP salary;2856.0;Income
+24.10.2017;Commerzbank;SAP salary;2856.0;Income
+26.11.2017;Commerzbank;SAP salary;2856.0;Income
+27.12.2017;Commerzbank;SAP salary;2856.0;Income
+02.01.2017;Investment Depot;Savings;300.0;Income
+02.02.2017;Investment Depot;Savings;300.0;Income
+02.03.2017;Investment Depot;Savings;300.0;Income
+02.04.2017;Investment Depot;Savings;300.0;Income
+02.05.2017;Investment Depot;Savings;300.0;Income
+02.06.2017;Investment Depot;Savings;300.0;Income
+02.07.2017;Investment Depot;Savings;300.0;Income
+02.08.2017;Investment Depot;Savings;300.0;Income
+02.09.2017;Investment Depot;Savings;300.0;Income
+02.10.2017;Investment Depot;Savings;300.0;Income
+02.11.2017;Investment Depot;Savings;300.0;Income
+02.12.2017;Investment Depot;Savings;300.0;Income
+02.01.2017;Commerzbank;Savings;-300.0;Income
+02.02.2017;Commerzbank;Savings;-300.0;Income
+02.03.2017;Commerzbank;Savings;-300.0;Income
+02.04.2017;Commerzbank;Savings;-300.0;Income
+02.05.2017;Commerzbank;Savings;-300.0;Income
+02.06.2017;Commerzbank;Savings;-300.0;Income
+02.07.2017;Commerzbank;Savings;-300.0;Income
+02.08.2017;Commerzbank;Savings;-300.0;Income
+02.09.2017;Commerzbank;Savings;-300.0;Income
+02.10.2017;Commerzbank;Savings;-300.0;Income
+02.11.2017;Commerzbank;Savings;-300.0;Income
+02.12.2017;Commerzbank;Savings;-300.0;Income
+02.01.2017;Commerzbank;Rent & Utilities;-1264.8;Rent & Utilities
+03.02.2017;Commerzbank;Rent & Utilities;-1264.8;Rent & Utilities
+01.03.2017;Commerzbank;Rent & Utilities;-1264.8;Rent & Utilities
+01.04.2017;Commerzbank;Rent & Utilities;-1264.8;Rent & Utilities
+03.05.2017;Commerzbank;Rent & Utilities;-1264.8;Rent & Utilities
+01.06.2017;Commerzbank;Rent & Utilities;-1264.8;Rent & Utilities
+01.07.2017;Commerzbank;Rent & Utilities;-1264.8;Rent & Utilities
+03.08.2017;Commerzbank;Rent & Utilities;-1264.8;Rent & Utilities
+02.09.2017;Commerzbank;Rent & Utilities;-1264.8;Rent & Utilities
+02.10.2017;Commerzbank;Rent & Utilities;-1264.8;Rent & Utilities
+03.11.2017;Commerzbank;Rent & Utilities;-1264.8;Rent & Utilities
+01.12.2017;Commerzbank;Rent & Utilities;-1264.8;Rent & Utilities
+16.01.2017;Commerzbank;Gym;-30.0;Sport
+17.02.2017;Commerzbank;Gym;-30.0;Sport
+17.03.2017;Commerzbank;Gym;-30.0;Sport
+17.04.2017;Commerzbank;Gym;-30.0;Sport
+16.05.2017;Commerzbank;Gym;-30.0;Sport
+17.06.2017;Commerzbank;Gym;-30.0;Sport
+15.07.2017;Commerzbank;Gym;-30.0;Sport
+15.08.2017;Commerzbank;Gym;-30.0;Sport
+15.09.2017;Commerzbank;Gym;-30.0;Sport
+15.10.2017;Commerzbank;Gym;-30.0;Sport
+15.11.2017;Commerzbank;Gym;-30.0;Sport
+15.12.2017;Commerzbank;Gym;-30.0;Sport
+05.01.2017;Commerzbank;Legal protection;-40.0;Insurance
+04.02.2017;Commerzbank;Legal protection;-40.0;Insurance
+05.03.2017;Commerzbank;Legal protection;-40.0;Insurance
+04.04.2017;Commerzbank;Legal protection;-40.0;Insurance
+03.05.2017;Commerzbank;Legal protection;-40.0;Insurance
+05.06.2017;Commerzbank;Legal protection;-40.0;Insurance
+05.07.2017;Commerzbank;Legal protection;-40.0;Insurance
+05.08.2017;Commerzbank;Legal protection;-40.0;Insurance
+03.09.2017;Commerzbank;Legal protection;-40.0;Insurance
+03.10.2017;Commerzbank;Legal protection;-40.0;Insurance
+04.11.2017;Commerzbank;Legal protection;-40.0;Insurance
+03.12.2017;Commerzbank;Legal protection;-40.0;Insurance
+04.01.2017;Commerzbank;Netflix;-12.0;Entertainment
+04.02.2017;Commerzbank;Netflix;-12.0;Entertainment
+05.03.2017;Commerzbank;Netflix;-12.0;Entertainment
+05.04.2017;Commerzbank;Netflix;-12.0;Entertainment
+05.05.2017;Commerzbank;Netflix;-12.0;Entertainment
+04.06.2017;Commerzbank;Netflix;-12.0;Entertainment
+04.07.2017;Commerzbank;Netflix;-12.0;Entertainment
+04.08.2017;Commerzbank;Netflix;-12.0;Entertainment
+05.09.2017;Commerzbank;Netflix;-12.0;Entertainment
+04.10.2017;Commerzbank;Netflix;-12.0;Entertainment
+04.11.2017;Commerzbank;Netflix;-12.0;Entertainment
+05.12.2017;Commerzbank;Netflix;-12.0;Entertainment
+24.01.2017;Commerzbank;DM;-26.94;Groceries
+18.01.2017;Commerzbank;Aldi;-20.14;Groceries
+02.01.2017;Commerzbank;DM;-8.26;Groceries
+21.02.2017;Commerzbank;DM;-56.0;Groceries
+21.02.2017;Commerzbank;Aldi;-49.5;Groceries
+08.02.2017;Commerzbank;Market;-101.46;Groceries
+27.03.2017;Commerzbank;Kaufland;-83.12;Groceries
+25.03.2017;Commerzbank;Edeka;-85.85;Groceries
+14.03.2017;Commerzbank;Aldi;-4.71;Groceries
+27.04.2017;Commerzbank;Aldi;-62.01;Groceries
+08.04.2017;Commerzbank;DM;-28.93;Groceries
+04.04.2017;Commerzbank;Kaufland;-87.83;Groceries
+12.05.2017;Commerzbank;Kaufland;-94.18;Groceries
+13.05.2017;Commerzbank;Kaufland;-82.98;Groceries
+23.05.2017;Commerzbank;Kaufland;-69.06;Groceries
+23.06.2017;Commerzbank;Market;-92.94;Groceries
+10.06.2017;Commerzbank;Market;-84.67;Groceries
+09.06.2017;Commerzbank;Kaufland;-33.84;Groceries
+02.07.2017;Commerzbank;DM;-15.38;Groceries
+09.07.2017;Commerzbank;Aldi;-36.85;Groceries
+22.07.2017;Commerzbank;Edeka;-23.34;Groceries
+14.08.2017;Commerzbank;Edeka;-75.79;Groceries
+03.08.2017;Commerzbank;Kaufland;-60.73;Groceries
+03.08.2017;Commerzbank;Market;-77.21;Groceries
+12.09.2017;Commerzbank;Market;-47.26;Groceries
+02.09.2017;Commerzbank;Aldi;-61.16;Groceries
+26.09.2017;Commerzbank;Market;-12.21;Groceries
+15.10.2017;Commerzbank;DM;-99.44;Groceries
+20.10.2017;Commerzbank;Kaufland;-81.4;Groceries
+17.10.2017;Commerzbank;Aldi;-8.97;Groceries
+03.11.2017;Commerzbank;DM;-13.81;Groceries
+23.11.2017;Commerzbank;DM;-74.04;Groceries
+20.11.2017;Commerzbank;Kaufland;-68.35;Groceries
+20.12.2017;Commerzbank;Kaufland;-9.77;Groceries
+18.12.2017;Commerzbank;Market;-56.82;Groceries
+05.12.2017;Commerzbank;DM;-3.48;Groceries
+16.01.2017;Commerzbank;Dinner in restaurant;-100.25;Restaurant
+07.01.2017;Commerzbank;Lunch in restaurant;-64.74;Restaurant
+26.01.2017;Commerzbank;Lunch in restaurant;-26.93;Restaurant
+02.01.2017;Commerzbank;Dinner in restaurant;-62.81;Restaurant
+27.02.2017;Commerzbank;Dinner in restaurant;-100.01;Restaurant
+26.02.2017;Commerzbank;Lunch in restaurant;-48.07;Restaurant
+03.02.2017;Commerzbank;Lunch in restaurant;-97.79;Restaurant
+21.02.2017;Commerzbank;Dinner in restaurant;-34.68;Restaurant
+06.03.2017;Commerzbank;Lunch in restaurant;-49.62;Restaurant
+10.03.2017;Commerzbank;Dinner in restaurant;-41.27;Restaurant
+07.03.2017;Commerzbank;Lunch in restaurant;-76.9;Restaurant
+21.03.2017;Commerzbank;Dinner in restaurant;-27.9;Restaurant
+21.04.2017;Commerzbank;Dinner in restaurant;-53.45;Restaurant
+23.04.2017;Commerzbank;Dinner in restaurant;-64.54;Restaurant
+09.04.2017;Commerzbank;Dinner in restaurant;-80.06;Restaurant
+05.04.2017;Commerzbank;Dinner in restaurant;-80.05;Restaurant
+08.05.2017;Commerzbank;Dinner in restaurant;-70.71;Restaurant
+18.05.2017;Commerzbank;Lunch in restaurant;-49.04;Restaurant
+04.05.2017;Commerzbank;Dinner in restaurant;-31.33;Restaurant
+06.05.2017;Commerzbank;Lunch in restaurant;-18.93;Restaurant
+11.06.2017;Commerzbank;Dinner in restaurant;-93.1;Restaurant
+04.06.2017;Commerzbank;Dinner in restaurant;-69.91;Restaurant
+21.06.2017;Commerzbank;Dinner in restaurant;-49.59;Restaurant
+24.06.2017;Commerzbank;Dinner in restaurant;-69.48;Restaurant
+13.07.2017;Commerzbank;Lunch in restaurant;-28.76;Restaurant
+20.07.2017;Commerzbank;Dinner in restaurant;-84.03;Restaurant
+09.07.2017;Commerzbank;Dinner in restaurant;-100.85;Restaurant
+24.07.2017;Commerzbank;Lunch in restaurant;-69.83;Restaurant
+09.08.2017;Commerzbank;Lunch in restaurant;-31.92;Restaurant
+18.08.2017;Commerzbank;Dinner in restaurant;-67.61;Restaurant
+22.08.2017;Commerzbank;Dinner in restaurant;-84.29;Restaurant
+20.08.2017;Commerzbank;Dinner in restaurant;-17.66;Restaurant
+04.09.2017;Commerzbank;Lunch in restaurant;-38.05;Restaurant
+03.09.2017;Commerzbank;Lunch in restaurant;-50.84;Restaurant
+19.09.2017;Commerzbank;Lunch in restaurant;-64.24;Restaurant
+20.09.2017;Commerzbank;Dinner in restaurant;-64.47;Restaurant
+07.10.2017;Commerzbank;Dinner in restaurant;-69.24;Restaurant
+11.10.2017;Commerzbank;Dinner in restaurant;-38.63;Restaurant
+05.10.2017;Commerzbank;Lunch in restaurant;-60.05;Restaurant
+27.10.2017;Commerzbank;Dinner in restaurant;-17.05;Restaurant
+13.11.2017;Commerzbank;Lunch in restaurant;-42.6;Restaurant
+03.11.2017;Commerzbank;Dinner in restaurant;-77.02;Restaurant
+08.11.2017;Commerzbank;Dinner in restaurant;-60.91;Restaurant
+04.11.2017;Commerzbank;Dinner in restaurant;-29.16;Restaurant
+13.12.2017;Commerzbank;Dinner in restaurant;-39.7;Restaurant
+16.12.2017;Commerzbank;Lunch in restaurant;-96.6;Restaurant
+18.12.2017;Commerzbank;Dinner in restaurant;-89.96;Restaurant
+27.12.2017;Commerzbank;Dinner in restaurant;-69.91;Restaurant
+21.01.2017;Commerzbank;Fuel;-60.49;Fuel & Mobility
+09.01.2017;Commerzbank;Fuel;-58.14;Fuel & Mobility
+27.02.2017;Commerzbank;Train;-49.21;Fuel & Mobility
+22.02.2017;Commerzbank;Bus;-79.89;Fuel & Mobility
+27.03.2017;Commerzbank;Train;-77.35;Fuel & Mobility
+09.03.2017;Commerzbank;Train;-31.38;Fuel & Mobility
+12.04.2017;Commerzbank;Bus;-22.07;Fuel & Mobility
+12.04.2017;Commerzbank;Train;-40.08;Fuel & Mobility
+22.05.2017;Commerzbank;Fuel;-75.9;Fuel & Mobility
+17.05.2017;Commerzbank;Bus;-74.98;Fuel & Mobility
+19.06.2017;Commerzbank;Train;-12.07;Fuel & Mobility
+16.06.2017;Commerzbank;Train;-15.58;Fuel & Mobility
+02.07.2017;Commerzbank;Fuel;-49.82;Fuel & Mobility
+07.07.2017;Commerzbank;Train;-86.94;Fuel & Mobility
+05.08.2017;Commerzbank;Bus;-72.5;Fuel & Mobility
+12.08.2017;Commerzbank;Bus;-15.48;Fuel & Mobility
+21.09.2017;Commerzbank;Train;-12.38;Fuel & Mobility
+13.09.2017;Commerzbank;Train;-37.06;Fuel & Mobility
+25.10.2017;Commerzbank;Bus;-87.03;Fuel & Mobility
+23.10.2017;Commerzbank;Train;-33.16;Fuel & Mobility
+03.11.2017;Commerzbank;Bus;-53.33;Fuel & Mobility
+26.11.2017;Commerzbank;Bus;-20.0;Fuel & Mobility
+16.12.2017;Commerzbank;Fuel;-16.64;Fuel & Mobility
+18.12.2017;Commerzbank;Fuel;-29.05;Fuel & Mobility
+01.11.2017;Commerzbank;SAP yearly bonus;5100.0;Income
+06.11.2017;Commerzbank;Bonus savings;-4000.0;Savings
+06.11.2017;Savings Account;Bonus savings;4000.0;Savings
+22.12.2017;Commerzbank;Europe roundtrip;-3386.54;Holidays & Trips
+05.06.2017;Commerzbank;New York;-233.44;Holidays & Trips
+17.01.2017;Commerzbank;i;-64.5;Insurance
+27.01.2018;Commerzbank;SAP salary;2913.12;Income
+27.02.2018;Commerzbank;SAP salary;2913.12;Income
+24.03.2018;Commerzbank;SAP salary;2913.12;Income
+25.04.2018;Commerzbank;SAP salary;2913.12;Income
+24.05.2018;Commerzbank;SAP salary;2913.12;Income
+24.06.2018;Commerzbank;SAP salary;2913.12;Income
+27.07.2018;Commerzbank;SAP salary;2913.12;Income
+25.08.2018;Commerzbank;SAP salary;2913.12;Income
+27.09.2018;Commerzbank;SAP salary;2913.12;Income
+25.10.2018;Commerzbank;SAP salary;2913.12;Income
+26.11.2018;Commerzbank;SAP salary;2913.12;Income
+25.12.2018;Commerzbank;SAP salary;2913.12;Income
+02.01.2018;Investment Depot;Savings;300.0;Income
+02.02.2018;Investment Depot;Savings;300.0;Income
+02.03.2018;Investment Depot;Savings;300.0;Income
+02.04.2018;Investment Depot;Savings;300.0;Income
+02.05.2018;Investment Depot;Savings;300.0;Income
+02.06.2018;Investment Depot;Savings;300.0;Income
+02.07.2018;Investment Depot;Savings;300.0;Income
+02.08.2018;Investment Depot;Savings;300.0;Income
+02.09.2018;Investment Depot;Savings;300.0;Income
+02.10.2018;Investment Depot;Savings;300.0;Income
+02.11.2018;Investment Depot;Savings;300.0;Income
+02.12.2018;Investment Depot;Savings;300.0;Income
+02.01.2018;Commerzbank;Savings;-300.0;Income
+02.02.2018;Commerzbank;Savings;-300.0;Income
+02.03.2018;Commerzbank;Savings;-300.0;Income
+02.04.2018;Commerzbank;Savings;-300.0;Income
+02.05.2018;Commerzbank;Savings;-300.0;Income
+02.06.2018;Commerzbank;Savings;-300.0;Income
+02.07.2018;Commerzbank;Savings;-300.0;Income
+02.08.2018;Commerzbank;Savings;-300.0;Income
+02.09.2018;Commerzbank;Savings;-300.0;Income
+02.10.2018;Commerzbank;Savings;-300.0;Income
+02.11.2018;Commerzbank;Savings;-300.0;Income
+02.12.2018;Commerzbank;Savings;-300.0;Income
+02.01.2018;Commerzbank;Rent & Utilities;-1290.1;Rent & Utilities
+01.02.2018;Commerzbank;Rent & Utilities;-1290.1;Rent & Utilities
+03.03.2018;Commerzbank;Rent & Utilities;-1290.1;Rent & Utilities
+02.04.2018;Commerzbank;Rent & Utilities;-1290.1;Rent & Utilities
+02.05.2018;Commerzbank;Rent & Utilities;-1290.1;Rent & Utilities
+01.06.2018;Commerzbank;Rent & Utilities;-1290.1;Rent & Utilities
+01.07.2018;Commerzbank;Rent & Utilities;-1290.1;Rent & Utilities
+02.08.2018;Commerzbank;Rent & Utilities;-1290.1;Rent & Utilities
+03.09.2018;Commerzbank;Rent & Utilities;-1290.1;Rent & Utilities
+01.10.2018;Commerzbank;Rent & Utilities;-1290.1;Rent & Utilities
+03.11.2018;Commerzbank;Rent & Utilities;-1290.1;Rent & Utilities
+02.12.2018;Commerzbank;Rent & Utilities;-1290.1;Rent & Utilities
+17.01.2018;Commerzbank;Gym;-30.0;Sport
+16.02.2018;Commerzbank;Gym;-30.0;Sport
+16.03.2018;Commerzbank;Gym;-30.0;Sport
+17.04.2018;Commerzbank;Gym;-30.0;Sport
+16.05.2018;Commerzbank;Gym;-30.0;Sport
+16.06.2018;Commerzbank;Gym;-30.0;Sport
+15.07.2018;Commerzbank;Gym;-30.0;Sport
+17.08.2018;Commerzbank;Gym;-30.0;Sport
+16.09.2018;Commerzbank;Gym;-30.0;Sport
+16.10.2018;Commerzbank;Gym;-30.0;Sport
+17.11.2018;Commerzbank;Gym;-30.0;Sport
+16.12.2018;Commerzbank;Gym;-30.0;Sport
+04.01.2018;Commerzbank;Legal protection;-40.0;Insurance
+03.02.2018;Commerzbank;Legal protection;-40.0;Insurance
+04.03.2018;Commerzbank;Legal protection;-40.0;Insurance
+04.04.2018;Commerzbank;Legal protection;-40.0;Insurance
+04.05.2018;Commerzbank;Legal protection;-40.0;Insurance
+05.06.2018;Commerzbank;Legal protection;-40.0;Insurance
+04.07.2018;Commerzbank;Legal protection;-40.0;Insurance
+04.08.2018;Commerzbank;Legal protection;-40.0;Insurance
+05.09.2018;Commerzbank;Legal protection;-40.0;Insurance
+03.10.2018;Commerzbank;Legal protection;-40.0;Insurance
+05.11.2018;Commerzbank;Legal protection;-40.0;Insurance
+03.12.2018;Commerzbank;Legal protection;-40.0;Insurance
+03.01.2018;Commerzbank;Netflix;-12.0;Entertainment
+04.02.2018;Commerzbank;Netflix;-12.0;Entertainment
+04.03.2018;Commerzbank;Netflix;-12.0;Entertainment
+05.04.2018;Commerzbank;Netflix;-12.0;Entertainment
+03.05.2018;Commerzbank;Netflix;-12.0;Entertainment
+03.06.2018;Commerzbank;Netflix;-12.0;Entertainment
+03.07.2018;Commerzbank;Netflix;-12.0;Entertainment
+04.08.2018;Commerzbank;Netflix;-12.0;Entertainment
+05.09.2018;Commerzbank;Netflix;-12.0;Entertainment
+05.10.2018;Commerzbank;Netflix;-12.0;Entertainment
+03.11.2018;Commerzbank;Netflix;-12.0;Entertainment
+03.12.2018;Commerzbank;Netflix;-12.0;Entertainment
+12.01.2018;Commerzbank;Kaufland;-56.48;Groceries
+06.01.2018;Commerzbank;Kaufland;-13.23;Groceries
+17.01.2018;Commerzbank;Market;-35.57;Groceries
+27.02.2018;Commerzbank;DM;-18.18;Groceries
+07.02.2018;Commerzbank;DM;-31.33;Groceries
+10.02.2018;Commerzbank;Kaufland;-79.65;Groceries
+10.03.2018;Commerzbank;Kaufland;-66.2;Groceries
+21.03.2018;Commerzbank;Kaufland;-98.21;Groceries
+27.03.2018;Commerzbank;Aldi;-17.22;Groceries
+19.04.2018;Commerzbank;Edeka;-47.07;Groceries
+19.04.2018;Commerzbank;Aldi;-10.95;Groceries
+15.04.2018;Commerzbank;DM;-78.4;Groceries
+13.05.2018;Commerzbank;Edeka;-12.9;Groceries
+13.05.2018;Commerzbank;DM;-19.0;Groceries
+25.05.2018;Commerzbank;Edeka;-16.08;Groceries
+20.06.2018;Commerzbank;Kaufland;-57.52;Groceries
+22.06.2018;Commerzbank;Edeka;-24.13;Groceries
+03.06.2018;Commerzbank;Aldi;-90.54;Groceries
+27.07.2018;Commerzbank;DM;-58.91;Groceries
+27.07.2018;Commerzbank;DM;-88.05;Groceries
+06.07.2018;Commerzbank;DM;-73.98;Groceries
+23.08.2018;Commerzbank;Kaufland;-94.55;Groceries
+26.08.2018;Commerzbank;Edeka;-22.93;Groceries
+05.08.2018;Commerzbank;Kaufland;-64.97;Groceries
+11.09.2018;Commerzbank;Kaufland;-50.66;Groceries
+26.09.2018;Commerzbank;Aldi;-37.01;Groceries
+15.09.2018;Commerzbank;Kaufland;-100.16;Groceries
+04.10.2018;Commerzbank;Aldi;-48.66;Groceries
+18.10.2018;Commerzbank;Kaufland;-39.12;Groceries
+02.10.2018;Commerzbank;Market;-79.15;Groceries
+02.11.2018;Commerzbank;Market;-35.51;Groceries
+03.11.2018;Commerzbank;Aldi;-26.75;Groceries
+26.11.2018;Commerzbank;Aldi;-41.75;Groceries
+16.12.2018;Commerzbank;Aldi;-38.17;Groceries
+21.12.2018;Commerzbank;Edeka;-53.37;Groceries
+09.12.2018;Commerzbank;Market;-46.24;Groceries
+25.01.2018;Commerzbank;Dinner in restaurant;-28.44;Restaurant
+24.01.2018;Commerzbank;Dinner in restaurant;-86.16;Restaurant
+24.01.2018;Commerzbank;Dinner in restaurant;-73.03;Restaurant
+02.01.2018;Commerzbank;Dinner in restaurant;-76.59;Restaurant
+23.02.2018;Commerzbank;Lunch in restaurant;-57.08;Restaurant
+09.02.2018;Commerzbank;Dinner in restaurant;-15.61;Restaurant
+14.02.2018;Commerzbank;Lunch in restaurant;-51.22;Restaurant
+18.02.2018;Commerzbank;Lunch in restaurant;-60.32;Restaurant
+26.03.2018;Commerzbank;Dinner in restaurant;-68.27;Restaurant
+10.03.2018;Commerzbank;Lunch in restaurant;-81.29;Restaurant
+25.03.2018;Commerzbank;Dinner in restaurant;-52.7;Restaurant
+02.03.2018;Commerzbank;Lunch in restaurant;-83.28;Restaurant
+05.04.2018;Commerzbank;Lunch in restaurant;-28.1;Restaurant
+16.04.2018;Commerzbank;Lunch in restaurant;-34.52;Restaurant
+20.04.2018;Commerzbank;Dinner in restaurant;-29.25;Restaurant
+14.04.2018;Commerzbank;Dinner in restaurant;-97.29;Restaurant
+12.05.2018;Commerzbank;Lunch in restaurant;-41.3;Restaurant
+07.05.2018;Commerzbank;Lunch in restaurant;-102.01;Restaurant
+07.05.2018;Commerzbank;Dinner in restaurant;-65.75;Restaurant
+20.05.2018;Commerzbank;Dinner in restaurant;-62.44;Restaurant
+06.06.2018;Commerzbank;Lunch in restaurant;-63.46;Restaurant
+18.06.2018;Commerzbank;Dinner in restaurant;-99.23;Restaurant
+26.06.2018;Commerzbank;Dinner in restaurant;-87.74;Restaurant
+12.06.2018;Commerzbank;Dinner in restaurant;-100.66;Restaurant
+26.07.2018;Commerzbank;Dinner in restaurant;-90.04;Restaurant
+05.07.2018;Commerzbank;Dinner in restaurant;-42.59;Restaurant
+05.07.2018;Commerzbank;Lunch in restaurant;-46.43;Restaurant
+07.07.2018;Commerzbank;Dinner in restaurant;-88.0;Restaurant
+20.08.2018;Commerzbank;Dinner in restaurant;-28.41;Restaurant
+13.08.2018;Commerzbank;Dinner in restaurant;-83.5;Restaurant
+14.08.2018;Commerzbank;Dinner in restaurant;-77.36;Restaurant
+17.08.2018;Commerzbank;Dinner in restaurant;-94.76;Restaurant
+18.09.2018;Commerzbank;Lunch in restaurant;-22.7;Restaurant
+25.09.2018;Commerzbank;Lunch in restaurant;-24.37;Restaurant
+23.09.2018;Commerzbank;Dinner in restaurant;-92.91;Restaurant
+21.09.2018;Commerzbank;Dinner in restaurant;-17.03;Restaurant
+18.10.2018;Commerzbank;Lunch in restaurant;-66.01;Restaurant
+10.10.2018;Commerzbank;Dinner in restaurant;-38.13;Restaurant
+11.10.2018;Commerzbank;Dinner in restaurant;-96.58;Restaurant
+02.10.2018;Commerzbank;Lunch in restaurant;-39.43;Restaurant
+20.11.2018;Commerzbank;Lunch in restaurant;-49.01;Restaurant
+26.11.2018;Commerzbank;Lunch in restaurant;-102.06;Restaurant
+13.11.2018;Commerzbank;Lunch in restaurant;-87.67;Restaurant
+08.11.2018;Commerzbank;Lunch in restaurant;-100.43;Restaurant
+17.12.2018;Commerzbank;Lunch in restaurant;-60.44;Restaurant
+12.12.2018;Commerzbank;Lunch in restaurant;-16.08;Restaurant
+01.12.2018;Commerzbank;Lunch in restaurant;-86.45;Restaurant
+05.12.2018;Commerzbank;Dinner in restaurant;-92.29;Restaurant
+23.01.2018;Commerzbank;Fuel;-98.76;Fuel & Mobility
+01.01.2018;Commerzbank;Fuel;-69.98;Fuel & Mobility
+22.02.2018;Commerzbank;Fuel;-23.42;Fuel & Mobility
+06.02.2018;Commerzbank;Train;-30.86;Fuel & Mobility
+27.03.2018;Commerzbank;Bus;-46.71;Fuel & Mobility
+05.03.2018;Commerzbank;Bus;-81.77;Fuel & Mobility
+25.04.2018;Commerzbank;Train;-52.48;Fuel & Mobility
+22.04.2018;Commerzbank;Fuel;-35.17;Fuel & Mobility
+20.05.2018;Commerzbank;Fuel;-66.82;Fuel & Mobility
+05.05.2018;Commerzbank;Fuel;-73.37;Fuel & Mobility
+07.06.2018;Commerzbank;Fuel;-91.73;Fuel & Mobility
+09.06.2018;Commerzbank;Bus;-69.58;Fuel & Mobility
+14.07.2018;Commerzbank;Train;-42.38;Fuel & Mobility
+18.07.2018;Commerzbank;Train;-36.96;Fuel & Mobility
+01.08.2018;Commerzbank;Train;-35.27;Fuel & Mobility
+22.08.2018;Commerzbank;Fuel;-16.37;Fuel & Mobility
+07.09.2018;Commerzbank;Train;-70.54;Fuel & Mobility
+04.09.2018;Commerzbank;Fuel;-16.55;Fuel & Mobility
+17.10.2018;Commerzbank;Fuel;-56.3;Fuel & Mobility
+15.10.2018;Commerzbank;Bus;-32.93;Fuel & Mobility
+20.11.2018;Commerzbank;Train;-80.79;Fuel & Mobility
+18.11.2018;Commerzbank;Train;-80.14;Fuel & Mobility
+04.12.2018;Commerzbank;Fuel;-52.2;Fuel & Mobility
+11.12.2018;Commerzbank;Train;-34.62;Fuel & Mobility
+03.11.2018;Commerzbank;SAP yearly bonus;5202.0;Income
+05.11.2018;Commerzbank;Bonus savings;-4000.0;Savings
+05.11.2018;Savings Account;Bonus savings;4000.0;Savings
+08.11.2018;Commerzbank;New York;-3102.85;Holidays & Trips
+12.08.2018;Commerzbank;Europe roundtrip;-427.27;Holidays & Trips
+15.01.2018;Commerzbank;i;-64.5;Insurance
+24.01.2019;Commerzbank;SAP salary;2971.38;Income
+26.02.2019;Commerzbank;SAP salary;2971.38;Income
+26.03.2019;Commerzbank;SAP salary;2971.38;Income
+24.04.2019;Commerzbank;SAP salary;2971.38;Income
+25.05.2019;Commerzbank;SAP salary;2971.38;Income
+24.06.2019;Commerzbank;SAP salary;2971.38;Income
+26.07.2019;Commerzbank;SAP salary;2971.38;Income
+24.08.2019;Commerzbank;SAP salary;2971.38;Income
+26.09.2019;Commerzbank;SAP salary;2971.38;Income
+27.10.2019;Commerzbank;SAP salary;2971.38;Income
+24.11.2019;Commerzbank;SAP salary;2971.38;Income
+26.12.2019;Commerzbank;SAP salary;2971.38;Income
+02.01.2019;Investment Depot;Savings;300.0;Income
+02.02.2019;Investment Depot;Savings;300.0;Income
+02.03.2019;Investment Depot;Savings;300.0;Income
+02.04.2019;Investment Depot;Savings;300.0;Income
+02.05.2019;Investment Depot;Savings;300.0;Income
+02.06.2019;Investment Depot;Savings;300.0;Income
+02.07.2019;Investment Depot;Savings;300.0;Income
+02.08.2019;Investment Depot;Savings;300.0;Income
+02.09.2019;Investment Depot;Savings;300.0;Income
+02.10.2019;Investment Depot;Savings;300.0;Income
+02.11.2019;Investment Depot;Savings;300.0;Income
+02.12.2019;Investment Depot;Savings;300.0;Income
+02.01.2019;Commerzbank;Savings;-300.0;Income
+02.02.2019;Commerzbank;Savings;-300.0;Income
+02.03.2019;Commerzbank;Savings;-300.0;Income
+02.04.2019;Commerzbank;Savings;-300.0;Income
+02.05.2019;Commerzbank;Savings;-300.0;Income
+02.06.2019;Commerzbank;Savings;-300.0;Income
+02.07.2019;Commerzbank;Savings;-300.0;Income
+02.08.2019;Commerzbank;Savings;-300.0;Income
+02.09.2019;Commerzbank;Savings;-300.0;Income
+02.10.2019;Commerzbank;Savings;-300.0;Income
+02.11.2019;Commerzbank;Savings;-300.0;Income
+02.12.2019;Commerzbank;Savings;-300.0;Income
+01.01.2019;Commerzbank;Rent & Utilities;-1315.9;Rent & Utilities
+03.02.2019;Commerzbank;Rent & Utilities;-1315.9;Rent & Utilities
+03.03.2019;Commerzbank;Rent & Utilities;-1315.9;Rent & Utilities
+03.04.2019;Commerzbank;Rent & Utilities;-1315.9;Rent & Utilities
+02.05.2019;Commerzbank;Rent & Utilities;-1315.9;Rent & Utilities
+03.06.2019;Commerzbank;Rent & Utilities;-1315.9;Rent & Utilities
+02.07.2019;Commerzbank;Rent & Utilities;-1315.9;Rent & Utilities
+02.08.2019;Commerzbank;Rent & Utilities;-1315.9;Rent & Utilities
+03.09.2019;Commerzbank;Rent & Utilities;-1315.9;Rent & Utilities
+01.10.2019;Commerzbank;Rent & Utilities;-1315.9;Rent & Utilities
+01.11.2019;Commerzbank;Rent & Utilities;-1315.9;Rent & Utilities
+02.12.2019;Commerzbank;Rent & Utilities;-1315.9;Rent & Utilities
+15.01.2019;Commerzbank;Gym;-30.0;Sport
+16.02.2019;Commerzbank;Gym;-30.0;Sport
+16.03.2019;Commerzbank;Gym;-30.0;Sport
+16.04.2019;Commerzbank;Gym;-30.0;Sport
+16.05.2019;Commerzbank;Gym;-30.0;Sport
+16.06.2019;Commerzbank;Gym;-30.0;Sport
+15.07.2019;Commerzbank;Gym;-30.0;Sport
+16.08.2019;Commerzbank;Gym;-30.0;Sport
+16.09.2019;Commerzbank;Gym;-30.0;Sport
+16.10.2019;Commerzbank;Gym;-30.0;Sport
+17.11.2019;Commerzbank;Gym;-30.0;Sport
+16.12.2019;Commerzbank;Gym;-30.0;Sport
+04.01.2019;Commerzbank;Legal protection;-40.0;Insurance
+04.02.2019;Commerzbank;Legal protection;-40.0;Insurance
+05.03.2019;Commerzbank;Legal protection;-40.0;Insurance
+04.04.2019;Commerzbank;Legal protection;-40.0;Insurance
+05.05.2019;Commerzbank;Legal protection;-40.0;Insurance
+05.06.2019;Commerzbank;Legal protection;-40.0;Insurance
+03.07.2019;Commerzbank;Legal protection;-40.0;Insurance
+03.08.2019;Commerzbank;Legal protection;-40.0;Insurance
+05.09.2019;Commerzbank;Legal protection;-40.0;Insurance
+05.10.2019;Commerzbank;Legal protection;-40.0;Insurance
+04.11.2019;Commerzbank;Legal protection;-40.0;Insurance
+05.12.2019;Commerzbank;Legal protection;-40.0;Insurance
+04.01.2019;Commerzbank;Netflix;-12.0;Entertainment
+03.02.2019;Commerzbank;Netflix;-12.0;Entertainment
+05.03.2019;Commerzbank;Netflix;-12.0;Entertainment
+05.04.2019;Commerzbank;Netflix;-12.0;Entertainment
+05.05.2019;Commerzbank;Netflix;-12.0;Entertainment
+04.06.2019;Commerzbank;Netflix;-12.0;Entertainment
+04.07.2019;Commerzbank;Netflix;-12.0;Entertainment
+04.08.2019;Commerzbank;Netflix;-12.0;Entertainment
+04.09.2019;Commerzbank;Netflix;-12.0;Entertainment
+04.10.2019;Commerzbank;Netflix;-12.0;Entertainment
+03.11.2019;Commerzbank;Netflix;-12.0;Entertainment
+05.12.2019;Commerzbank;Netflix;-12.0;Entertainment
+20.01.2019;Commerzbank;DM;-77.45;Groceries
+09.01.2019;Commerzbank;Kaufland;-100.06;Groceries
+13.01.2019;Commerzbank;Edeka;-27.78;Groceries
+05.02.2019;Commerzbank;DM;-35.15;Groceries
+04.02.2019;Commerzbank;Kaufland;-26.76;Groceries
+10.02.2019;Commerzbank;Market;-73.15;Groceries
+03.03.2019;Commerzbank;Edeka;-55.1;Groceries
+19.03.2019;Commerzbank;Kaufland;-77.96;Groceries
+02.03.2019;Commerzbank;Kaufland;-100.26;Groceries
+25.04.2019;Commerzbank;Edeka;-13.94;Groceries
+20.04.2019;Commerzbank;Market;-85.88;Groceries
+13.04.2019;Commerzbank;DM;-61.03;Groceries
+16.05.2019;Commerzbank;DM;-65.06;Groceries
+13.05.2019;Commerzbank;DM;-59.01;Groceries
+18.05.2019;Commerzbank;Market;-35.02;Groceries
+19.06.2019;Commerzbank;Aldi;-47.35;Groceries
+17.06.2019;Commerzbank;Market;-24.09;Groceries
+27.06.2019;Commerzbank;Edeka;-71.75;Groceries
+26.07.2019;Commerzbank;Market;-22.86;Groceries
+06.07.2019;Commerzbank;Market;-104.27;Groceries
+03.07.2019;Commerzbank;Market;-87.56;Groceries
+20.08.2019;Commerzbank;DM;-6.06;Groceries
+07.08.2019;Commerzbank;DM;-67.96;Groceries
+27.08.2019;Commerzbank;Aldi;-38.15;Groceries
+22.09.2019;Commerzbank;DM;-23.75;Groceries
+02.09.2019;Commerzbank;Edeka;-60.85;Groceries
+01.09.2019;Commerzbank;Aldi;-65.02;Groceries
+02.10.2019;Commerzbank;Edeka;-75.54;Groceries
+19.10.2019;Commerzbank;Kaufland;-96.29;Groceries
+12.10.2019;Commerzbank;Market;-14.76;Groceries
+14.11.2019;Commerzbank;Kaufland;-71.21;Groceries
+10.11.2019;Commerzbank;Aldi;-46.27;Groceries
+23.11.2019;Commerzbank;Market;-26.47;Groceries
+05.12.2019;Commerzbank;Kaufland;-104.6;Groceries
+27.12.2019;Commerzbank;Market;-99.14;Groceries
+12.12.2019;Commerzbank;DM;-100.25;Groceries
+01.01.2019;Commerzbank;Lunch in restaurant;-59.04;Restaurant
+26.01.2019;Commerzbank;Lunch in restaurant;-70.4;Restaurant
+11.01.2019;Commerzbank;Dinner in restaurant;-97.92;Restaurant
+26.01.2019;Commerzbank;Dinner in restaurant;-83.12;Restaurant
+08.02.2019;Commerzbank;Dinner in restaurant;-90.46;Restaurant
+05.02.2019;Commerzbank;Dinner in restaurant;-83.61;Restaurant
+12.02.2019;Commerzbank;Lunch in restaurant;-64.12;Restaurant
+15.02.2019;Commerzbank;Lunch in restaurant;-72.51;Restaurant
+04.03.2019;Commerzbank;Lunch in restaurant;-102.01;Restaurant
+02.03.2019;Commerzbank;Dinner in restaurant;-19.66;Restaurant
+07.03.2019;Commerzbank;Dinner in restaurant;-56.8;Restaurant
+20.03.2019;Commerzbank;Lunch in restaurant;-66.43;Restaurant
+23.04.2019;Commerzbank;Lunch in restaurant;-73.22;Restaurant
+21.04.2019;Commerzbank;Lunch in restaurant;-25.97;Restaurant
+14.04.2019;Commerzbank;Dinner in restaurant;-18.93;Restaurant
+02.04.2019;Commerzbank;Lunch in restaurant;-23.36;Restaurant
+20.05.2019;Commerzbank;Lunch in restaurant;-78.59;Restaurant
+16.05.2019;Commerzbank;Lunch in restaurant;-70.57;Restaurant
+13.05.2019;Commerzbank;Dinner in restaurant;-85.9;Restaurant
+23.05.2019;Commerzbank;Dinner in restaurant;-63.85;Restaurant
+07.06.2019;Commerzbank;Lunch in restaurant;-78.21;Restaurant
+27.06.2019;Commerzbank;Dinner in restaurant;-57.98;Restaurant
+09.06.2019;Commerzbank;Lunch in restaurant;-50.43;Restaurant
+11.06.2019;Commerzbank;Lunch in restaurant;-76.82;Restaurant
+23.07.2019;Commerzbank;Lunch in restaurant;-72.57;Restaurant
+16.07.2019;Commerzbank;Lunch in restaurant;-38.73;Restaurant
+19.07.2019;Commerzbank;Dinner in restaurant;-24.74;Restaurant
+17.07.2019;Commerzbank;Dinner in restaurant;-26.2;Restaurant
+16.08.2019;Commerzbank;Lunch in restaurant;-85.31;Restaurant
+26.08.2019;Commerzbank;Dinner in restaurant;-39.52;Restaurant
+09.08.2019;Commerzbank;Dinner in restaurant;-37.35;Restaurant
+02.08.2019;Commerzbank;Lunch in restaurant;-94.3;Restaurant
+01.09.2019;Commerzbank;Dinner in restaurant;-20.16;Restaurant
+03.09.2019;Commerzbank;Lunch in restaurant;-85.5;Restaurant
+18.09.2019;Commerzbank;Lunch in restaurant;-90.66;Restaurant
+23.09.2019;Commerzbank;Dinner in restaurant;-97.83;Restaurant
+19.10.2019;Commerzbank;Dinner in restaurant;-40.08;Restaurant
+19.10.2019;Commerzbank;Dinner in restaurant;-82.97;Restaurant
+04.10.2019;Commerzbank;Dinner in restaurant;-32.38;Restaurant
+16.10.2019;Commerzbank;Lunch in restaurant;-91.6;Restaurant
+25.11.2019;Commerzbank;Dinner in restaurant;-34.51;Restaurant
+01.11.2019;Commerzbank;Lunch in restaurant;-79.85;Restaurant
+14.11.2019;Commerzbank;Lunch in restaurant;-95.64;Restaurant
+23.11.2019;Commerzbank;Lunch in restaurant;-23.76;Restaurant
+17.12.2019;Commerzbank;Dinner in restaurant;-20.85;Restaurant
+21.12.2019;Commerzbank;Lunch in restaurant;-45.33;Restaurant
+07.12.2019;Commerzbank;Lunch in restaurant;-94.09;Restaurant
+20.12.2019;Commerzbank;Dinner in restaurant;-17.32;Restaurant
+07.01.2019;Commerzbank;Bus;-67.79;Fuel & Mobility
+27.01.2019;Commerzbank;Fuel;-46.43;Fuel & Mobility
+21.02.2019;Commerzbank;Train;-37.55;Fuel & Mobility
+19.02.2019;Commerzbank;Train;-23.74;Fuel & Mobility
+17.03.2019;Commerzbank;Bus;-39.3;Fuel & Mobility
+13.03.2019;Commerzbank;Fuel;-52.54;Fuel & Mobility
+18.04.2019;Commerzbank;Train;-48.32;Fuel & Mobility
+02.04.2019;Commerzbank;Fuel;-84.1;Fuel & Mobility
+20.05.2019;Commerzbank;Fuel;-63.89;Fuel & Mobility
+10.05.2019;Commerzbank;Fuel;-97.38;Fuel & Mobility
+02.06.2019;Commerzbank;Fuel;-98.9;Fuel & Mobility
+05.06.2019;Commerzbank;Train;-84.2;Fuel & Mobility
+19.07.2019;Commerzbank;Train;-71.22;Fuel & Mobility
+18.07.2019;Commerzbank;Train;-83.45;Fuel & Mobility
+13.08.2019;Commerzbank;Train;-56.93;Fuel & Mobility
+18.08.2019;Commerzbank;Fuel;-94.25;Fuel & Mobility
+02.09.2019;Commerzbank;Bus;-42.85;Fuel & Mobility
+22.09.2019;Commerzbank;Fuel;-65.72;Fuel & Mobility
+11.10.2019;Commerzbank;Fuel;-58.03;Fuel & Mobility
+25.10.2019;Commerzbank;Bus;-71.99;Fuel & Mobility
+26.11.2019;Commerzbank;Fuel;-94.22;Fuel & Mobility
+23.11.2019;Commerzbank;Bus;-10.31;Fuel & Mobility
+19.12.2019;Commerzbank;Train;-45.75;Fuel & Mobility
+27.12.2019;Commerzbank;Train;-19.03;Fuel & Mobility
+03.11.2019;Commerzbank;SAP yearly bonus;5306.04;Income
+05.11.2019;Commerzbank;Bonus savings;-4000.0;Savings
+06.11.2019;Savings Account;Bonus savings;4000.0;Savings
+12.07.2019;Commerzbank;South africa;-2622.61;Holidays & Trips
+06.12.2019;Commerzbank;South africa;-356.0;Holidays & Trips
+15.01.2019;Commerzbank;r;-64.5;Insurance
+12.10.2017;Commerzbank;New PC;-2300.0;Tech
+15.05.2019;Commerzbank;New Car;-14400.0;Fuel & Mobility
+14.07.2017;Commerzbank;Car repairs;-3400.0;Fuel & Mobility
+13.03.2017;Commerzbank;Tax payback;1300.0;Income

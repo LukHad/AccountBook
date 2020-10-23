@@ -31,6 +31,7 @@ class AccountTableWidget(QWidget):
         self.monthly_bar_chart.legend().hide()
         monthly_bar_view = QtCharts.QChartView(self.monthly_bar_chart)
         self.monthly_bar_chart_y_axis = None
+        self.monthly_bar_chart_x_axis = None
 
         layout = QGridLayout()
         layout.addWidget(self.acc_table, 0, 0)
@@ -42,6 +43,12 @@ class AccountTableWidget(QWidget):
         self.update_data()
 
     def update_data(self):
+        self.update_account_table()
+        self.update_account_pie()
+        self.update_total_balance_trend()
+        self.update_monthly_bar_trend()
+
+    def update_account_table(self):
         acc_data_dict = self.ctrl.get_account_data()
 
         # Account Table
@@ -71,7 +78,8 @@ class AccountTableWidget(QWidget):
                 table_item.setData(Qt.DisplayRole, data[row][column])
                 table.setItem(row, column, table_item)
 
-        # Account Pie
+    def update_account_pie(self):
+        acc_data_dict = self.ctrl.get_account_data()
         #  Reset
         self.acc_chart.removeAllSeries()
         self.acc_chart.setTitle("Accounts with positive balance")
@@ -91,7 +99,7 @@ class AccountTableWidget(QWidget):
 
         self.acc_chart.addSeries(series)
 
-        # Total balance trend
+    def update_total_balance_trend(self):
         self.balance_trend_chart.removeAllSeries()
         labels, results = self.ctrl.get_total_balance_trend()
         # Values
@@ -125,16 +133,17 @@ class AccountTableWidget(QWidget):
             self.balance_trend_x_axis = x_axis
             self.balance_trend_chart.addAxis(x_axis, Qt.AlignBottom)
 
-        # Monthly bar trend
+    def update_monthly_bar_trend(self):
         self.monthly_bar_chart.removeAllSeries()
         labels, results = self.ctrl.get_monthly_bar_trend()
         if results:
             series = QtCharts.QBarSeries()
+            bar_set = QtCharts.QBarSet("Test")
             for i, result in enumerate(results):
-                bar_set = QtCharts.QBarSet("Test")
                 bar_set.append(result)
-                bar_set.setLabel(labels[i])
-                series.append(bar_set)
+
+            # ToDo: Negative bars shall be red
+            series.append(bar_set)
             self.monthly_bar_chart.addSeries(series)
 
             # y_Axis
@@ -147,6 +156,15 @@ class AccountTableWidget(QWidget):
 
             self.monthly_bar_chart.addAxis(y_axis, Qt.AlignLeft)
             self.monthly_bar_chart_y_axis = y_axis
+
+            # x_Axis
+            self.monthly_bar_chart.removeAxis(self.monthly_bar_chart_x_axis)
+            x_axis = QtCharts.QBarCategoryAxis()
+            # set properties
+            x_axis.append(labels)
+            x_axis.setLabelsAngle(-90)
+            self.monthly_bar_chart_x_axis = x_axis
+            self.monthly_bar_chart.addAxis(x_axis, Qt.AlignBottom)
 
 
 

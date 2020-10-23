@@ -4,6 +4,6 @@ __pycache__/
 .DS_Store
 .idea/
 saved_data/
-tests/myTransactions.py
+create_dummy_transactions.py
 venv/
 
