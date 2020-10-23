@@ -9,7 +9,7 @@ class Controller:
     def __init__(self):
         self.DEBUG = True
         self.file_path = r"C:\Users\Win10VM\Documents\MyLocalFiles\Python_Projects\TransactionBook\util\dummy_database.csv" # ToDo: Test, remove
-        self.file_name = "Transaction Book"
+        self.file_name_for_title = "Transaction Book"
         self.selected_year = None
         self.selected_month = None
         self.view_table_model_map = []  # [3] = 5 : 3 view table index, 5 is model df index
@@ -19,15 +19,21 @@ class Controller:
         self.initialize()
 
     def initialize(self):
+        self.view.update_data()  # initialize view
+        today = datetime.today()
+        # Select current month
+        self.view.set_selected_month(today.month)
+        self.selected_month = today.month
+
         if self.file_path is not None:
+            self.__update_file(self.file_path)
             self.model.load_from(self.file_path)
             # Select most recent year in database
-            self.selected_year = int(self.get_years_in_data_as_str()[0])
-            # Select current month
-            today = datetime.today()
-            self.view.set_selected_month(today.month)
-            self.selected_month = today.month
-        self.view.update_data()
+            latest_year_in_data = int(self.get_years_in_data_as_str()[0])
+            self.view.set_selected_year(latest_year_in_data)
+            self.selected_year = latest_year_in_data
+
+        self.view.update_data()  # update view
 
     def debug_print(self, text):
         if self.DEBUG:
@@ -88,6 +94,9 @@ class Controller:
     def event_new_transaction(self, date, account, description, amount, category):
         self.debug_print(f"Ctrl: New transaction: [{date}, {account}, {description}, {amount}, {category}]")
         self.model.new_transaction(date, account, description, amount, category)
+
+        if '*' not in self.file_name_for_title:
+            self.file_name_for_title = "*" + self.file_name_for_title
         self.view.update_data()
 
     def event_edit_transaction(self, view_id, date, account, description, amount, category):
@@ -95,6 +104,9 @@ class Controller:
         self.debug_print(f"Ctrl: Edit transaction (view={view_id}, model={model_index}): "
                          f"[{date}, {account}, {description}, {amount}, {category}]")
         self.model.edit_transaction(model_index, date, account, description, amount, category)
+
+        if '*' not in self.file_name_for_title:
+            self.file_name_for_title = "*" + self.file_name_for_title
         self.view.update_data()
 
     def event_delete_transaction(self, view_id_list):
@@ -102,6 +114,9 @@ class Controller:
             model_index = self.view_table_model_map[view_id]
             self.debug_print(f"Ctrl: Deleting (view={view_id}, model={model_index})")
             self.model.delete_transaction(model_index)
+
+        if '*' not in self.file_name_for_title:
+            self.file_name_for_title = "*" + self.file_name_for_title
         self.view.update_data()
 
     def event_selected_transaction_year_changed(self, year_str):
@@ -116,7 +131,7 @@ class Controller:
 
     def event_open_file(self, file_path):
         self.__update_file(file_path)
-        self.debug_print(f"Ctrl: File {self.file_name} loaded")
+        self.debug_print(f"Ctrl: File {self.file_name_for_title} loaded")
 
         self.initialize()
 
@@ -139,7 +154,7 @@ class Controller:
 
     def __update_file(self, file_path):
         self.file_path = file_path
-        self.file_name = os.path.basename(file_path)
+        self.file_name_for_title = os.path.basename(file_path)
 
     def get_file_path(self):
         return self.file_path
@@ -149,8 +164,8 @@ class Controller:
         date, account, description, amount, category = self.model.get_transaction_by_index(model_index)
         return date, account, description, amount, category
 
-    def get_loaded_file_name(self):
-        return self.file_name
+    def get_loaded_file_name_for_title(self):
+        return self.file_name_for_title
 
     def get_account_list(self):
         return self.model.get_accounts()

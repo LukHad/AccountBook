@@ -22,7 +22,7 @@ class QCustomComboBox(QComboBox):
         self.selection_changed_callback = selection_changed_callback
         self.trigger_callbacks = True
 
-        self.update_data()
+        # self.update_data()
 
         if selection_changed_callback is not None:
             self.currentIndexChanged.connect(self.cb_selection_changed)
@@ -33,7 +33,7 @@ class QCustomComboBox(QComboBox):
         self.setCurrentIndex(index)
 
     def cb_selection_changed(self):
-        if self.trigger_callbacks:
+        if self.trigger_callbacks and self.selection_changed_callback is not None:
             self.selection_changed_callback(self.text())
 
     def update_data(self):
@@ -53,6 +53,13 @@ class QCustomComboBox(QComboBox):
         if callback_necessary:
             self.trigger_callbacks = True  # Only trigger callback if selection actually changed
             self.setCurrentIndex(new_index)
+
+            # cb_selection_changed is naturally triggered when the index changes.
+            # The problem here is that when the first item is added, then the index remains the same.
+            # Therefore the following workaround is required to trigger cb_selection_changed when the first item
+            # is added to the list.
+            if not old_text and self.text():  # if dropdown was empty but hast jut got text
+                self.cb_selection_changed()
         else:
             self.setCurrentIndex(new_index)
 

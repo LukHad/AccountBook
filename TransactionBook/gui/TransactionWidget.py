@@ -34,6 +34,7 @@ class TransactionTableWidget(QWidget):
         # self.update_data()
 
     def update_data(self):
+        # Transaction table
         column_headings, data = self.ctrl.get_transaction_table_data()
         num_columns = len(column_headings)
 
@@ -53,7 +54,9 @@ class TransactionTableWidget(QWidget):
                     data[row][column] = self.ctrl.get_pretty_amount_str(data[row][column])  # cast to string
                 table_item.setData(Qt.DisplayRole, data[row][column])
                 table.setItem(row, column, table_item)
+        table.resizeColumnsToContents()
 
+        # Dop downs
         self.year_selector.update_data()
         self.month_selector.update_data()
 
@@ -143,16 +146,22 @@ class TransactionPopUp(QWidget):
         self.close()
 
     def cb_add_category(self):
-        text, ok = QInputDialog.getText(self, 'New Category', 'Enter category name:')
+        text, ok = QInputDialog.getText(self, 'New Category', 'Info: A new category is only saved when it is assigned \n'
+                                                              'to at least one transaction. \n\n'
+                                                              'Enter new category name:')
         if ok:
             self.ctrl.event_add_category(text)
             self.category_input.update_data()
+            self.category_input.set_text(text)
 
     def cb_add_account(self):
-        text, ok = QInputDialog.getText(self, 'New Account', 'Enter account name:')
+        text, ok = QInputDialog.getText(self, 'New Account', 'Info: A new account is only saved when it is assigned \n'
+                                                             'to at least one transaction. \n\n'
+                                                             'Enter new account name:')
         if ok:
             self.ctrl.event_add_account(text)
             self.account_input.update_data()
+            self.account_input.set_text(text)
 
 
 

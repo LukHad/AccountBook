@@ -34,7 +34,7 @@ class MainWindow(QMainWindow):
         self.popup = None
 
     def update_data(self):
-        self.setWindowTitle(self.ctrl.get_loaded_file_name())
+        self.setWindowTitle(self.ctrl.get_loaded_file_name_for_title())
 
         self.transaction_widget.update_data()
         self.account_widget.update_data()
@@ -157,4 +157,6 @@ class MainWindow(QMainWindow):
         month_str = str(month)
         self.transaction_widget.month_selector.set_text(month_str)
 
-
+    def set_selected_year(self, year):
+        year_str = str(year)
+        self.transaction_widget.year_selector.set_text(year_str)

@@ -55,35 +55,42 @@ class AccountTableWidget(QWidget):
         #  Create table data
         data = []
         total_balance = 0
-        for key, value in acc_data_dict.items():
+        column_headings = ["Accounts", "Balance"]
+        table = self.acc_table
+        table.setColumnCount(len(column_headings))
+        table.setRowCount(len(acc_data_dict) + 1)  # +1 due to Total balance row
+        table.setHorizontalHeaderLabels(column_headings)
+
+        #  Add account data
+        for i, (key, value) in enumerate(acc_data_dict.items()):
             total_balance += value
             data.append([key, value])
-        #  Add empty row
-        # data.append(["", ""])
-        #  Add sum to data
-        data.append(["Total balance", total_balance])
-        #  Create table widget
-        column_headings = ["Accounts", "Balance"]
-        num_columns = len(column_headings)
-        table = self.acc_table
-        table.setColumnCount(num_columns)
-        table.setHorizontalHeaderLabels(column_headings)
-        num_rows = len(data)
-        table.setRowCount(num_rows)
-        for column in range(num_columns):
-            for row in range(num_rows):
-                table_item = QTableWidgetItem()
-                if column == 1:  # Special formatting for balance row
-                    table_item.setTextAlignment(Qt.AlignRight | Qt.AlignVCenter)
-                    if data[row][column] < 0.0:
-                        table_item.setTextColor(Qt.red)
-                    data[row][column] = self.ctrl.get_pretty_amount_str(data[row][column])  # cast to string
-                if row == num_rows-1:  # Special formatting for last row which is total balance
-                    font = QFont()
-                    font.setBold(True)
-                    table_item.setFont(font)
-                table_item.setData(Qt.DisplayRole, data[row][column])
-                table.setItem(row, column, table_item)
+
+            table_item_key = QTableWidgetItem()
+            table_item_value = QTableWidgetItem()
+            table_item_value.setTextAlignment(Qt.AlignRight | Qt.AlignVCenter)
+            if value < 0:
+                table_item_value.setTextColor(Qt.red)
+
+            value_str = self.ctrl.get_pretty_amount_str(value)
+
+            table_item_key.setData(Qt.DisplayRole, key)
+            table_item_value.setData(Qt.DisplayRole, value_str)
+            table.setItem(i, 0, table_item_key)
+            table.setItem(i, 1, table_item_value)
+
+        #  Add total balance
+        table_item_key = QTableWidgetItem()
+        table_item_value = QTableWidgetItem()
+        table_item_value.setTextAlignment(Qt.AlignRight | Qt.AlignVCenter)
+        font = QFont().setBold(True)
+        table_item_key.setFont(font)
+        table_item_value.setFont(font)
+        table_item_key.setData(Qt.DisplayRole, "Total balance")
+        table_item_value.setData(Qt.DisplayRole, self.ctrl.get_pretty_amount_str(total_balance))
+
+        table.setItem(len(acc_data_dict), 0, table_item_key)
+        table.setItem(len(acc_data_dict), 1, table_item_value)
 
     def update_account_pie(self):
         acc_data_dict = self.ctrl.get_account_data()
