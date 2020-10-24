@@ -27,7 +27,7 @@ class MainWindow(QMainWindow):
 
         # Central Widgets
         self.transaction_widget = TransactionTableWidget(self.ctrl)
-        self.account_widget = AccountTableWidget(self.ctrl)
+        self.account_widget = AccountTableWidget(self.ctrl, main_window=self)
         self.init_central_widget()
 
         #
@@ -87,6 +87,9 @@ class MainWindow(QMainWindow):
 
         self.setCentralWidget(tab_widget)
 
+    def resizeEvent(self, event):
+        self.account_widget.resize_action()
+
     def cb_new_transaction_button(self):
         self.popup = TransactionPopUp(self.ctrl)
         self.popup.show()
@@ -128,6 +131,9 @@ class MainWindow(QMainWindow):
 
     def new_file(self):
         print("New File")
+
+    def get_size(self):
+        return self.size()
 
     def open_file(self):
         file_path = QFileDialog.getOpenFileName(self, self.tr("Open..."), self.tr(""), self.tr("*.csv"))[0]

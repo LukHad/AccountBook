@@ -168,8 +168,7 @@ class TransactionBook:
         # year = max(years)
         df = df.loc[df["Year"] == year]  # Pivot latest year of data set
         # Create list with formatted months
-        label = ["01.", "02.", "03.", "04.", "05.", "06.", "07.", "08.", "09.", "10.", "11.", "12."]
-        label = [i + str(year) for i in label]
+        label = [str(i) + self.DATE_DELIMITER + str(year) for i in range(1, 13)]
         # Init result list
         result = [0] * 12
         # Calculate balance at months

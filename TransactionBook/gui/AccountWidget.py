@@ -5,10 +5,11 @@ from PySide2.QtCharts import QtCharts
 
 
 class AccountTableWidget(QWidget):
-    def __init__(self, ctrl):
+    def __init__(self, ctrl, main_window):
         super(AccountTableWidget, self).__init__()
         self.name = "Accounts"
         self.ctrl = ctrl
+        self.main_window = main_window
 
         # Transaction table
         self.acc_table = QTableWidget(3, 3)
@@ -18,6 +19,7 @@ class AccountTableWidget(QWidget):
         # Account Pie
         self.acc_chart = QtCharts.QChart()
         acc_pie = QtCharts.QChartView(self.acc_chart)
+        self.acc_chart.legend().setAlignment(Qt.AlignRight)
 
         # Total balance over months
         self.balance_trend_chart = QtCharts.QChart()
@@ -151,14 +153,20 @@ class AccountTableWidget(QWidget):
         self.monthly_bar_chart.removeAllSeries()
         labels, results = self.ctrl.get_monthly_bar_trend()
         if results:
-            series = QtCharts.QBarSeries()
+            bar_series = QtCharts.QBarSeries()
             bar_set = QtCharts.QBarSet("Test")
             for i, result in enumerate(results):
                 bar_set.append(result)
 
             # ToDo: Negative bars shall be red
-            series.append(bar_set)
-            self.monthly_bar_chart.addSeries(series)
+            bar_series.append(bar_set)
+
+            size = self.main_window.get_size()
+           # series.setLabelsAngle(-90)
+            bar_series.setBarWidth(0.9)
+           # series.setLabelsFormat("@value €")
+            self.monthly_bar_chart.bar_series = bar_series
+            self.monthly_bar_chart.addSeries(bar_series)
 
             # y_Axis
             self.monthly_bar_chart.removeAxis(self.monthly_bar_chart_y_axis)
@@ -179,6 +187,17 @@ class AccountTableWidget(QWidget):
             x_axis.setLabelsAngle(-90)
             self.monthly_bar_chart_x_axis = x_axis
             self.monthly_bar_chart.addAxis(x_axis, Qt.AlignBottom)
+
+    def resize_action(self):
+        size = self.main_window.get_size()
+        if size.width() > 2500:
+            self.monthly_bar_chart.bar_series.setLabelsVisible(True)
+        else:
+            self.monthly_bar_chart.bar_series.setLabelsVisible(False)
+
+
+
+
 
 
 

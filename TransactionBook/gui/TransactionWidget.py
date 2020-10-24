@@ -88,6 +88,9 @@ class TransactionPopUp(QWidget):
         self.ok_btn = QPushButton("OK")
         self.cancel_btn = QPushButton("Cancel")
 
+        self.account_input.update_data()
+        self.category_input.update_data()
+
         # Add button callbacks
         self.ok_btn.clicked.connect(self.cb_ok)
         self.cancel_btn.clicked.connect(self.close)
