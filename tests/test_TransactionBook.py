@@ -174,6 +174,38 @@ def test_pivot_total_balance_trend():
     nose.tools.ok_(result == expected_result)
 
 
+def test_rename_category():
+    tb = dummy_transactions_2()
+    data = tb.get_data()
+
+    expected_result = data.loc[data[tb.CATEGORY] == "Entertainment", tb.AMOUNT].sum()
+
+    tb.rename_category("Entertainment", "Fun stuff")
+
+    data = tb.get_data()
+    result = data.loc[data[tb.CATEGORY] == "Fun stuff", tb.AMOUNT].sum()
+
+    nose.tools.ok_(result == expected_result)
+    nose.tools.ok_("Entertainment" not in tb.get_categories())
+    nose.tools.ok_("Fun stuff" in tb.get_categories())
+
+
+def test_rename_account():
+    tb = dummy_transactions_2()
+    data = tb.get_data()
+
+    expected_result = data.loc[data[tb.ACCOUNT] == "Account 1", tb.AMOUNT].sum()
+
+    tb.rename_account("Account 1", "Investment account")
+
+    data = tb.get_data()
+    result = data.loc[data[tb.ACCOUNT] == "Investment account", tb.AMOUNT].sum()
+
+    nose.tools.ok_(result == expected_result)
+    nose.tools.ok_("Account 1" not in tb.get_accounts())
+    nose.tools.ok_("Investment account" in tb.get_accounts())
+
+
 if __name__ == '__main__':
     test_populate_list_from_data()
     test_filter_date()
@@ -188,3 +220,6 @@ if __name__ == '__main__':
     test_add_account()
     test_add_category()
     test_pivot_total_balance_trend()
+    test_rename_category()
+    test_rename_account()
+

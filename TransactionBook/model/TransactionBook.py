@@ -157,6 +157,24 @@ class TransactionBook:
         years = df["Year"].unique()
         return years.tolist()
 
+    def rename_category(self, old_name, new_name):
+        assert old_name in self.get_categories(), "TransactionBook.rename_category(old_name, new_name): " \
+                                                  "The argument old_name must be an existing category."
+        df = self.get_data()
+        df[self.CATEGORY] = df[self.CATEGORY].replace(to_replace=old_name, value=new_name)
+        self.__set_data(df)
+        self.categories.remove(old_name)
+        self.add_category(new_name)
+
+    def rename_account(self, old_name, new_name):
+        assert old_name in self.get_accounts(), "TransactionBook.rename_account(old_name, new_name): " \
+                                                "The argument old_name must be an existing account."
+        df = self.get_data()
+        df[self.ACCOUNT] = df[self.ACCOUNT].replace(to_replace=old_name, value=new_name)
+        self.__set_data(df)
+        self.accounts.remove(old_name)
+        self.add_account(new_name)
+
     # Data aggregation methods:
     def pivot_monthly_trend(self, year, negative_amount_only=False):
         df = self.get_data()
